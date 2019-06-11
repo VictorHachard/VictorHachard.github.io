@@ -17,7 +17,7 @@ learn something, that's great. If you're an inspiration, that's better.
     {% unless project.draft %}
         <li class="project">
             <h2>
-                <a class="name" href="{{ project.url }}">
+                <a class="name" href="{{ project.url | relative_url }}">
                     {{ project.title }}
                 </a>
             </h2>
@@ -39,7 +39,7 @@ learn something, that's great. If you're an inspiration, that's better.
     {% if project.draft %}
         <li class="project draft">
             <h2>
-                <a class="name" href="{{ project.url }}">
+                <a class="name" href="{{ project.url | relative_url }}">
                     {{ project.title }}
                 </a>
             </h2>

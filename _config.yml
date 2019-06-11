@@ -17,7 +17,7 @@ title: Victor Hachard
 email:
 description: >- # this means to ignore newlines until "baseurl:"
 
-baseurl: "my-awesome-site" # the subpath of your site, e.g. /blog /my-awesome-site
+baseurl: "/my-awesome-site" # the subpath of your site, e.g. /my-awesome-site
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  victorHachard
 
