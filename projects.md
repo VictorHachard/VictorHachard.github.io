@@ -7,8 +7,7 @@ order: "2"
 
 # Projects
 
-I work on projects from time to time, and I try to publish them here. If you have
-learn something, that's great. If you're an inspiration, that's better.
+I work on projects from time to time, and I try to publish them here. If you have learn something, that's great. If you're an inspiration, that's better.
 
 &nbsp;
 

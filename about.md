@@ -2,7 +2,7 @@
 layout: default
 title: About
 permalink: /about/
-order: "3"
+order: "4"
 ---
 
 # About
