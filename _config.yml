@@ -26,7 +26,7 @@ collections:
     projects:
         output: true
         permalink: /:collection/:name
-    wtds:
+    htds:
         output: true
         permalink: /:collection/:name
 
