@@ -24,7 +24,7 @@ github_username:  victorHachard
 collections:
     projects:
         output: true
-        permalink: /:collection/:name
+        permalink: my-awesome-site/:collection/:name
 
 # Build settings
 markdown: kramdown
