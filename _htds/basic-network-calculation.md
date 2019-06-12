@@ -29,11 +29,17 @@ Do `32` minus the mask of the network the whole squared minus `2` like that: <im
 
 In computer networking, broadcasting refers to transmitting a packet that will be received by every device on the network. In practice, the scope of the broadcast is limited to a broadcast domain.
 
-example: `192.168.0.25/29`
+example: `192.168.0.133/29`
 
 `/29` -> `11111111.11111111.11111111.11111000`
+Take the octect where there is the split between `0` and `1` -> `11111000` and complement to 1 -> `00000111`.
 
-TODO
+`133` --> `10000101`<br/>
+`/29` --> `00000111` complemented to 1<br/>
+`----------------`<br/>
+binary or `10000111`
+
+The broadcast is `10000111`, `192.168.0.135/29`.
 
 ## Find the NETID
 
