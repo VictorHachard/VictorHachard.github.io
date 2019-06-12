@@ -7,11 +7,11 @@ author: Victor Hachard
 
 ## Unité de la tension Formule pas rapport a l’énergie :
 
-![Page-1-Image-1](res/basic-electric-physics/Page-1-Image-1.png)
+![Page-1-Image-1]({{site.baseurl}}/res/basic-electric-physics/Page-1-Image-1.png)
 
 ## Formule de la Quantité électrique exprimé en Coulomb [C] :
 
-![Page-1-Image-2](res/basic-electric-physics/Page-1-Image-2.png)
+![Page-1-Image-2](/res/basic-electric-physics/Page-1-Image-2.png)
 
 Cette formule est l’une des transformations possible si dans un exercice on vous demande de chercher Q avec un temps et une intensité Vous devez transformez la formule ci-dessous donc on obtiendra : Q = I\*t = [A]\*[s] = [C]
 
@@ -19,7 +19,7 @@ ATTENTION Si ON VOUS DONNE DES [A].[h] si vous faites X3600 VOUS RETOMBEZ EN COU
 
 ## La formule de la résistivité électrique selon Pouillet (Donc sans coefficient de température) :
 
-![Page-2-Image-3](res/basic-electric-physics/Page-2-Image-3.png)
+![Page-2-Image-3](/res/basic-electric-physics/Page-2-Image-3.png)
 
 ATTENTION ERREUR COURANTE : Dans un exercice on peut vous donné une section d’un câble en mm, MAIS N’OUBLIER PAS QUE VOUS DEVEZ RETOMBER EN m², donc il va falloir calculer alors d’abord la conversion de mm -> en m puis convertir m² en calculant la surface du câble.
 
@@ -27,7 +27,7 @@ Loi d’ohm résistance pas confondre avec résistivité : R = U/I
 
 ## La formule de la résistivité selon Mathiessen (avec coefficient de température) :
 
-![Page-2-Image-3](res/basic-electric-physics/Page-2-Image-4.png)
+![Page-2-Image-3](/res/basic-electric-physics/Page-2-Image-4.png)
 
 ## La Loi de Joule (Différentes formules de Puissances) :
 
@@ -59,13 +59,13 @@ N = Rendement s’exprime en [%]
 
 ### La loi des nœuds :
 
-![Page-4-Image-5](res/basic-electric-physics/Page-4-Image-5.png)
+![Page-4-Image-5](/res/basic-electric-physics/Page-4-Image-5.png)
 
 Un nœud est une jonction ou se rejoint plusieurs branche. La loi explique que la somme des courants entrants est équivalents a la somme des courants sortants ce qui est utile pour calculer un courant dont on ne connaît pas les valeurs dans un exercice.
 
 #### La loi des Mailles :
 
-![Page-5-Image-6](res/basic-electric-physics/Page-5-Image-6.png)
+![Page-5-Image-6](/res/basic-electric-physics/Page-5-Image-6.png)
 
 La loi des mailles dis que la somme des tension des mailles dans un circuit est égale à 0.
 
@@ -77,19 +77,19 @@ Déjà il va falloir déterminer le sens du courant électrique, quand ceci sera
 
 ### Mise en série :
 
-![Page-6-Image-7](res/basic-electric-physics/Page-6-Image-7.png)
+![Page-6-Image-7](/res/basic-electric-physics/Page-6-Image-7.png)
 
 Req = R1+R2 -> On additionne les deux valeurs Ohmiques.
 
 ### Mise en parallèle :
 
-![Page-6-Image-8](res/basic-electric-physics/Page-6-Image-8.png)
+![Page-6-Image-8](/res/basic-electric-physics/Page-6-Image-8.png)
 
 ATTENTION ASTUCES : si les valeurs des résistances sont les même ont peut diviser la valeur par le nombre de branche.
 
 ## Théorème de Kennelly :
 
-![Page-7-Image-9](res/basic-electric-physics/Page-7-Image-9.png)
+![Page-7-Image-9](/res/basic-electric-physics/Page-7-Image-9.png)
 
 Comme vous pouvez le constatez la configuration étoile n’est pas utile pour calculer la Req : donc ceci est utilisé pour transformer en configuration triangle qui est plus facile pour calculer la Req. ATTENTION APRES LA CONFIGURATION EN TRIANGLE TERMINER NE PAS OUBLIER DE REPASSER CECI EN SCHEMA DE PRINCIPE POUR CALCULER.
 
@@ -104,23 +104,23 @@ C’est bon on peut commencer :D !!
 
 ### Pont diviseur de courant :
 
-![Page-8-Image-10](res/basic-electric-physics/Page-8-Image-10.png)
+![Page-8-Image-10](/res/basic-electric-physics/Page-8-Image-10.png)
 
 ### Pont diviseur de tension continu :
 
-![Page-8-Image-11](res/basic-electric-physics/Page-8-Image-11.png)
+![Page-8-Image-11](/res/basic-electric-physics/Page-8-Image-11.png)
 
 ## Montage :
 
 ### Montage Aval :
 
-![Page-9-Image-12](res/basic-electric-physics/Page-9-Image-12.png)
+![Page-9-Image-12](/res/basic-electric-physics/Page-9-Image-12.png)
 
 Ce montage est utilisé pour la mesure de petites résistances.
 
 ### Montage Amont :
 
-![Page-9-Image-13](res/basic-electric-physics/Page-9-Image-13.png)
+![Page-9-Image-13](/res/basic-electric-physics/Page-9-Image-13.png)
 
 ## La loi de Coulomb :
 
@@ -132,7 +132,7 @@ Deux formules :
 
 Et la deuxième formule par rapport à une charge ponctuelle :
 
-![Page-10-Image-14](res/basic-electric-physics/Page-10-Image-14.png)
+![Page-10-Image-14](/res/basic-electric-physics/Page-10-Image-14.png)
 
 Etudions d’un peu plus près chaque membre de la formule :
 
@@ -147,7 +147,7 @@ ATTENTION ERREUR COURANTE DANS CE CHAPITRE :
 
 La permittivité de l’air (E0) ?
 
-![Page-11-Image-15](res/basic-electric-physics/Page-11-Image-15.png)
+![Page-11-Image-15](/res/basic-electric-physics/Page-11-Image-15.png)
 
 Vous avez donc une constante.
 
@@ -161,11 +161,11 @@ ATTENTION LA PERMITIVITTER VOUS AVEZ REMARQUE ELLE NE S’ECRIS PAS « E « MAIS
 
 Le champ électrostatique ou magnétique :
 
-![Page-11-Image-16](res/basic-electric-physics/Page-11-Image-16.png)
+![Page-11-Image-16](/res/basic-electric-physics/Page-11-Image-16.png)
 
 Relations a appliquée en exercice :
 
-![Page-11-Image-17](res/basic-electric-physics/Page-11-Image-17.png)
+![Page-11-Image-17](/res/basic-electric-physics/Page-11-Image-17.png)
 
 ## Le condensateur :
 
@@ -175,17 +175,17 @@ Par definition, la grandeur caracterisant un condensateur est liee a la differen
 
 Première Formule :
 
-![Page-12-Image-18](res/basic-electric-physics/Page-12-Image-18.png)
+![Page-12-Image-18](/res/basic-electric-physics/Page-12-Image-18.png)
 
 Deuxième Formule :
 
-![Page-12-Image-19](res/basic-electric-physics/Page-12-Image-19.png)
+![Page-12-Image-19](/res/basic-electric-physics/Page-12-Image-19.png)
 
 ATTENTION cette formule est à prendre compte que si il n’y a pas d’isolant entre les armatures.
 
 Troisième Formule :
 
-![Page-12-Image-20](res/basic-electric-physics/Page-12-Image-20.png)
+![Page-12-Image-20](/res/basic-electric-physics/Page-12-Image-20.png)
 
 Si un isolant est pris en compte dans la formule.
 
@@ -193,18 +193,18 @@ Si un isolant est pris en compte dans la formule.
 
 #### Mise en parallèle :
 
-![Page-13-Image-21](res/basic-electric-physics/Page-13-Image-21.png)
+![Page-13-Image-21](/res/basic-electric-physics/Page-13-Image-21.png)
 
 On fait avec les condensateurs tout l’inverse des résistances.
 
 #### Mise en série :
 
-![Page-13-Image-22](res/basic-electric-physics/Page-13-Image-22.png)
+![Page-13-Image-22](/res/basic-electric-physics/Page-13-Image-22.png)
 
 On procède comme si on avait des résistances en parallèle.
 
 ## L’énergie électrostatique :
 
-![Page-13-Image-23](res/basic-electric-physics/Page-13-Image-23.png)
+![Page-13-Image-23](/res/basic-electric-physics/Page-13-Image-23.png)
 
 [J] = 1/2 \*[F]\*[V] ²
