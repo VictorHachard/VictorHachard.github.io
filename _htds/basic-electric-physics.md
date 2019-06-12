@@ -7,7 +7,7 @@ author: Victor Hachard
 
 ## Unité de la tension Formule pas rapport a l’énergie :
 
-![Page-1-Image-1]({{site.baseurl}}{{site.baseurl}}/res/basic-electric-physics/Page-1-Image-1.png)
+![Page-1-Image-1]({{site.baseurl}}/res/basic-electric-physics/Page-1-Image-1.png)
 
 ## Formule de la Quantité électrique exprimé en Coulomb [C] :
 
@@ -15,7 +15,7 @@ author: Victor Hachard
 
 Cette formule est l’une des transformations possible si dans un exercice on vous demande de chercher Q avec un temps et une intensité Vous devez transformez la formule ci-dessous donc on obtiendra :
 
-Q = I\*t = [A]\*[s] = [C]
+`Q = I*t = [A]*[s] = [C]`
 
 ATTENTION Si ON VOUS DONNE DES [A].[h] si vous faites X3600 VOUS RETOMBEZ EN COULOMB !!!!
 
@@ -25,7 +25,9 @@ ATTENTION Si ON VOUS DONNE DES [A].[h] si vous faites X3600 VOUS RETOMBEZ EN COU
 
 ATTENTION ERREUR COURANTE : Dans un exercice on peut vous donné une section d’un câble en mm, MAIS N’OUBLIER PAS QUE VOUS DEVEZ RETOMBER EN m², donc il va falloir calculer alors d’abord la conversion de mm -> en m puis convertir m² en calculant la surface du câble.
 
-Loi d’ohm résistance pas confondre avec résistivité : R = U/I
+Loi d’ohm résistance pas confondre avec résistivité :
+
+`R = U/I`
 
 ## La formule de la résistivité selon Mathiessen (avec coefficient de température) :
 
@@ -33,29 +35,29 @@ Loi d’ohm résistance pas confondre avec résistivité : R = U/I
 
 ## La Loi de Joule (Différentes formules de Puissances) :
 
-ATTENTION ALERTE MOMENT RELOU : Dans le chapitre des puissances il y’a beaucoup de formules pour calculer les puissances, ces formules sont à choisir selon les valeurs données dans les exercices ou ça dépend aussi de ce que l’on cherche N’OUBLIEZ PAS QUE CHAQUE FORMULE PEUT NOUS AIDEZ A TROUVER DES AUTRES DONNEES : Exemple : le courant, le temps, La tension ou même la résistance ou même l’énergie Voici les formules des puissances : P = W/t -> En clair c’est l’énergie (Travail électrique [J] / le temps [s]) On aura une réponse exprimés en Watt [W] (LA PUISSANCE TOUJOURS EXPRIMER EN WATT).
+ATTENTION ALERTE MOMENT RELOU : Dans le chapitre des puissances il y’a beaucoup de formules pour calculer les puissances, ces formules sont à choisir selon les valeurs données dans les exercices ou ça dépend aussi de ce que l’on cherche N’OUBLIEZ PAS QUE CHAQUE FORMULE PEUT NOUS AIDEZ A TROUVER DES AUTRES DONNEES : Exemple : le courant, le temps, La tension ou même la résistance ou même l’énergie Voici les formules des puissances : `P = W/t` -> En clair c’est l’énergie (Travail électrique [J] / le temps [s]) On aura une réponse exprimés en Watt [W] (LA PUISSANCE TOUJOURS EXPRIMER EN WATT).
 
 ### Les Formules de Joules :
 
-P = U\*I -> [W] = [V]\*[A]
+`P = U*I -> [W] = [V]*[A]`
 
-P = U²/R -> [W] = [V]²/Ω
+`P = U²/R -> [W] = [V]²/Ω`
 
-P = R\*I² -> [W] = [Ω]\*[A]²
+`P = R*I² -> [W] = [Ω]*[A]²`
 
 ## L’Energie électrique :
 
-Comme vous avez pu le remarquez les formules d’énergie ressemble a ceux des puissance..EFFECTIVEMENT pour calculer une énergie il suffit de ou transformer la première formules des puissances que je vous ai dit (P = W/t -> W = P\*t) Ceci vous donc dire que si on prend une puissance et qu’on multiplie avec une unité de temps alors nous obtenons une énergie exprimés en Joule…MAIS C’NE EST PAS BEAU L’ELECTRICITER !?
+Comme vous avez pu le remarquez les formules d’énergie ressemble a ceux des puissance..EFFECTIVEMENT pour calculer une énergie il suffit de ou transformer la première formules des puissances que je vous ai dit (`P = W/t -> W = P*t`) Ceci vous donc dire que si on prend une puissance et qu’on multiplie avec une unité de temps alors nous obtenons une énergie exprimés en Joule…MAIS C’NE EST PAS BEAU L’ELECTRICITER !?
 
-ATTENTION POUR LA NOTION DE TEMPS JE REPETE C’EST EN SECONDE CAR N’OUBLIER PAS LA RELATION [J] = [s] -> [W.h] = [Heure] donc nous multiplierons notre temps en seconde ATTENTION AU CONVERSION !!
+ATTENTION POUR LA NOTION DE TEMPS JE REPETE C’EST EN SECONDE CAR N’OUBLIER PAS LA RELATION `[J] = [s]` -> `[W.h] = [Heure]` donc nous multiplierons notre temps en seconde ATTENTION AU CONVERSION !!
 
 ## La Notion de rendement :
 
-n = Pu/Pa
+`n = Pu/Pa`
 
-Pu = Puissance Mécaniques [W]
-Pa = Puissance absorbée [W] (Pa = U\*I ou les autres formules montré avant)
-N = Rendement s’exprime en [%]
+`Pu` = Puissance Mécaniques [W]
+`Pa` = Puissance absorbée [W] (`Pa = U*I` ou les autres formules montré avant)
+`N` = Rendement s’exprime en [%]
 
 ## Les lois de KIRCHHOFF :
 
@@ -81,7 +83,7 @@ Déjà il va falloir déterminer le sens du courant électrique, quand ceci sera
 
 ![Page-6-Image-7]({{site.baseurl}}/res/basic-electric-physics/Page-6-Image-7.png)
 
-Req = R1+R2 -> On additionne les deux valeurs Ohmiques.
+`Req = R1+R2` -> On additionne les deux valeurs Ohmiques.
 
 ### Mise en parallèle :
 
@@ -130,7 +132,7 @@ Le calcule d’une force électrostatique :
 
 Deux formules :
 
--E = F/q -> E\*Q = F
+`-E = F/q -> E*Q = F`
 
 Et la deuxième formule par rapport à une charge ponctuelle :
 
@@ -138,8 +140,7 @@ Et la deuxième formule par rapport à une charge ponctuelle :
 
 Etudions d’un peu plus près chaque membre de la formule :
 
-Les q1 et q2 sont deux charges exprimés en coulomb le 1r ne vaut que 1(appelé vecteur a 1).
-Le r² et la distances qui séparent ces deux charges.
+Les q1 et q2 sont deux charges exprimés en coulomb le 1r ne vaut que 1(appelé vecteur a 1). Le r² et la distances qui séparent ces deux charges.
 
 Mais le E0 c’est quoi ?
 
@@ -157,9 +158,9 @@ Vous avez donc une constante.
 
 Ceci dépend des matériaux utilisé et varie si on veut la « permittivité dite » nous devons faire alors :
 
-E = E0\*ER
+`E = E0*ER`
 
-ATTENTION LA PERMITIVITTER VOUS AVEZ REMARQUE ELLE NE S’ECRIS PAS « E « MAIS LE SIGNE BIZARRE DANS LA FORMULE.
+ATTENTION LA PERMITIVITTER VOUS AVEZ REMARQUE ELLE NE S’ECRIS PAS « E » MAIS LE SIGNE BIZARRE DANS LA FORMULE.
 
 Le champ électrostatique ou magnétique :
 
@@ -209,4 +210,4 @@ On procède comme si on avait des résistances en parallèle.
 
 ![Page-13-Image-23]({{site.baseurl}}/res/basic-electric-physics/Page-13-Image-23.png)
 
-[J] = 1/2 \*[F]\*[V]²
+`[J] = 1/2 *[F]*[V]²`
