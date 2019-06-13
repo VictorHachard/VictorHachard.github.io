@@ -29,6 +29,9 @@ collections:
     htds:
         output: true
         permalink: /:collection/:name
+    notes:
+        output: true
+        permalink: /:collection/:name
 
 # Build settings
 markdown: kramdown
