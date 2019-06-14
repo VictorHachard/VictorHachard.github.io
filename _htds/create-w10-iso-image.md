@@ -25,7 +25,7 @@ author: Kari "Kalsarikänni"
 
 5) Windows will now restart in Audit Mode using built-in administrator account. You will see a Sysprep prompt in the middle of display:
 
- ![Page-4-Image-16]({{site.baseurl}}/res/basic-electric-physics/Page-4-Image-16.png)
+ ![Page-4-Image-16]({{site.baseurl}}/res/create-w-10-iso-image/Page-4-Image-16.png)
 
  Leave it open for now.
 
@@ -37,11 +37,11 @@ author: Kari "Kalsarikänni"
 
 9) When clean-up is done, in Sysprep dialog select System Cleanup Action: Enter System Out-of-Box Experience (OOBE), select Shutdown Options: Shutdown, select (tick the box) Generalize, click OK:
 
- ![Page-5-Image-19]({{site.baseurl}}/res/basic-electric-physics/Page-5-Image-19.png)
+ ![Page-5-Image-19]({{site.baseurl}}/res/create-w-10-iso-image/Page-5-Image-19.png)
 
 10) Sysprep will now prepare Windows, shutting down machine when done:
 
- ![Page-5-Image-20]({{site.baseurl}}/res/basic-electric-physics/Page-5-Image-20.png)
+ ![Page-5-Image-20]({{site.baseurl}}/res/create-w-10-iso-image/Page-5-Image-20.png)
 
 11) If using Hyper-V vm, create a checkpoint when Windows has shut down after Sysprep. Continue from Part Four below
 
@@ -61,7 +61,7 @@ author: Kari "Kalsarikänni"
 
 1) Clean install your preferred Windows 10 build on your reference machine, a Hyper-V or other virtual machine or a spare physical computer. When installation stops first time after installation to wait user input, do not click anything. Instead, press CTRL + SHIFT + F3 to restart Windows in Audit Mode:
 
- ![Page-7-Image-28]({{site.baseurl}}/res/basic-electric-physics/Page-7-Image-28.png)
+ ![Page-7-Image-28]({{site.baseurl}}/res/create-w-10-iso-image/Page-7-Image-28.png)
 
  Alternatively follow steps 1.1 to 1.7 in Part One above, continue then from step 2 below
 
@@ -124,11 +124,11 @@ echo Y|del %appdata%\microsoft\windows\recent\automaticdestinations\*del %0
 
 8) In Sysprep dialog still open on your desktop, select System Cleanup Action: Enter System Out-of-Box Experience (OOBE), select Shutdown Options: Shutdown, select (tick the box) Generalize, click OK:
 
- ![Page-8-Image-30]({{site.baseurl}}/res/basic-electric-physics/Page-8-Image-30.png)
+ ![Page-8-Image-30]({{site.baseurl}}/res/create-w-10-iso-image/Page-8-Image-30.png)
 
 9) Sysprep will now prepare Windows, shutting down machine when done. Continue from below (Part Four):
 
- ![Page-9-Image-31]({{site.baseurl}}/res/basic-electric-physics/Page-9-Image-31.png)
+ ![Page-9-Image-31]({{site.baseurl}}/res/create-w-10-iso-image/Page-9-Image-31.png)
 
 ## 4 Capture Windows image (create custom install.wim)
 
@@ -136,7 +136,7 @@ echo Y|del %appdata%\microsoft\windows\recent\automaticdestinations\*del %0
 
 2) When you arrive the region and format selection, press SHIFT + F10 to open Command Prompt:
 
- ![Page-9-Image-34]({{site.baseurl}}/res/basic-electric-physics/Page-9-Image-34.png)
+ ![Page-9-Image-34]({{site.baseurl}}/res/create-w-10-iso-image/Page-9-Image-34.png)
 
 3) Enter command diskpart, press Enter (#1 in screenshot after step 4.4), enter command list vol (#2)
 
@@ -160,7 +160,7 @@ dism /capture-image /imagefile:E:\install.wim /capturedir:D:\ /ScratchDir:E:\Scr
 
  Replace drive letter E in imagefile switch (green highlight in screenshot) with the drive letter and folder path of the target drive where you want your custom install.wim be written (saved), drive letter D in capturedir switch (blue highlight) with the Windows system partition, and temporarily working folder Scratch path (see step 3.6) with correct path as shown by diskpart in step 4.3:
 
- ![Page-10-Image-35]({{site.baseurl}}/res/basic-electric-physics/Page-10-Image-35.png)
+ ![Page-10-Image-35]({{site.baseurl}}/res/create-w-10-iso-image/Page-10-Image-35.png)
 
  The name given in /name switch in above command is irrelevant, we will name the ISO later on. Use any name you want to.
 
@@ -176,13 +176,13 @@ dism /capture-image /imagefile:E:\install.wim /capturedir:D:\ /ScratchDir:E:\Scr
 
  Copy its content (everything) to a folder on any internal or external hard disk.
 
- ![Page-10-Image-35]({{site.baseurl}}/res/basic-electric-physics/Page-10-Image-35.png)
+ ![Page-10-Image-35]({{site.baseurl}}/res/create-w-10-iso-image/Page-10-Image-35.png)
 
  I always name this folder as ISO_Files. Alternatively copy the contents of a Windows 10 install USB or DVD to ISO_Files​.
 
 2) Browse to your custom install.wim created earlier in Part Four. Copy it to Sources folder under ISO_Files folder, replacing the original install.wim:
 
- ![Page-13-Image-45]({{site.baseurl}}/res/basic-electric-physics/Page-13-Image-45.png)
+ ![Page-13-Image-45]({{site.baseurl}}/res/create-w-10-iso-image/Page-13-Image-45.png)
 
 3) If your host machine is not opted in to Insider builds, download the latest Windows Assessment and Deployment Kit (ADK) for Windows 10: Windows ADK downloads - Windows Hardware Dev Center
 
@@ -191,11 +191,11 @@ Windows Insider Preview ADK instead: Windows Insider Preview ADK
 
  Full download of ADK is about 7.5 GB but luckily we only need Deployment Tools. Unselect everything else and click Install:
 
- ![Page-14-Image-47]({{site.baseurl}}/res/basic-electric-physics/Page-14-Image-47.png)
+ ![Page-14-Image-47]({{site.baseurl}}/res/create-w-10-iso-image/Page-14-Image-47.png)
 
 4) Start elevated (right click > More > Run as administrator) Deployment and Imaging Tools interface:
 
- ![Page-14-Image-48]({{site.baseurl}}/res/basic-electric-physics/Page-14-Image-48.png)
+ ![Page-14-Image-48]({{site.baseurl}}/res/create-w-10-iso-image/Page-14-Image-48.png)
 
 5) The path shown in prompt is annoyingly long. To shorten it and jump to root of drive C:, type cd\\ and hit Enter. The cd command (abbreviation from Change Directory) changes the current working folder (directory), in this case to root of current drive (backslash \\ = root, two dots .. = up one level).
 
@@ -209,7 +209,7 @@ oscdimg.exe -m -o -u2 -udfver102 -bootdata:2#p0,e,bd:\iso_files\boot\etfsboot.co
 oscdimg.exe -m -o -u2 -udfver102 -bootdata:2#p0,e,bd:\iso_files\boot\etfsboot.com#pEF,e,bd:\iso_files\efi\microsoft\boot\efisys.bin d:\iso_files d:\14986PROx64.iso
 ```
 
- ![Page-15-Image-49]({{site.baseurl}}/res/basic-electric-physics/Page-15-Image-49.png)
+ ![Page-15-Image-49]({{site.baseurl}}/res/create-w-10-iso-image/Page-15-Image-49.png)
 
  Replace three instances of `d:\iso_files` (green highlight in above code box and screenshot) with drive and folder where you copied Windows installation files. Notice that this is not a typo: first two of these instances are typed as argument for switch -b without a space in between the switch and argument, to tell oscdimg command where to find boot files to be added to ISO.
 
