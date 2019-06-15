@@ -25,7 +25,7 @@ example: `192.168.0.25/29`
 
 Do `32` minus the mask of the network the whole squared minus `2` like that: <img src="https://tex.s2cms.ru/svg/((32-29)%5E2)-2" alt="((32-29)^2)-2" /> = 6. The number of hosts is 6.
 
-## Find the broadcast of a network
+## Find the broadcast address of a network
 
 In computer networking, broadcasting refers to transmitting a packet that will be received by every device on the network. In practice, the scope of the broadcast is limited to a broadcast domain.
 
@@ -41,10 +41,27 @@ binary or `10000111`
 
 The broadcast is `10000111`, `192.168.0.135/29`.
 
-## Find the NETID
+## Find network address / NETID
 
-TODO
+A network address is an identifier for a node or host on a telecommunications network.
+
+example: `173.115.163.86/20`
+
+`163` --> `10100011`<br/>
+`163` --> `1010|0011`cutting<br/>
+
+Take the left part `1010` -> `160`<br/>
+
+- The network address is `173.115.160.0/20`.
+- The first network address is `173.115.160.1/20`.
 
 ## Find the last possible address of a network
 
-TODO
+example: `173.115.163.86/20`
+network address: `173.115.160.0/20`
+
+`1010|1111.11111111` remplace the right paty by one<br/>
+`1010|1111.11111111` -> `175.255`<br/>
+
+- The broadcast address is `173.115.175.255/20`.
+- The last possible address is `173.115.175.254/20`
