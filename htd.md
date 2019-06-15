@@ -20,6 +20,9 @@ I work on think from time to time, when I understand something that I know I wil
                     {{ htd.title }}
                 </a>
             </h2>
+            <p>
+                {{ htd.content | number_of_words }} words published on {{ htd.date | date: "%B %d, %Y" }}
+            </p>
         </li>
     {% endunless %}
 {% endfor %}

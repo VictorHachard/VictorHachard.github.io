@@ -20,6 +20,9 @@ I work on think from time to time, when I understand something that I know I wil
                     {{ note.title }}
                 </a>
             </h2>
+            <p>
+                {{ note.content | number_of_words }} words published on {{ note.date | date: "%B %d, %Y" }}
+            </p>
         </li>
     {% endunless %}
 {% endfor %}
