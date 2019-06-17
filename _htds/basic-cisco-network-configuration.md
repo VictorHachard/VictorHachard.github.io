@@ -240,5 +240,5 @@ Router(config)#ipv6 route ::/0 <output_interface>
 ## Switch static mapping
 
 ```
-Switch(config)#mac-address-table static <mac_address> <vlan> interface <output_interface>
+Switch(config)#mac-address-table static <mac_address> vlan <vlan> interface <output_interface>
 ```
