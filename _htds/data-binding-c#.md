@@ -7,9 +7,9 @@ author: Victor Hachard
 
 ## Item.cs
 
-Create the object to insert into the DataGrid.
+Create the object to insert in the Data Grid.
 
-```java
+```c++
 namespace XX
 {
     public class Item
@@ -22,19 +22,26 @@ namespace XX
 
 ## MainWindow.xaml.cs
 
-Create the Observable Collection to store the Item.
+Create the Observable Collection to store the Item. Set the Observable Collection in the Data Context.
 
-```java
+```c++
 namespace XX
 {
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Item> lstItem = new ObservableCollection<Item>();
+        public ObservableCollection<Item> lstItem = new ObservableCollection<Item>(); //Create
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = lstItem;
+            DataContext = lstItem; //Set
+
+            //Test
+            Item item = new Item();
+            item.Name = 'Victor';
+
+            lstItem.Add(item);
+            //End Test
         }
     }
 }
@@ -42,9 +49,9 @@ namespace XX
 
 ## MainWindow.xaml
 
-Create the DataGrid in the xaml and the Window Resources.
+Create the Data Grid in the xaml and the Window Resources.
 
-```html
+```css
 <Window x:Class="XX.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -54,12 +61,12 @@ Create the DataGrid in the xaml and the Window Resources.
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <CollectionViewSource x:Key="Item" Source="{Binding}"/>
+        <CollectionViewSource x:Key="Item" Source="{Binding}"/> /*Bind the Item*/
     </Window.Resources>
     <Grid>
         <DataGrid x:Name="Grid" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Source={StaticResource Item}}" HorizontalAlignment="Left" Height="100" Margin="300,120,0,0" VerticalAlignment="Top" Width="100" HeadersVisibility="Column">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}"/> /*Bind the Item Name to this Column*/
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
