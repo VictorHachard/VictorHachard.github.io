@@ -15,7 +15,7 @@ openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialF
 
 if (openFileDialog.ShowDialog() == true)
 {
-    //Do what you want the file
+    //Do what you want to the file
 }
 ```
 
