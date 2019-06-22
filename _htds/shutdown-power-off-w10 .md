@@ -1,9 +1,11 @@
 ---
 layout: htd
 draft: false
-date: 2019-06-17 19:19:00 +0200
+date: 2019-06-20 23:28:00 +0200
 author: Victor Hachard
 ---
+
+## Commands
 
 1. Start -> Run -> CMD;
 
@@ -19,3 +21,7 @@ author: Victor Hachard
   - c "text" (optional) to add a small text
 
   ![Shutdown CMD]({{site.baseurl}}/res/shutdown-power-off-w10/shutdown-cmd.png)
+
+## Example
+
+To stop your computer in 30 minutes `shutdown /s /f /t 1800`
