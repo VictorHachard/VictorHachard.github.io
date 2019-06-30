@@ -242,3 +242,11 @@ Router(config)#ipv6 route ::/0 <output_interface>
 ```
 Switch(config)#mac-address-table static <mac_address> vlan <vlan> interface <output_interface>
 ```
+
+## Save to a TFTP server
+```
+!!!! Copy to a server
+copy running-config tftp
+!!!! Copy from a server
+copy tftp running-config
+```
