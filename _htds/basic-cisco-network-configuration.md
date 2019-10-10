@@ -55,7 +55,7 @@ Routeur#reload
 Proceed with reload? [confirm]
 ```
 
-## Secure a router
+## Secure a router/switch
 
 ### Set the name of the router and the domain name
 
