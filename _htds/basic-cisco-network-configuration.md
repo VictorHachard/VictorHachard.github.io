@@ -103,7 +103,7 @@ Router(config)# enable secret <password>
 ### Create a banner
 
 ```
-Router(config)# banner motd #
+Router(config)#banner motd #
 ```
 
 ```
@@ -114,6 +114,36 @@ Router(config)#no banner motd
 
 ```
 Router(config)#service password-encryption
+```
+
+## Add vlan to a switch
+
+```
+Switch(config)#vlan <number>
+Switch(config-if)#name <name>
+```
+
+```
+Switch(config)#no vlan <number>
+```
+
+```
+Switch(config)#interface <interface>
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan <number>
+Switch(config-if)#exit
+```
+
+## Switch static mapping
+
+```
+Switch(config)#mac-address-table static <mac_address> vlan <vlan> interface <output_interface>
+```
+
+## Add a default gateway
+
+```
+Switch(config)#ip default-gateway <ip_address>
 ```
 
 ## View and test
@@ -138,7 +168,7 @@ Switch#show ip interface brief or sh ip int br
 Switch#show ipv6 interface brief or sh ipv6 int br
 ```
 
-## IP addressing
+## IP addressing on router
 
 ### IPv4
 
@@ -174,7 +204,7 @@ Router(config-if)#shutdown or sh
 
 ### IPv6
 
-Basic, ipv6 routing is disabled on your routers which prevents ipv6 communication between different pc. You must activate it with this command:
+ipv6 routing is disabled on your routers which prevents ipv6 communication between different pc. You must activate it with this command:
 
 ```
 Router(config)#ipv6 unicast-routing
@@ -185,6 +215,14 @@ Router(config)#ipv6 unicast-routing
 ```
 Router(config)#int fa0/0
 Router(config-if)#ipv6 address FE80::1 link-local
+Router(config-if)#no shutdown or no sh
+```
+
+#### Add IPv6 addressing
+
+```
+Router(config)#int fa0/0
+Router(config-if)#ipv6 address 2001:....:1/64
 Router(config-if)#no shutdown or no sh
 ```
 
@@ -235,12 +273,6 @@ Router(config)#ipv6 route 2001:6A8:3540:A::1/64 2001:6A8:3540:D::1
 
 ```
 Router(config)#ipv6 route ::/0 <output_interface>
-```
-
-## Switch static mapping
-
-```
-Switch(config)#mac-address-table static <mac_address> vlan <vlan> interface <output_interface>
 ```
 
 ## Save to a TFTP server
