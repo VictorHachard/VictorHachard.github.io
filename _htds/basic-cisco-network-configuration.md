@@ -232,9 +232,13 @@ Router(config-if)#no shutdown or no sh
 
 #### Add a route
 
+A static route connected directly and fully defined:
+
 ```
 Router(config)#ip route <network_address> <subnet_mask> <output_interface>
 ```
+
+A recursive static route:
 
 ```
 Router(config)#ip route <network_address> <subnet_mask> <ip_address_of_the_next_device>
@@ -262,6 +266,14 @@ Router(config)#ip route 0.0.0.0 0.0.0.0 <output_interface>
 
 ### IPv6 Route static
 
+A static route connected directly and fully defined:
+
+```
+Router(config)#ipv6 route <network_address> <output_interface>
+```
+
+A recursive static route:
+
 - Subnet or information must go: 2001:6A8:3540:A::1/64
 - Ipv6 address of the interface of the next device: 2001:6A8:3540:D::1
 
@@ -270,6 +282,10 @@ Router(config)#ipv6 route 2001:6A8:3540:A::1/64 2001:6A8:3540:D::1
 ```
 
 ### Default IPv6 static route
+
+```
+Router(config)#ipv6 route ::/0 <ipv6_address_of_the_next_device>
+```
 
 ```
 Router(config)#ipv6 route ::/0 <output_interface>
