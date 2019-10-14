@@ -31,3 +31,11 @@ touch file_name
 rm file_name file_name
 rm *.pdf
 ```
+
+## Show the size of a file
+
+```
+du -h file_name
+```
+
+The -h show the size nicely.

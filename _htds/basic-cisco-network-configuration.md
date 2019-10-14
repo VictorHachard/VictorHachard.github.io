@@ -73,7 +73,7 @@ Router(config)#
 ### Prevent unwanted DNS lookups
 
 ```
-Router(config)# no ip domain-lookup
+Router(config)#no ip domain-lookup
 ```
 
 ### Set a console password
@@ -97,10 +97,10 @@ Router(config-line)#exit
 ### Set a preferred mode password
 
 ```
-Router(config)# enable secret <password>
+Router(config)#enable secret <password>
 ```
 
-### Create a banner
+### Create/remove a banner
 
 ```
 Router(config)#banner motd #
@@ -128,10 +128,14 @@ Switch(config)#no vlan <number>
 ```
 
 ```
-Switch(config)#interface <interface>
+Switch(config)#interface <interface> or interface range <interface>
 Switch(config-if)#switchport mode access
 Switch(config-if)#switchport access vlan <number>
 Switch(config-if)#exit
+```
+
+```
+Switch(config)#interface range fastEthernet 0/2-24
 ```
 
 ## Switch static mapping
