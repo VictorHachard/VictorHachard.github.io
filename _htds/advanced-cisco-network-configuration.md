@@ -88,6 +88,6 @@ Switch(config-if)#end
 ### Shoz configurations
 
 ```
-Switch# show port-security address interface interface_id
-Switch# show port-security address
+Switch#show port-security address interface <interface_id>
+Switch#show port-security address
 ```
