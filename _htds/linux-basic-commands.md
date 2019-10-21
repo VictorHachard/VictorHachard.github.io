@@ -39,3 +39,30 @@ du -h file_name
 ```
 
 The -h show the size nicely.
+
+## Mount/umount
+
+Show the list of devices:
+
+```
+fdisk -l
+lsblk
+```
+
+```
+mount <device_name> <path>
+```
+
+the path use is `/media/usb`
+
+### Umount
+
+Run away from the mounted folder.
+
+```
+umount path or devices
+```
+
+```
+fuser -m path
+```
