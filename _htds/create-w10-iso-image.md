@@ -19,7 +19,7 @@ author: Kari "Kalsarikänni"
 
 4) Restart Windows in Audit Mode with following command in Command Prompt:
 
-  ```
+ ```
 %windir%\system32\sysprep\sysprep.exe /audit /reboot
 ```
 
@@ -200,10 +200,6 @@ Windows Insider Preview ADK instead: Windows Insider Preview ADK
 5) The path shown in prompt is annoyingly long. To shorten it and jump to root of drive C:, type cd\\ and hit Enter. The cd command (abbreviation from Change Directory) changes the current working folder (directory), in this case to root of current drive (backslash \\ = root, two dots .. = up one level).
 
  Enter the following command:
-
- ```
-oscdimg.exe -m -o -u2 -udfver102 -bootdata:2#p0,e,bd:\iso_files\boot\etfsboot.com#pEF,e,bd:\iso_files\efi\microsoft\boot\efisys.bin d:\iso_files d:\14986PROx64.iso
-```
 
  ```
 oscdimg.exe -m -o -u2 -udfver102 -bootdata:2#p0,e,bd:\iso_files\boot\etfsboot.com#pEF,e,bd:\iso_files\efi\microsoft\boot\efisys.bin d:\iso_files d:\14986PROx64.iso
