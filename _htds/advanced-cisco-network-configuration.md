@@ -85,9 +85,32 @@ Switch(config-if)#switchport port-security mac-address sticky <mac_address>
 Switch(config-if)#end
 ```
 
-### Shoz configurations
+### Show configurations
 
 ```
 Switch#show port-security address interface <interface_id>
 Switch#show port-security address
+```
+
+## Vlan
+
+### Create a vlan
+
+```
+configure terminal
+vlan 10
+name name
+exit
+```
+
+### Config the router
+
+config for the vlan 10
+
+```
+interface gigabitEthernet 0/0.10
+R1(config-subif)#encapsulation dot1Q 10
+R1(config-subif)#ip address 172.17.10.1 255.255.255.0
+R1(config-subif)#exit
+exit
 ```
