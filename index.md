@@ -13,6 +13,12 @@ I'm a Computer Science Student.
 
 ## Projects
 
+{ % for project in site.projects % }
+<ul>
+<li><a href="{ { project.url } }">{ { project.title } }</a></li>
+</ul>
+{ % endfor % }
+
 <ul class="projects finished">
 {% for project in site.projects reversed %}
     {% unless project.draft %}

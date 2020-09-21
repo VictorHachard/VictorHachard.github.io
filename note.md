@@ -1,11 +1,11 @@
 ---
-title: Note
+title: Notes
 layout: default
 permalink: /note/
 order: "4"
 ---
 
-# How to do
+# Notes
 
 I work on think from time to time, when I understand something that I know I will forget I publish them here. If you have learn something, that's great. If you're an inspiration, that's better.
 

@@ -1,5 +1,5 @@
 ---
-layout: htd
+layout: note
 draft: false
 date: 2019-07-06 19:10:00 +0200
 author: Victor Hachard

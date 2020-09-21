@@ -1,5 +1,5 @@
 ---
-layout: htd
+layout: note
 draft: false
 date: 2019-06-14 20:47:00 +0200
 author: Kari "Kalsarikänni"
