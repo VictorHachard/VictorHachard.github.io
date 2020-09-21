@@ -3,7 +3,7 @@ layout: project
 draft: false
 date: 2019-06-18 00:00:00 +0200
 author: Victor Hachard
-languages: ["Java, JavaFX"]
+languages: ["Java", "avaFX"]
 githubs: ["https://github.com/VictorHachard/BobyIsYou"]
 ---
 

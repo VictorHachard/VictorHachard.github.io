@@ -15,7 +15,7 @@ I'm a Computer Science Student.
 
 {% for project in site.projects reversed %}
 <ul>
-<li><a href="{ { project.url } }">{ { project.title } }</a></li>
+<li><a href="{{ project.url | relative_url }}">{{ project.title }}</a></li>
 </ul>
 {% endfor %}
 

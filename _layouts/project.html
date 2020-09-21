@@ -20,10 +20,10 @@ layout: default
         {% endfor %}</ul>
       {%- endif -%}</p>
       {%- if page.githubs -%}
-      <h5>source code @ : {% for github in page.githubs %} {{ page.github }} {% endfor %}</h5>
+      <h5>source code @ : {% for github in page.githubs %} {{ github }} {% endfor %}</h5>
       {%- endif -%}
       {%- if page.languages -%}
-      <h5>Built with : {% for language in page.languages %} {{ page.language }} {% endfor %}</h5>
+      <h5>Built with : {% for language in page.languages %} {{ language }} {% endfor %}</h5>
       {%- endif -%}
 
   </header>
