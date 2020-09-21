@@ -10,8 +10,6 @@
           <li class="p-name">
             {%- if site.author -%}
               {{ site.author | escape }}
-            {%- else -%}
-              {{ site.title | escape }}
             {%- endif -%}
             </li>
             {%- if site.email -%}
@@ -21,7 +19,7 @@
       </div>
 
       <div class="footer-col one-half">
-        <p>{{- site.description | escape -}}</p>
+        <p></p>
       </div>
 
     </div>

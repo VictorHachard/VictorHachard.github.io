@@ -3,8 +3,7 @@ layout: project
 draft: false
 date: 2019-06-11 12:53:00 +0200
 author: Victor Hachard
-#references:
-#- https://github.com/VictorHachard/my-awesome-site
+language: python
 ---
 
 All things start with a "Hello World".

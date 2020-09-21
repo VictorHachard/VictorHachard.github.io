@@ -3,8 +3,8 @@ layout: project
 draft: false
 date: 2019-06-18 00:00:00 +0200
 author: Victor Hachard
-#references:
-#- https://github.com/VictorHachard/my-awesome-site
+language: Java, JavaFX
+references: https://https://github.com/VictorHachard/BobyIsYou
 ---
 
 As part of the first year of the bachelor's degree in Computer Science, a project of programming must be done. This project is a video game that must be inspired by [Baba Is You](https://store.steampowered.com/app/736260/Baba_Is_You/). The goal is to make this video game based on the courses taught and to apply fundamental notions such as inheritance and object-oriented programming. If you want more information I invite you to read the [report](https://github.com/VictorHachard/BobyIsYou/blob/master/BobyIsYou.pdf).

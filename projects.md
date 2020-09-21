@@ -12,7 +12,7 @@ I work on projects from time to time, and I try to publish them here. If you hav
 &nbsp;
 
 <ul class="projects finished">
-{% for project in site.projects %}
+{% for project in site.projects reversed %}
     {% unless project.draft %}
         <li class="project">
             <h2>
