@@ -13,11 +13,11 @@ I'm a Computer Science Student.
 
 ## Projects
 
-{ % for project in site.projects % }
+{% for project in site.projects reversed %}
 <ul>
 <li><a href="{ { project.url } }">{ { project.title } }</a></li>
 </ul>
-{ % endfor % }
+{% endfor %}
 
 <ul class="projects finished">
 {% for project in site.projects reversed %}

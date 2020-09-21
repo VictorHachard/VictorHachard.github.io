@@ -19,7 +19,13 @@ layout: default
             <li><a href="{{reference}}">{{ reference }}</a></li>
         {% endfor %}</ul>
       {%- endif -%}</p>
-      <h5>Built with : {{ page.langage }}</h5>
+      {%- if page.githubs -%}
+      <h5>source code @ : {% for github in page.githubs %} {{ page.github }} {% endfor %}</h5>
+      {%- endif -%}
+      {%- if page.languages -%}
+      <h5>Built with : {% for language in page.languages %} {{ page.language }} {% endfor %}</h5>
+      {%- endif -%}
+
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
