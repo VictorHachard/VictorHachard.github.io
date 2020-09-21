@@ -12,11 +12,7 @@ All things start with a "Hello World".
 To a programmer this means specifically:
 
 ```py
-def main():
-  print 'Hello, world!'
-
-if __name__ == '__main__':
-  main()
+print("Hello World!")
 ```
 
 But in general it should represent the minimal effort to show the workings of a
