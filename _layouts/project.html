@@ -13,18 +13,20 @@ layout: default
       {%- if page.author -%}
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span></span>
       {%- endif -%}
-      {%- if page.references -%}
-      <ul class="references">
-        {% for reference in page.references %}
-            <li><a href="{{reference}}">{{ reference }}</a></li>
-        {% endfor %}</ul>
-      {%- endif -%}</p>
-      {%- if page.githubs -%}
-      <h5>source code @ : {% for github in page.githubs %} {{ github }} {% endfor %}</h5>
-      {%- endif -%}
       {%- if page.languages -%}
-      <h5>Built with : {% for language in page.languages %} {{ language }} {% endfor %}</h5>
+      <p>Built with:
+          {% for language in page.languages %}
+            {{ language }}
+          {% endfor %}
+          {%- if page.githubs -%}
+              source code @
+              {% for github in page.githubs %}
+                <a href="https://{{ github }}">{{ github }}</a>
+              {% endfor %}
+          {%- endif -%}
+      </p>
       {%- endif -%}
+    </p>
 
   </header>
 
