@@ -34,18 +34,12 @@ I'm a Computer Science Student.
 
 ## Educations
 
-<ul class="educations finished">
+<ul class="educations finished" style="list-style: none;">
 {% for education in site.educations reversed %}
         <li class="education">
+            <img src="res/home/{{ education.logo }}" alt="logo {{ education.school }}" style="max-width:300px;width:100%;padding-bottom:8px;" loading="lazy">
             <h2>{{ education.study }}</h2>
-            <p>{{ education.degree }} • {{ education.school }}</p>
-            {{ project.excerpt }}
+            <p>{{ education.degree }} • {{ education.school }} • {{ education.start_year }} - {{ education.end_year }}</p>
         </li>
 {% endfor %}
 </ul>
-
-<img class="contain experience" src="res/home/heh.png" alt="" style="padding: 20px" loading="lazy">
-
-<img class="contain experience" src="res/home/umons.png" alt="" style="padding: 20px" loading="lazy">
-
-<img class="contain experience" src="res/home/saint-luc.png" alt="" style="padding: 20px" loading="lazy">

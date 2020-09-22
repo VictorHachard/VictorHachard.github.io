@@ -8,4 +8,5 @@ location: Mons, Belgium
 school: Umons
 degree: Bachelor's degree
 study: Computer Science
+logo: umons.png
 ---

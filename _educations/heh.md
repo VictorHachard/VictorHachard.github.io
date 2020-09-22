@@ -8,4 +8,5 @@ location: Mons, Belgium
 school: Haute Ecole en Hainaut
 degree: Bachelor's degree
 study: Computer Systems Networking and Telecommunications
+logo: heh.png
 ---
