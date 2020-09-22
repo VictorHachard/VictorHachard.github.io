@@ -2,7 +2,7 @@
 layout: project
 title: YouTube Playlist Checker
 draft: false
-date: 2018-06-18 00:00:00 +0200
+date: 2018-07-01 00:00:00 +0200
 author: Victor Hachard
 languages: ["HTML", "CSS", "PHP", "SQL"]
 language: HTML, CSS, PHP, SQL
