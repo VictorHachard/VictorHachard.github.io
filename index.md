@@ -32,7 +32,17 @@ I'm a Computer Science Student.
 
 
 
-## Education
+## Educations
+
+<ul class="educations finished">
+{% for education in site.educations reversed %}
+        <li class="education">
+            <h2>{{ education.study }}</h2>
+            <p>{{ education.degree }} • {{ education.school }}</p>
+            {{ project.excerpt }}
+        </li>
+{% endfor %}
+</ul>
 
 <img class="contain experience" src="res/home/heh.png" alt="" style="padding: 20px" loading="lazy">
 
