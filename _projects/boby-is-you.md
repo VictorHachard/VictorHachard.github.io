@@ -4,6 +4,7 @@ draft: false
 date: 2019-06-18 00:00:00 +0200
 author: Victor Hachard
 languages: ["Java", "JavaFX"]
+language: Java, JavaFX
 githubs: ["github.com/VictorHachard/BobyIsYou"]
 ---
 

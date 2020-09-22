@@ -14,17 +14,13 @@ layout: default
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span></span>
       {%- endif -%}
       {%- if page.languages -%}
-      <p>Built with:
-          {% for language in page.languages %}
-            {{ language }}
-          {% endfor %}
+      <br> Built with: {{ language }}
           {%- if page.githubs -%}
-              source code @
+              • source code @
               {% for github in page.githubs %}
                 <a href="https://{{ github }}">{{ github }}</a>
               {% endfor %}
           {%- endif -%}
-      </p>
       {%- endif -%}
     </p>
 
