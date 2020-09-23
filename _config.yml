@@ -32,6 +32,9 @@ collections:
     notes:
         output: true
         permalink: /:collection/:name
+    experiences:
+        output: true
+        permalink: /:collection/:name
     drafts:
         output: true
         permalink: /:collection/:name

@@ -30,14 +30,20 @@ I'm a Computer Science Student.
 
 ## Experience
 
-
+<ul class="experiences finished" style="list-style: none;">
+{% for experience in site.experiences reversed %}
+        <li class="experience">
+            <h2>{{ experience.post }}</h2>
+            <p>{{ experience.post }} • {{ experience.business }} • {{ experience.start_year }} - {{ experience.end_year }}</p>
+        </li>
+{% endfor %}
+</ul>
 
 ## Educations
 
 <ul class="educations finished" style="list-style: none;">
 {% for education in site.educations reversed %}
         <li class="education">
-            <img src="res/home/{{ education.logo }}" alt="logo {{ education.school }}" style="max-width:300px;width:100%;padding-bottom:8px;" loading="lazy">
             <h2>{{ education.study }}</h2>
             <p>{{ education.degree }} • {{ education.school }} • {{ education.start_year }} - {{ education.end_year }}</p>
         </li>

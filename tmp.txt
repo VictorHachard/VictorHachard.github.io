@@ -1,0 +1,1 @@
+<img src="res/home/{{ education.logo }}" alt="logo {{ education.school }}" style="max-width:300px;width:100%;padding-bottom:8px;" loading="lazy">
