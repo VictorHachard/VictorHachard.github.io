@@ -14,9 +14,9 @@ layout: default
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span></span>
       {%- endif -%}
       {%- if page.languages -%}
-      <br> Built with: {{ page.language }} 
+      <br> Built with: {{ page.language }}
           {%- if page.githubs -%}
-              • source code @
+              &nbsp • source code @
               {% for github in page.githubs %}
                 <a href="https://{{ github }}">{{ github }}</a>
               {% endfor %}
