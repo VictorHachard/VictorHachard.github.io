@@ -30,23 +30,23 @@ I'm a Computer Science Student.
 
 ## Experiences
 
-<ul class="experiences finished" style="list-style: none;">
+<ul class="experiences finished">
 {% for experience in site.experiences reversed %}
-        <li class="experience">
-            <h2>{{ experience.post }}</h2>
-            <p>{{ experience.business }} • {{ experience.start_year }} - {{ experience.end_year }} <br> {{ experience.content }}
-            </p>
-        </li>
+    <li class="experience">
+        <h2>{{ experience.post }}</h2>
+        <p>{{ experience.business }} • {{ experience.start_year }} - {{ experience.end_year }} <br> {{ experience.content }}
+        </p>
+    </li>
 {% endfor %}
 </ul>
 
 ## Educations
 
-<ul class="educations finished" style="list-style: none;">
+<ul class="educations finished">
 {% for education in site.educations reversed %}
-        <li class="education">
-            <h2>{{ education.study }}</h2>
-            <p>{{ education.degree }} • {{ education.school }} • {{ education.start_year }} - {{ education.end_year }}</p>
-        </li>
+    <li class="education">
+        <h2>{{ education.study }}</h2>
+        <p>{{ education.degree }} • {{ education.school }} • {{ education.start_year }} - {{ education.end_year }}</p>
+    </li>
 {% endfor %}
 </ul>

@@ -4,8 +4,8 @@ title: YouTube Playlist Checker
 draft: false
 date: 2018-07-01 00:00:00 +0200
 author: Victor Hachard
-languages: ["HTML", "CSS", "PHP", "SQL"]
-language: HTML, CSS, PHP, SQL
+languages: ["HTML", "CSS", "PHP", "SQL", "JS"]
+language: HTML, CSS, PHP, SQL, JS 
 githubs: ["github.com/VictorHachard/YPC_2.0"]
 ---
 
