@@ -28,7 +28,7 @@ I'm a Computer Science Student.
 {% endfor %}
 </ul>
 
-## Experience
+## Experiences
 
 <ul class="experiences finished" style="list-style: none;">
 {% for experience in site.experiences reversed %}

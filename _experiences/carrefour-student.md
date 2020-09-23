@@ -11,5 +11,4 @@ logo: none.png
 ---
 
 
-During this experience I was able to improve myself in communication with customer contacts as well as familiarize myself with
-the world of work in large companies.
+During this experience I was able to improve myself in communication with customer contacts as well as familiarize myself with the world of work in large companies.
