@@ -4,7 +4,7 @@ draft: false
 date: 2017-01-01 12:53:00 +0200
 author: Victor Hachard
 languages: ["Python"]
-language: Python 
+language: Python
 ---
 
 All things start with a "Hello World".

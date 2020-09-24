@@ -4,6 +4,9 @@ layout: default
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
+  <style media="screen">
+
+  </style>
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
@@ -14,14 +17,15 @@ layout: default
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span></span>
       {%- endif -%}
       {%- if page.languages -%}
-      <br> Built with: {{ page.language }}{%- if page.githubs -%} • source code @
+      <br> Built with: {{ languages }}
+		  {%- if page.githubs -%}
+			<br> source code @
               {% for github in page.githubs %}
                 <a href="https://{{ github }}">{{ github }}</a>
               {% endfor %}
           {%- endif -%}
       {%- endif -%}
     </p>
-
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">

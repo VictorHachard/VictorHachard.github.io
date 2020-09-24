@@ -9,9 +9,9 @@ language: HTML, CSS, PHP, JS
 githubs: ["github.com/VictorHachard/BasicWebSite/tree/patmobile"]
 ---
 
-![Logo Pat'mobile]({{site.baseurl}}/res/patmobile/logo.png)
-
 [Pat'mobile](https://www.patmobile.be/) is a static website that I build for a client.
+
+![Logo Pat'mobile]({{site.baseurl}}/res/patmobile/logo.png)
 
 ## What I Learned
 
