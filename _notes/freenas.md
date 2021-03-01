@@ -55,12 +55,11 @@ chown -R root:wheel Backup
 
 ## Transmission plugin
 
-I had the same problem a few days ago, add this line to /etc/rc.conf file:
+### Mount points
 
-transmission_download_dir="/home/Downloads"
+```
+Source: /mnt/volum3/download/transmission
+Destination: /mnt/volum3/iocage/jails/transmission/root/usr/local/etc/transmission/home/Downloads
+```
 
-that worked for me.
-
-freenas share nfs
-
-sudo apt-get install nfs-common
+https://flemmingss.com/how-to-install-and-configure-transmission-plugin-in-freenas-11-3/
