@@ -15,6 +15,8 @@ Naturopath is a Wikipedia like web application. Users can view and add pages, ad
 
 ## What I Learned
 
+- Angular
+- TypeScript
 - Building an API with Spring Boot
 - Java advanced
 - Swagger
