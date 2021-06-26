@@ -1,6 +1,6 @@
 ---
 layout: project
-draft: true
+draft: false
 date: 2020-03-01 00:00:00 +0200
 author: Victor Hachard
 languages: ["Python", "PyGame"]

@@ -11,7 +11,7 @@ githubs: ["github.com/VictorHachard/user-api", "github.com/VictorHachard/user-ap
 
 This project is me trying to improve all the programming logic part of the 'Naturopath' project.
 
-![Gif Naturopath]({{site.baseurl}}/res/user/sample.gif)
+![Gif User]({{site.baseurl}}/res/user/sample.gif)
 
 ## What I Learned
 

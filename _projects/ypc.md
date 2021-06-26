@@ -16,7 +16,6 @@ YouTube Playlist Checker 2.0 is a web service monitoring your YouTube playlists,
 ## What I Learned
 
 - PHP
-- Database
 - MySQL
 - Building a web service from scratch
 - Building an API from scratch
