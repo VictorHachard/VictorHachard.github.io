@@ -1,5 +1,6 @@
 ---
 layout: note
+title: OSI Model
 draft: false
 date: 2019-06-12 18:20:00 +0200
 author: Victor Hachard

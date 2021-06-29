@@ -1,6 +1,5 @@
 ---
 layout: project
-title: Naturopath
 draft: false
 date: 2021-06-24 00:00:00 +0200
 author: Victor Hachard

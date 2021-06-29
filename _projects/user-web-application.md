@@ -1,6 +1,5 @@
 ---
 layout: project
-title: User web application
 draft: false
 date: 2021-06-25 00:00:00 +0200
 author: Victor Hachard
