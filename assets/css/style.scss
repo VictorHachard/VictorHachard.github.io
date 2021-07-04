@@ -14,7 +14,7 @@
 }
 
 .m-skill p {
-  margin-bottom: 5!important;
+  margin-bottom: 5px!important;
 }
 
 .site-nav .page-link {
@@ -35,4 +35,8 @@
     border-radius: .25rem;
     margin-bottom: 1.5rem;
     max-width: 715px;
+}
+
+#results-container li h3 {
+  margin-bottom: 10px!important;
 }
