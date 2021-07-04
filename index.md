@@ -19,7 +19,7 @@ I'm a Computer Science Student.
   <p><b>Technologies:</b> Spring Boot, Angular.</p>
   <p><b>Systems:</b> Windows, Windows Server, Linux.</p>
   <p><b>Softwares:</b> IntelliJ, WebStorm, Eclipse, Visual Studio Code, Git, Photoshop.</p>
-<div>
+</div>
 
 ## Experiences
 
