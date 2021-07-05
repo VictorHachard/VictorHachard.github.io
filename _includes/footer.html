@@ -1,8 +1,6 @@
 <footer class="site-footer h-card">
   <data class="u-url" href="{{ "/" | relative_url }}"></data>
-
   <div class="wrapper">
-
     <div class="social-links">
       <ul class="social-media-list">
         {% if site.github_username %}
@@ -19,6 +17,11 @@
             </a>
           </li>
         {% endif %}
+        <li>
+          <a href="https://www.victorhachard.fr/">
+            <i class="fa fa-camera"></i> My pictures
+          </a>
+        </li>
         {% if site.facebook_username %}
           <li>
             <a href="https://www.facebook.com/{{ site.facebook_username }}">
@@ -28,7 +31,5 @@
         {% endif %}
       </ul>
     </div>
-
   </div>
-
 </footer>

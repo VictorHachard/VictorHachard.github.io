@@ -17,5 +17,5 @@ Boby Is You is a small game copy of [Baba Is You](https://store.steampowered.com
 ## What I Learned
 
 - Java and JavaFX
-- File management
+- Files management
 - Apache Ant

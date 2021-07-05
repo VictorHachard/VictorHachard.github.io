@@ -9,14 +9,13 @@ pagination:
 # Home
 
 Hi!👋️ My name is Victor.
-I'm a Computer Science Student.
 
 ## Skills
 
 <div class="m-skill">
   <p><b>Languages:</b> French (mother tongue), English (full professional proficiency).</p>
   <p><b>Langages:</b> Java, Python, PHP, SQL, C, C#, HTML, CSS, JavaScript/jQuery, TypeScript, Shell, Bash.</p>
-  <p><b>Technologies:</b> Spring Boot, Angular.</p>
+  <p><b>Technologies:</b> Spring Boot, Angular, NSIS.</p>
   <p><b>Systems:</b> Windows, Windows Server, Linux.</p>
   <p><b>Softwares:</b> IntelliJ, WebStorm, Eclipse, Visual Studio Code, Git, Photoshop.</p>
 </div>
