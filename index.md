@@ -25,8 +25,8 @@ Hi!👋️ My name is Victor.
 {% for experience in site.experiences reversed %}
     <li class="experience">
         <h2>{{ experience.post }}</h2>
-        <p>{{ experience.business }} • {{ experience.start_year }} - {{ experience.end_year }} <br> {{ experience.content }}
-        </p>
+        <p>{{ experience.business }} • {{ experience.start_year }} - {{ experience.end_year }}</p>
+        <p>{{ experience.content }}</p>
     </li>
 {% endfor %}
 </ul>

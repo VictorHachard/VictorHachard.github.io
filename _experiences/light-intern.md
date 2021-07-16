@@ -10,4 +10,4 @@ post: Lighting designer intern
 logo: none.png
 ---
 
-These internship were superb: I was a child making my dreams come true. The best time for me was to control live lighting for one evening.
+These internship were superb: I was a child making his dreams come true. The best time for me was to be at the lighting console of a show
