@@ -10,3 +10,5 @@ degree: Qualification technique degree
 study: Visual Arts and Photography
 logo: saint-luc.png
 ---
+
+CESS, Certificate of photography technician, Certificate of basic management.

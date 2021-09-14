@@ -10,3 +10,5 @@ degree: Bachelor's degree
 study: Computer Systems Networking and Telecommunications
 logo: heh.png
 ---
+
+Relevant assets learn: routing and switching, development web-android, object oriented design, algorithms, relational database, data structures, software development.

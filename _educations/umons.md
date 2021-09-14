@@ -10,3 +10,5 @@ degree: Bachelor's degree
 study: Computer Science
 logo: umons.png
 ---
+
+Relevant assets learn: computer operation, programming and algorithms, physics, mathematics.

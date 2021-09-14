@@ -2,8 +2,8 @@
 layout: default
 date: 2019-01-01 00:00:00 +0200
 author: Victor Hachard
-start_year: summer, winter 2019
-end_year: summer 2020
+start_year: 2019
+end_year: 2021
 location: Froyennes, Belgium
 business: Carrefour EU
 post: Student Job - meat counter
