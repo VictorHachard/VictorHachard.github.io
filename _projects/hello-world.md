@@ -5,7 +5,7 @@ date: 2017-01-01 12:53:00 +0200
 author: Victor Hachard
 languages: ["Python"]
 language: Python
-image: /res/hello-world/logo.jpg
+image: {{site.baseurl}}/res/hello-world/logo.jpg
 ---
 
 All things start with a "Hello World".
