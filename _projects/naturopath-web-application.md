@@ -6,7 +6,7 @@ author: Victor Hachard
 languages: ["Angular", "Spring Boot (Java)", "PostgreSQL"]
 language: Angular, Spring Boot (Java), PostgreSQL
 githubs: ["github.com/VictorHachard/naturopath-tfe-api", "github.com/VictorHachard/naturopath-tfe-application"]
-image: {{site.baseurl}}res/naturopath/logo.png
+image: https://victorhachard.github.io/res/naturopath/logo.png
 ---
 
 Naturopath is a Wikipedia like web application. Users can view and add pages, administrators check the content of the pages and can create new categories. If you want more information I invite you to read the [report](https://github.com/VictorHachard/naturopath-tfe-application/blob/master/naturopath.pdf).
