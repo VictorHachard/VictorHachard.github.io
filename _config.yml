@@ -17,7 +17,7 @@ title: Victor Hachard
 email:
 description: #>- # this means to ignore newlines until "baseurl:"
   #This is my personal, and semi-professional website. Created using Jekyll, and hosted on GitHub Pages.
-baseurl: "" # the subpath of your site, e.g. /my-awesome-site
+baseurl: "https://victorhachard.github.io" # the subpath of your site, e.g. /my-awesome-site
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  victorHachard
 facebook_username: victor.hachard
