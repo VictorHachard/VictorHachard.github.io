@@ -10,7 +10,7 @@ author: Victor Hachard
 
 ## keyboard sizes
 
-![seven-layers-OSI-model]({{site.baseurl}}/res/keyboard/keyboard-size.png)
+![keyboard-sizes]({{site.baseurl}}/res/keyboard/keyboard-sizes.jpg)
 
 -   Full-sized: You usually can’t find this size for custom keyboards, it’s only used on pre-built keyboards. If you’re lucky you might be able to find a full-sized custom keyboard.
 
