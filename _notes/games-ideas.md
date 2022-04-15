@@ -7,8 +7,7 @@ author: Victor Hachard
 
 - Game where you collect virgins to sacrifice to a/the devil
 
-- Bugs in a House: Asymmetrical RTS
-https://www.reddit.com/r/gameideas/comments/penxhn/bugs_in_a_house_asymmetrical_rts/
+- Bugs in a House: Asymmetrical RTS ([lien](https://www.reddit.com/r/gameideas/comments/penxhn/bugs_in_a_house_asymmetrical_rts/))
 
 - A game about planning theatrical heists, with heavy focus on the planning part.
 
