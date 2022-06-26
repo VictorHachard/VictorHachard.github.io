@@ -18,10 +18,14 @@ class FieldMapperFieldMapperLineRel(models.Model):
             return record.sequence + 5
         return 10000
 
-    field_mapper_id = fields.Many2one(comodel_name='field.mapper', string='Field Mapper',
-                                        ondelete='cascade', required=True)
-    field_mapper_line_id = fields.Many2one(comodel_name='field.mapper.line', string='Field Mapper Line',
-                                            ondelete='cascade', required=True)
+    field_mapper_id = fields.Many2one(comodel_name='field.mapper',
+                                      string='Field Mapper',
+                                      ondelete='cascade',
+                                      required=True)
+    field_mapper_line_id = fields.Many2one(comodel_name='field.mapper.line',
+                                           string='Field Mapper Line',
+                                           ondelete='cascade',
+                                           required=True)
     sequence = fields.Integer(string='Sequence', required=True, index=True, default=_default_sequence)
 
     _sql_constraints = [
@@ -38,11 +42,13 @@ class FieldMapper(models.Model):
     name = fields.Char(string='Name', required=True)
 
     field_mapper_line_ids = fields.Many2many(comodel_name='field.mapper.line',
-                                                relation='field_mapper_field_mapper_line',
-                                                column1='field_mapper_id',
-                                                column2='field_mapper_line_id',
-                                                string='Field Mapper Line')
-    field_mapper_ids = fields.One2many('field.mapper.field.mapper.line', 'field_mapper_id', string='Field Rel')
+                                             relation='field_mapper_field_mapper_line',
+                                             column1='field_mapper_id',
+                                             column2='field_mapper_line_id',
+                                             string='Field Mapper Line')
+    field_mapper_ids = fields.One2many(comodel_name='field.mapper.field.mapper.line',
+                                       column1='field_mapper_id',
+                                       string='Field Rel')
 
 
 class FieldMapperLine(models.Model):
@@ -54,7 +60,9 @@ class FieldMapperLine(models.Model):
                                         column1='field_mapper_line_id',
                                         column2='field_mapper_id',
                                         string='Field Mapper')
-    field_mapper_line_ids = fields.One2many('field.mapper.field.mapper.line', 'field_mapper_line_id', string='Field Rel')
+    field_mapper_line_ids = fields.One2many(comodel_name='field.mapper.field.mapper.line',
+                                            column1='field_mapper_line_id',
+                                            string='Field Rel')
 
     target_field = fields.Char(string='Target Field', required=True)
 ```
