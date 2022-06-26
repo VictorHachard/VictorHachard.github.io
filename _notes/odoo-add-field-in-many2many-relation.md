@@ -47,7 +47,7 @@ class FieldMapper(models.Model):
                                              column2='field_mapper_line_id',
                                              string='Field Mapper Line')
     field_mapper_ids = fields.One2many(comodel_name='field.mapper.field.mapper.line',
-                                       column1='field_mapper_id',
+                                       inverse_name='field_mapper_id',
                                        string='Field Rel')
 
 
@@ -61,7 +61,7 @@ class FieldMapperLine(models.Model):
                                         column2='field_mapper_id',
                                         string='Field Mapper')
     field_mapper_line_ids = fields.One2many(comodel_name='field.mapper.field.mapper.line',
-                                            column1='field_mapper_line_id',
+                                            inverse_name='field_mapper_line_id',
                                             string='Field Rel')
 
     target_field = fields.Char(string='Target Field', required=True)
