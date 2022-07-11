@@ -9,7 +9,7 @@ author: Victor Hachard
 
 Select all torrents that don't have a revision or one of the revision is outdated (not the latest).
 
-![sql-diagram]({{site.baseurl}}/res/sql-102/1.png)
+<!-- ![sql-diagram]({{site.baseurl}}/res/sql-102/1.png) -->
 
 ```sql
 with rev as (select MAX(id) as id from pirate_revision group by revision_type)  /*select all revision (last one of each type)*/
@@ -29,5 +29,4 @@ with sol as (select sol.* from sale_order_line sol
   join sale_order so on so.id = sol.order_id
   where so.state in ('draft', 'sent', 'sale'))
 select distinct sol1.id from sol as sol1 inner join sol as sol2 on sol1.id != sol2.id
-
 ```
