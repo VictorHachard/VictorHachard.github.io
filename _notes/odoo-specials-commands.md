@@ -35,3 +35,11 @@ rule_1.write({
     ]
 })
 ```
+
+## List of ondelete options
+
+'ondelete' defines what happens when the related record is deleted.
+
+Its default is set *null*, meaning that an empty value is set when the related record is deleted.
+
+Other possible values are *restricted*, raising an error preventing the deletion, and *cascade*, which also deletes this record.
