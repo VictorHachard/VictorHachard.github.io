@@ -13,14 +13,14 @@ author: Victor Hachard
 
 3. List of various choices that you can do with the command will be listed down, add a `/` ou `-` after `shutdown` to execute a choices. The choices can be combined;
 
-  - s to shutdown your computer
-  - r to restart your computer
-  - l to log off your computer
-  - f allows forcing actions
-  - t xx add a time in seconds before shutdown
-  - c "text" (optional) to add a small text
+-   s to shutdown your computer
+-   r to restart your computer
+-   l to log off your computer
+-   f allows forcing actions
+-   t xx add a time in seconds before shutdown
+-   c "text" (optional) to add a small text
 
-  ![Shutdown CMD]({{site.baseurl}}/res/shutdown-power-off-w10/shutdown-cmd.png)
+![Shutdown CMD]({{site.baseurl}}/res/shutdown-power-off-w10/shutdown-cmd.png)
 
 ## Example
 

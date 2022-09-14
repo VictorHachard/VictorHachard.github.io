@@ -178,9 +178,9 @@ Switch#show ipv6 interface brief or sh ipv6 int br
 
 #### Add an ip address
 
-- Interface: Fa0/0
-- IP adress: 192.168.100.1
-- Subnet Mask: 255.255.255.0
+-   Interface: Fa0/0
+-   IP adress: 192.168.100.1
+-   Subnet Mask: 255.255.255.0
 
 ```
 Router(config)#interface fastEthernet 0/0
@@ -278,8 +278,8 @@ Router(config)#ipv6 route <network_address> <output_interface>
 
 A recursive static route:
 
-- Subnet or information must go: 2001:6A8:3540:A::1/64
-- Ipv6 address of the interface of the next device: 2001:6A8:3540:D::1
+-   Subnet or information must go: 2001:6A8:3540:A::1/64
+-   Ipv6 address of the interface of the next device: 2001:6A8:3540:D::1
 
 ```
 Router(config)#ipv6 route 2001:6A8:3540:A::1/64 2001:6A8:3540:D::1

@@ -112,9 +112,9 @@ echo Y|del %appdata%\microsoft\windows\recent\automaticdestinations\*del %0
 
  The batch file explained:
 
- - echo Y \| = Pipes (sends) a letter Y to the command given after the Pipe (\|) character
- - del %appdata%\\microsoft\\windows\\recent\\automaticdestinations\* = Resets the Quick Access to defaults. This command expects the user to enter either Y for Yes or N for No. As the Y will be in this case piped, user interaction is not needed but instead the Y will be entered automatically
- - del %0 = Deletes the batch file itself after it has been run. Leaving this away, not deleting the batch file, would reset the Quick Access every time the user signs in
+ -   echo Y \| = Pipes (sends) a letter Y to the command given after the Pipe (\|) character
+ -   del %appdata%\\microsoft\\windows\\recent\\automaticdestinations\* = Resets the Quick Access to defaults. This command expects the user to enter either Y for Yes or N for No. As the Y will be in this case piped, user interaction is not needed but instead the Y will be entered automatically
+ -   del %0 = Deletes the batch file itself after it has been run. Leaving this away, not deleting the batch file, would reset the Quick Access every time the user signs in
 
 6) Run Disk Management. Shrink C: partition with 10 to 15 GB, create a new partition using the freed space. This partition will be used later to store the captured image. Rename Windows partition as Windows, and the new image partition as Image. Create a new folder in this new partition, name the folder as Scratch. Later on when we boot reference machine from install media to capture image with DISM command, this folder will be needed to offer DISM enough temporary working space
 

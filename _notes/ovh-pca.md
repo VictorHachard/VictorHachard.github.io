@@ -30,11 +30,11 @@ Le descellement d’une archive consiste à envoyer une demande de descellement,
 
 Le descellement peut se faire par :
 
-- L’interface client.
-- L’API Openstack.
-- Passerelles pour les protocoles basés sur SSH : faire une tentative de récupération de l’archive.
+-   L’interface client.
+-   L’API Openstack.
+-   Passerelles pour les protocoles basés sur SSH : faire une tentative de récupération de l’archive.
 
 Le traitement de cette opération peut être interrogé avec :
 
-- L’interface client](../pca_unlock/guide.fr-ca.md){.ref}.
-- L’API Openstack.
+-   L’interface client](../pca_unlock/guide.fr-ca.md){.ref}.
+-   L’API Openstack.

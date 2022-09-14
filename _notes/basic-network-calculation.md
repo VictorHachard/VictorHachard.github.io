@@ -52,8 +52,8 @@ example: `173.115.163.86/20`
 
 Take the left part `1010` -> `160`<br/>
 
-- The network address is `173.115.160.0/20`.
-- The first network address is `173.115.160.1/20`.
+-   The network address is `173.115.160.0/20`.
+-   The first network address is `173.115.160.1/20`.
 
 ## Find the last possible address of a network
 
@@ -63,5 +63,5 @@ network address: `173.115.160.0/20`
 `1010|1111.11111111` remplace the right paty by one<br/>
 `1010|1111.11111111` -> `175.255`<br/>
 
-- The broadcast address is `173.115.175.255/20`.
-- The last possible address is `173.115.175.254/20`
+-   The broadcast address is `173.115.175.255/20`.
+-   The last possible address is `173.115.175.254/20`

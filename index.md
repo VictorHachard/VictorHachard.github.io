@@ -14,8 +14,8 @@ Hi!👋️ My name is Victor.
 
 <div class="m-skill">
   <p><b>Languages:</b> French (mother tongue), English (full professional proficiency).</p>
-  <p><b>Langages:</b> Java, Python, PHP, SQL, C, C#, HTML, CSS, JavaScript/jQuery, TypeScript, Shell, Bash.</p>
-  <p><b>Technologies:</b> Spring Boot, Angular, Android, NSIS.</p>
+  <p><b>Langages:</b> Java, Python, PHP, SQL, C, C#, HTML, CSS, JavaScript/jQuery/TypeScript, Shell, Bash.</p>
+  <p><b>Technologies:</b> Odoo, Spring Boot, Angular, Android, NSIS.</p>
   <p><b>Systems:</b> Windows, Windows Server, Linux.</p>
 </div>
 
