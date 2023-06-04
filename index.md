@@ -17,6 +17,7 @@ Hi!👋️ My name is Victor.
   <p><b>Langages:</b> Java, Python, PHP, SQL, C, C#, HTML, CSS, JavaScript/jQuery/TypeScript, Shell, Bash.</p>
   <p><b>Technologies:</b> Odoo, Spring Boot, Angular, Android, NSIS.</p>
   <p><b>Systems:</b> Windows, Windows Server, Linux.</p>
+  <p><b>Cloud:</b> OVH, Oracle Cloud Infrastructure, CloudFlare.</p>
 </div>
 
 ## Experiences
@@ -30,6 +31,12 @@ Hi!👋️ My name is Victor.
     </li>
 {% endfor %}
 </ul>
+
+## Certification
+
+<div class="m-skill">
+  <p><b>Oracle:</b> Oracle Cloud Infrastructure 2023 Foundations Associate (1Z0-1085-23).</p>
+</div>
 
 ## Educations
 
