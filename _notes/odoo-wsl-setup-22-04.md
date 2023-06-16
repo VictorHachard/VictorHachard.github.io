@@ -208,3 +208,35 @@ sudo apt-get install node-less -y
 sudo apt-get install nodejs npm -y
 sudo npm install -g less@3.10.3 less-plugin-clean-css
 ```
+
+## Add a project
+
+### PostgreSQL
+
+Switches to the postgres user with root privileges:
+
+```sh
+sudo -i -u postgres
+```
+
+Start the PostgreSQL command-line tool (psql):
+
+```sh
+psql
+```
+
+Execute SQL command to create a database users: odoo_project_x with the password 'odoo' and the ability to create databases.
+
+```sh
+CREATE USER odoo_project_x WITH PASSWORD 'odoo' CREATEDB;
+```
+
+### Dependency
+
+Activate a virtual environment, install Python packages specified in the requirements.txt file located at the given path, and then deactivate the virtual environment.
+
+```sh
+source <name>-odoo-1x/bin/activate
+<name>-odoo-1x/bin/pip install -r /home/<name>-odoo-1x/src/requirements.txt
+deactivate
+```
