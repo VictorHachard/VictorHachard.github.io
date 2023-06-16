@@ -7,7 +7,7 @@ author: Victor Hachard
 
 ## Create a new user
 
-```
+```sh
 sudo adduser user_name
 sudo passwd 'user_name' password
 ```
@@ -16,7 +16,7 @@ Once a new user created, it’s entry automatically added to the `/etc/passwd` f
 
 ### Delete an user
 
-```
+```sh
 sudo userdel user_name
 ```
 
@@ -24,13 +24,13 @@ sudo userdel user_name
 
 By default ‘useradd‘ command creates a user’s home directory under /home directory with username. Thus, for example, we’ve seen above the default home directory for the user ‘tecmint‘ is ‘/home/tecmint‘.
 
-```
+```sh
 useradd -d folder_name user_name
 ```
 
 ### The /etc/passwd file
 
-```
+```sh
 tecmint:x:504:504:tecmint:/home/tecmint:/bin/bash
 ```
 
@@ -52,14 +52,14 @@ There are two types of groups in Linux operating systems:
 
 #### Create/delete group
 
-```
+```sh
 sudo groupadd group_name
 sudo groupdel group_name
 ```
 
 #### Add an user to a primary group
 
-```
+```sh
 sudo usermod -a -g group_name user_name
 ```
 
@@ -67,18 +67,18 @@ Always use the -a (append) switch when adding a user to a new group. If you omit
 
 #### Add/remove an user to a group
 
-```
+```sh
 sudo usermod -a -G group_name users_name
 sudo usermod -a -G group_name,group_name user_name
 ```
 
-```
+```sh
 sudo gpasswd -d user_name group_name
 ```
 
 #### Show user group
 
-```
+```sh
 id user_name
 group user_name
 ```
