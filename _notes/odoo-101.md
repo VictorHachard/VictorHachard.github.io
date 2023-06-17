@@ -31,7 +31,7 @@ def delete_product(self, product_id):
 
 ### Write
 
-`self.write(vals)`: This method is used to update existing records in the database. It takes a dictionary vals as an argument, where the keys are the fields to be updated, and the values are the new values for those fields. The write method returns True if the update is successful.
+`self.write(vals)`: This method is used to update existing record(s) in the database. It takes a dictionary vals as an argument, where the keys are the fields to be updated, and the values are the new values for those fields. The write method returns True if the update is successful.
 
 ```py
 def update_product_price(self, product_id, new_price):
@@ -39,14 +39,13 @@ def update_product_price(self, product_id, new_price):
     product.write({'list_price': new_price})
 ```
 
-
 ### Update
 
-`self.update(vals)`: This method is used to update multiple records in a single call. It takes a dictionary vals as an argument, similar to self.write(), but it updates all the records that match a certain domain. The update method returns the number of records updated.
+`self.update(vals)`: This method is used to update a record. It takes a dictionary vals as an argument, similar to self.write(), but it not savec in database. The update method returns mothing.
 
 ```py
 def update_product_price(self, product_id, new_price):
-     product = self.env['product.product'].browse(product_id)
+    product = self.env['product.product'].browse(product_id)
     products.update({'list_price': new_price})
 ```
 
@@ -54,29 +53,19 @@ def update_product_price(self, product_id, new_price):
 
 | | Write | Update |
 | --- | --- | --- |
-| Usage | Used to update existing record(s) in the database. | Used to update a record. |
-| Calling | Syntax: self.write(vals) | Syntax: self.update(vals) |
+| Usage | Used to update existing record(s) in the database. | Used to update a pseudo-record (in `@api.onchange`, ...) |
 | Arguments <td colspan=2> Takes a dictionary vals where keys are the fields to be updated, and values are the new values for those fields. |
-| Target | Can be called on a specific record or a set of records that match a certain domain. | Called on the model itself, not on a specific record. |
-| Triggers | Executes `@api.onchange` methods and `@api.depends` decorated methods, triggering related computations or updates. | Bypasses `@api.onchange` methods and `@api.depends` decorated methods, without triggering additional computations or updates. |
+| Target | Can be called on a specific record or a set of records. | Called on the model itself (a record). |
+| Triggers | Executes related computations methods (`@api.onchange`, `@api.depends`, ...) or updates. | Bypasses related computations methods or updates. |
 | Returns | Returns True if the update is successful. | Returns nothing. |
 
-General Considerations:
+## Method Decorators
 
-- 'write' is suitable when updating specific fields of individual records or a set of records, and when triggering related computations or updates.
-- 'update' is useful when updating multiple records efficiently, without invoking `@api.onchange` or `@api.depends` mechanisms. When dealing with `@api.onchange` methods and pseudo-records, update can be used to modify field values, as pseudo-records are not yet saved in the database.
+### @api.depends
 
-## Difference between @api.onchange and @api.depends
+The `@api.depends` decorator is used for "fields.function". It allows you to calculate the value of a field based on other fields within the same or related models. When any of the fields specified in the decorator are altered or changed, the decorated function is triggered, and the field's value is recalculated. This decorator provides a way to establish field dependencies across different screens and models.
 
-In Odoo, there are two decorators, `@api.depends` and `@api.onchange`, which serve different purposes when working with fields in models.
-
-The `@api.depends` decorator is used for "fields.function" in Odoo. It allows you to calculate the value of a field based on other fields within the same or related models. When any of the fields specified in the decorator are altered or changed in the form, the decorated function is triggered, and the field's value is recalculated. This decorator provides a way to establish field dependencies across different screens and models.
-
-On the other hand, the `@api.onchange` decorator is used to trigger a specific function when any of the specified fields change within the same screen or model. It enables you to perform custom actions or computations based on the changed values.
-
-While it is possible to combine `@api.depends` and `@api.onchange` decorators, it is generally not necessary or recommended to use them together for the same fields. The `@api.depends` decorator already handles the field dependencies and triggers the method when any of the specified fields change, including the fields that you might specify in `@api.onchange`.
-
-Here's an example to illustrate the usage of `@api.depends` and `@api.onchange` separately:
+Example:
 
 ```py
 class MyModel(models.Model):
@@ -84,7 +73,6 @@ class MyModel(models.Model):
 
     field1 = fields.Char()
     field2 = fields.Integer()
-    field3 = fields.Boolean()
     computed_field = fields.Float(compute='_compute_field')
 
     @api.depends('field1', 'field2')
@@ -94,6 +82,50 @@ class MyModel(models.Model):
 
         # Update the value of the computed_field
         self.computed_field = calculated_value
+```
+
+In the example above, the method `_compute_field` is decorated with `@api.depends`, specifying that it should be called whenever field1 or field2 changes. This allows for recalculating the value of the computed_field based on the values of those fields.
+
+### @api.depends_context
+
+The `@api.depends_context` decorator is used to define a method that depends on specific values from the context. The decorated method will be recomputed whenever any of the specified keys in the context changes.
+
+Example:
+
+```py
+class MyModel(models.Model):
+    _name = 'my.model'
+
+    field = fields.Char()
+    computed_field = fields.Float(compute='_compute_field')
+
+    @api.depends_context('my_context_key')
+    @api.depends('field')
+    def _compute_field(self):
+        # Access the value from the context
+        context_value = self.env.context.get('my_context_key')
+
+        # Perform calculations based on field and context_value
+        # ...
+
+        # Update the value of the computed_field
+        self.computed_field = calculated_value
+```
+
+In the example above, the method `_compute_field` is decorated with `@api.depends_context('my_context_key')`. It specifies that the method should be recomputed whenever the value of the key 'my_context_key' in the context changes, in addition to the regular dependency on the 'field'. This allows for dynamic computations based on both the field value and the context value.
+
+### @api.onchange
+
+The `@api.onchange` decorator is used to trigger a specific function when any of the specified fields change within the same screen or model. It enables you to perform custom actions or computations based on the changed values.
+
+Example:
+
+```py
+class MyModel(models.Model):
+    _name = 'my.model'
+
+    field3 = fields.Boolean()
+    computed_field = fields.Float()
 
     @api.onchange('field3')
     def _onchange_field3(self):
@@ -104,12 +136,71 @@ class MyModel(models.Model):
         self.computed_field = new_value
 ```
 
-In the example above, the method _compute_field is decorated with `@api.depends`, specifying that it should be called whenever field1 or field2 changes. This allows for recalculating the value of the computed_field based on the values of those fields.
+In the example above, the  method `_onchange_field3` is decorated with `@api.onchange` for field3, which triggers the method when the value of field3 changes. This allows for performing custom actions specific to the change in field3 and updating the computed_field or any other relevant fields accordingly.
 
-The method _onchange_field3 is decorated with `@api.onchange` for field3, which triggers the method when the value of field3 changes. This allows for performing custom actions specific to the change in field3 and updating the computed_field or any other relevant fields accordingly.
+### @api.constraints
 
-Remember, it is generally recommended to use either `@api.depends` or `@api.onchange` based on your specific requirements, rather than combining them for the same fields. This approach avoids redundancy and ensures clear and concise code.
+The `@api.constraints` decorator is used to define constraints on a model. It allows you to specify rules that the model's records must follow to maintain data integrity. The decorated method is called whenever the constraint is evaluated.
 
+Example:
+
+```py
+class MyModel(models.Model):
+    _name = 'my.model'
+
+    field = fields.Integer()
+
+    @api.constraints('field')
+    def _check_field_constraint(self):
+        for record in self:
+            if record.field < 0:
+                raise models.ValidationError("Field value must be positive.")
+```
+
+In the example above, the method `_check_field_constraint` is decorated with `@api.constraints('field')`. It specifies that the constraint should be checked whenever the 'field' value is modified. If any record violates the constraint (field value is negative), a validation error is raised.
+
+### @api.model_create_multi
+
+The `@api.model_create_multi` decorator is used to optimize the creation of multiple records in a single database query. It is applied to a method that creates multiple records at once.
+
+Example:
+
+```py
+class MyModel(models.Model):
+    _name = 'my.model'
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get('field'):
+                vals.update({'field': False})
+        return super().create(vals_list)
+```
+
+In the example above, the method `create` is decorated with `@api.model_create_multi`. This decorator enhances the performance by creating the records in a single database query, rather than individual queries for each record.
+
+### @api.autovacuum
+
+The `@api.autovacuum` decorator is used to mark a method as a "cleanup" method. It is automatically called by Odoo during a database vacuum operation, which helps optimize the database performance. This decorator is typically used for methods that perform cleanup tasks or remove outdated records.
+
+Example:
+
+```py
+class MyModel(models.Model):
+    _name = 'my.model'
+
+    @api.autovacuum
+    def _perform_cleanup(self):
+        # Perform cleanup tasks or delete outdated records
+        # ...
+        return self.sudo().search(domain).unlink()
+```
+
+In the example above, the method `_perform_cleanup` is decorated with `@api.autovacuum`. When Odoo performs a database vacuum operation, it will automatically call this method to execute the defined cleanup tasks.
+
+### Between method
+
+It is generally recommended to use either `@api.depends` or `@api.onchange` based on your specific requirements, rather than combining them for the same fields. This approach avoids redundancy and ensures clear and concise code.
 
 
 ## List of special commands
