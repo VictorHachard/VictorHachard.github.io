@@ -48,3 +48,34 @@
 #results-container li h3 {
   margin-bottom: 10px !important;
 }
+
+// Copy Past button on code block
+div.highlight {
+  position: relative;
+}
+
+pre.highlight {
+  padding-right: 20px;
+}
+
+.copied {
+  border-color: #57ab5a !important;
+}
+
+.copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px 2px 8px;
+  border-radius: 2px;
+  border: 1px solid #373737;
+  background-color: #eef;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  opacity: 0; /* Initially hide the copy button */
+}
+
+div.highlight:hover .copy {
+  opacity: 1; /* Show the copy button on hover */
+}
