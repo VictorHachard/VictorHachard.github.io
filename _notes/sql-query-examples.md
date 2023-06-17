@@ -7,26 +7,40 @@ author: Victor Hachard
 
 ## Get torrent that have an outdated revision
 
-Select all torrents that don't have a revision or one of the revision is outdated (not the latest).
+Retrieves the IDs of pirate torrents that don't have a revision or one of the revision is outdated (not the latest). 
 
 <!-- ![sql-diagram]({{site.baseurl}}/res/sql-102/1.png) -->
 
 ```sql
-with rev as (select MAX(id) as id from pirate_revision group by revision_type)  /*select all revision (last one of each type)*/
-select pt.id from pirate_torrent pt
-where pt.state in ('saved', 'exist') and (
-  select COUNT(*) from pirate_revision_pirate_torrent_rel prptr
-  where prptr.torrent_id = pt.id and prptr.revision_id in (select id from rev)
-) < (select count(id) from rev) limit 100000
+WITH rev AS (
+  SELECT MAX(id) AS id
+  FROM pirate_revision
+  GROUP BY revision_type
+)
+SELECT pt.id
+FROM pirate_torrent pt
+WHERE pt.state IN ('saved', 'exist')
+  AND (
+    SELECT COUNT(*)
+    FROM pirate_revision_pirate_torrent_rel prptr
+    WHERE prptr.torrent_id = pt.id
+      AND prptr.revision_id IN (SELECT id FROM rev)
+  ) < (SELECT COUNT(id) FROM rev)
+LIMIT 100000;
 ```
 
 ## Get duplicate sale order
 
-Select all sale order that are duplicated.
+Retrieves the distinct IDs of sale order lines that are associated with sale orders in the 'draft', 'sent', or 'sale' states, and have at least one other sale order line associated with the same sale order.
 
 ```sql
-with sol as (select sol.* from sale_order_line sol
-  join sale_order so on so.id = sol.order_id
-  where so.state in ('draft', 'sent', 'sale'))
-select distinct sol1.id from sol as sol1 inner join sol as sol2 on sol1.id != sol2.id
+WITH sol AS (
+  SELECT sol.*
+  FROM sale_order_line sol
+  JOIN sale_order so ON so.id = sol.order_id
+  WHERE so.state IN ('draft', 'sent', 'sale')
+)
+SELECT DISTINCT sol1.id
+FROM sol AS sol1
+INNER JOIN sol AS sol2 ON sol1.id != sol2.id;
 ```
