@@ -5,28 +5,52 @@ date: 2022-03-04 14:42:00 +0200
 author: Victor Hachard
 ---
 
-## Model Methode
+## TODO
 
-When working with models, you often need to modify records. Odoo provides several methods to achieve this, including create, unlink, write and update.
+Add more ORM methods
+Add translation in python
 
-## Create
 
-`self.unlink(vals)`: This method is used to create new records in the database. It takes a dictionary vals as an argument, where the keys are the fields of the new record, and the values are the values for those fields. The create method returns the newly created record.
+## ORM methods
+
+### Default Get
+
+`default_get(self, fields)`: This method is used to provide default values for fields when creating a new record. It takes a list of field names as an argument and returns a dictionary with the default values for those fields.
 
 ```py
-def create_new_product(self, name, price):
-    product = self.env['product.product'].create({'name': name, 'list_price': price})
-    return product
+def default_get(self, fields_list):
+    defaults = super().default_get(fields_list)
+    defaults['price'] = 100
+    return defaults
 ```
+
+### New
+
+`new(self, values)`: This method is used to create a new record without saving it to the database. It takes a dictionary values as an argument, where the keys are the fields of the record, and the values are the corresponding values for those fields. The new method returns a new record object.
+
+```py
+product = self.env['product.product'].new({'name': name, 'list_price': price})
+```
+
+Note that you would typically call the `create` method to create a new record that is saved to the database, but the `new` method can be useful in certain scenarios where you want to work with a record object temporarily before deciding whether to save it or not.
+
+### Create
+
+`self.create(vals)`: This method is used to create new records in the database. It takes a dictionary vals as an argument, where the keys are the fields of the new record, and the values are the values for those fields. The create method returns the newly created record.
+
+```py
+product = self.env['product.product'].create({'name': name, 'list_price': price})
+```
+
+### Copy
 
 ### Unlink
 
 `self.unlink()`: This method is used to delete records from the database. It removes the record associated with the current instance of the model. The unlink method returns True if the deletion is successful.
 
 ```py
-def delete_product(self, product_id):
-    product = self.env['product.product'].browse(product_id)
-    product.unlink()
+product = self.env['product.product'].browse(1)
+product.unlink()
 ```
 
 ### Write
@@ -34,9 +58,8 @@ def delete_product(self, product_id):
 `self.write(vals)`: This method is used to update existing record(s) in the database. It takes a dictionary vals as an argument, where the keys are the fields to be updated, and the values are the new values for those fields. The write method returns True if the update is successful.
 
 ```py
-def update_product_price(self, product_id, new_price):
-    product = self.env['product.product'].browse(product_id)
-    product.write({'list_price': new_price})
+product = self.env['product.product'].browse(product_id)
+product.write({'list_price': new_price})
 ```
 
 ### Update
@@ -44,9 +67,8 @@ def update_product_price(self, product_id, new_price):
 `self.update(vals)`: This method is used to update a record. It takes a dictionary vals as an argument, similar to self.write(), but it not savec in database. The update method returns mothing.
 
 ```py
-def update_product_price(self, product_id, new_price):
-    product = self.env['product.product'].browse(product_id)
-    products.update({'list_price': new_price})
+product = self.env['product.product'].browse(product_id)
+products.update({'list_price': new_price})
 ```
 
 ### Key differences between the update and write methods
@@ -71,20 +93,15 @@ Example:
 class MyModel(models.Model):
     _name = 'my.model'
 
-    field1 = fields.Char()
-    field2 = fields.Integer()
-    computed_field = fields.Float(compute='_compute_field')
+    debit = fields.Float()
+    credit = fields.Float()
+    balance = fields.Float(compute='_compute_balance')
 
-    @api.depends('field1', 'field2')
-    def _compute_field(self):
-        # Perform calculations based on field1 and field2
-        # ...
-
-        # Update the value of the computed_field
-        self.computed_field = calculated_value
+    @api.depends('debit', 'credit')
+    def _compute_balance(self):
+        for record in self:
+            record.balance = record.debit - record.credit
 ```
-
-In the example above, the method `_compute_field` is decorated with `@api.depends`, specifying that it should be called whenever field1 or field2 changes. This allows for recalculating the value of the computed_field based on the values of those fields.
 
 ### @api.depends_context
 
@@ -96,23 +113,19 @@ Example:
 class MyModel(models.Model):
     _name = 'my.model'
 
-    field = fields.Char()
-    computed_field = fields.Float(compute='_compute_field')
+    employee_ids = fields.Many2many('hr.employee')
+    employee_id = fields.Many2one('hr.employee', compute='_compute_company_employee')
 
-    @api.depends_context('my_context_key')
-    @api.depends('field')
-    def _compute_field(self):
-        # Access the value from the context
-        context_value = self.env.context.get('my_context_key')
-
-        # Perform calculations based on field and context_value
-        # ...
-
-        # Update the value of the computed_field
-        self.computed_field = calculated_value
+    @api.depends_context('company')
+    @api.depends('employee_ids')
+    def _compute_company_employee(self):
+        company = self.env.context.get('company')
+        for record in self:        
+            self.employee_id = self.env['hr.employee'].search([
+                ('id', 'in', rec.employee_ids.ids),
+                ('company_id', '=', self.env.company.id)],
+                limit=1)
 ```
-
-In the example above, the method `_compute_field` is decorated with `@api.depends_context('my_context_key')`. It specifies that the method should be recomputed whenever the value of the key 'my_context_key' in the context changes, in addition to the regular dependency on the 'field'. This allows for dynamic computations based on both the field value and the context value.
 
 ### @api.onchange
 
@@ -124,19 +137,17 @@ Example:
 class MyModel(models.Model):
     _name = 'my.model'
 
-    field3 = fields.Boolean()
-    computed_field = fields.Float()
+    done = fields.Boolean()
+    partner_id = field.Many2one('res.partner')
 
-    @api.onchange('field3')
-    def _onchange_field3(self):
-        # Perform specific actions when field3 is changed
-        # ...
-
-        # Update the value of the computed_field or other fields if needed
-        self.computed_field = new_value
+    @api.onchange('done')
+    def _onchange_done(self):
+        self.partner_id.done = self.done
 ```
 
-In the example above, the  method `_onchange_field3` is decorated with `@api.onchange` for field3, which triggers the method when the value of field3 changes. This allows for performing custom actions specific to the change in field3 and updating the computed_field or any other relevant fields accordingly.
+Since `@onchange` returns a recordset of pseudo-records, calling any one of the CRUD methods (`create`, `read`, `write`, `unlink`) on the aforementioned recordset is undefined behaviour, as they potentially do not exist in the database yet.
+
+Instead, simply set the record’s field like shown in the example above or call the `update` method.
 
 ### @api.constraints
 
@@ -157,7 +168,7 @@ class MyModel(models.Model):
                 raise models.ValidationError("Field value must be positive.")
 ```
 
-In the example above, the method `_check_field_constraint` is decorated with `@api.constraints('field')`. It specifies that the constraint should be checked whenever the 'field' value is modified. If any record violates the constraint (field value is negative), a validation error is raised.
+`@constrains` will be triggered only if the declared fields in the decorated method are included in the `create` or `write` call. It implies that fields not present in a view will not trigger a call during a record creation. A override of `create` is necessary to make sure a constraint will always be triggered (e.g. to test the absence of value).
 
 ### @api.model_create_multi
 
@@ -177,8 +188,6 @@ class MyModel(models.Model):
         return super().create(vals_list)
 ```
 
-In the example above, the method `create` is decorated with `@api.model_create_multi`. This decorator enhances the performance by creating the records in a single database query, rather than individual queries for each record.
-
 ### @api.autovacuum
 
 The `@api.autovacuum` decorator is used to mark a method as a "cleanup" method. It is automatically called by Odoo during a database vacuum operation, which helps optimize the database performance. This decorator is typically used for methods that perform cleanup tasks or remove outdated records.
@@ -196,7 +205,9 @@ class MyModel(models.Model):
         return self.sudo().search(domain).unlink()
 ```
 
-In the example above, the method `_perform_cleanup` is decorated with `@api.autovacuum`. When Odoo performs a database vacuum operation, it will automatically call this method to execute the defined cleanup tasks.
+### @api.ondelete
+
+### @api.returns
 
 ### Between method
 
