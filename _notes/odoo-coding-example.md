@@ -18,17 +18,6 @@ The `_compute_size_for_human` method takes each record of the File model and cal
 The `_generate_order_by` method is overridden to modify the sorting behavior of the model's queries. If the sorting is based on the size_human field, it replaces it with the size field in the order specification. This change allows for number sorting based on the file size rather than sorting based on the human-readable size.
 
 ```py
-def _sizeof_fmt(num, suffix="B"):
-    """
-    Return the human readable size of a file. The default suffix is in bytes.
-    """
-    for unit in ["", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"]:
-        if abs(num) < 1024.0:
-            return f"{num:3.1f}{unit}{suffix}"
-        num /= 1024.0
-    return f"{num:.1f}Yi{suffix}"
-
-
 class File(models.Model):
     _name = 'example.file'
     _description = 'Example File'

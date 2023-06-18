@@ -34,8 +34,9 @@ class FieldMapperFieldMapperLineRel(models.Model):
         ('field_mapper_field_line_mapper_uniq', 'unique (field_mapper_line_id, field_mapper_id)',
             'Field Mapper Line and Field Mapper must be unique!'),
     ]
+```
 
-
+```py
 class FieldMapper(models.Model):
     _name = 'field.mapper'
     _description = 'Field mapper'
@@ -51,8 +52,9 @@ class FieldMapper(models.Model):
     field_mapper_ids = fields.One2many(comodel_name='field.mapper.field.mapper.line',
                                        inverse_name='field_mapper_id',
                                        string='Field Rel')
+```
 
-
+```py
 class FieldMapperLine(models.Model):
     _name = 'field.mapper.line'
     _description = 'Field Mapper Line'
