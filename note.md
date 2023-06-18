@@ -7,7 +7,7 @@ order: "4"
 
 # Notes
 
-I work on think from time to time, when I understand something that I know I will forget I publish them here. If you have learn something, that's great. If you're an inspiration, that's better.
+Whenever I come across an insight that I anticipate forgetting, I make sure to share it here. If you have learn something, that's great. If you're an inspiration, that's better.
 
 &nbsp;
 

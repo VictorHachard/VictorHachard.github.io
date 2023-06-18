@@ -12,7 +12,7 @@ order: "5"
 </div>
 
 <!-- Script pointing to search-script.js -->
-<script src="{{site.baseurl}}/search-script/search-script.js" type="text/javascript"></script>
+<script src="{{site.baseurl}}/assets/js/search-script.js" type="text/javascript"></script>
 
 <!-- Configuration -->
 <script>
