@@ -76,9 +76,9 @@ products.update({'list_price': new_price})
 | | Write | Update |
 | --- | --- | --- |
 | Usage | Used to update existing record(s) in the database. | Used to update a pseudo-record (in `@api.onchange`, ...) |
-| Arguments <td colspan=2> Takes a dictionary vals where keys are the fields to be updated, and values are the new values for those fields. |
+| Arguments | <td colspan="2"> Takes a dictionary vals where keys are the fields to be updated, and values are the new values for those fields. |
 | Target | Can be called on a specific record or a set of records. | Called on the model itself (a record). |
-| Triggers | Executes related computations methods (`@api.onchange`, `@api.depends`, ...) or updates. | Bypasses related computations methods or updates. |
+| Triggers | Executes related computations methods (`@api.depends`, ...) or updates. | Bypasses related computations methods or updates. |
 | Returns | Returns True if the update is successful. | Returns nothing. |
 
 ## Method Decorators
@@ -200,12 +200,29 @@ class MyModel(models.Model):
 
     @api.autovacuum
     def _perform_cleanup(self):
-        # Perform cleanup tasks or delete outdated records
-        # ...
         return self.sudo().search(domain).unlink()
 ```
 
 ### @api.ondelete
+
+The `@api.ondelete` decorator in Odoo is used to mark a method to be executed during the unlink() operation. This decorator allows you to define business rules and conditions that restrict the deletion of records. It is particularly useful when you want to prevent the deletion of certain records that are not intended to be deleted from a business perspective.
+
+One important advantage of using @api.ondelete is that it ensures compatibility with module uninstallation. When a module is uninstalled, the overridden unlink() method may raise errors that could interfere with the uninstallation process, leaving the database in an inconsistent state. By using @api.ondelete, you can avoid such issues and ensure that all records related to the module are properly removed during uninstallation.
+
+```py
+class UserModel(models.Model):
+    _name = 'user.model'
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_user_inactive(self):
+        if any(user.active for user in self):
+            raise UserError("Can't delete an active user!")
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_active_user(self):
+        if any(user.active for user in self):
+            raise UserError("Can't delete an active user!")
+```
 
 ### @api.returns
 
@@ -244,10 +261,19 @@ rule_1.write({
 })
 ```
 
-## List of ondelete options
+## Field parameters
 
-'ondelete' defines what happens when the related record is deleted.
+## ondelete
 
-Its default is set *null*, meaning that an empty value is set when the related record is deleted.
+`ondelete`, you can control the behavior of related records when the referenced record is deleted, ensuring data consistency and integrity.
 
-Other possible values are *restricted*, raising an error preventing the deletion, and *cascade*, which also deletes this record.
+```py
+class ChildModel(models.Model):
+    _name = 'child.model'
+
+    parent_id = fields.Many2one('parent.model', ondelete='cascade')
+```
+
+- `'set null'`: Sets the field value to null when the referenced record is deleted (default).
+- `'restrict'`: Prevents the deletion of the referenced record if there are dependent records.
+- `'no action'`: No action is taken when the referenced record is deleted.
