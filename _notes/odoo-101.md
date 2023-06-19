@@ -24,6 +24,8 @@ def default_get(self, fields_list):
     return defaults
 ```
 
+### Read
+
 ### New
 
 `new(self, values)`: This method is used to create a new record without saving it to the database. It takes a dictionary values as an argument, where the keys are the fields of the record, and the values are the corresponding values for those fields. The new method returns a new record object.
@@ -75,17 +77,21 @@ products.update({'list_price': new_price})
 
 | | Write | Update |
 | --- | --- | --- |
-| Usage | Used to update existing record(s) in the database. | Used to update a pseudo-record (in `@api.onchange`, ...) |
+| Usage | Used to update existing record(s) in the database. | Used to update a pseudo-record/record in a `@api.onchange` or a `@api.depends`. |
 | Arguments | <td colspan="2"> Takes a dictionary vals where keys are the fields to be updated, and values are the new values for those fields. |
 | Target | Can be called on a specific record or a set of records. | Called on the model itself (a record). |
-| Triggers | Executes related computations methods (`@api.depends`, ...) or updates. | Bypasses related computations methods or updates. |
-| Returns | Returns True if the update is successful. | Returns nothing. |
+| Triggers | Executes related computations methods (`@api.depends`, ...). | Bypasses related computations methods. |
+| Returns | Returns `True` if the update is successful. | Returns `None`. |
 
 ## Method Decorators
 
 ### @api.depends
 
 The `@api.depends` decorator is used for "fields.function". It allows you to calculate the value of a field based on other fields within the same or related models. When any of the fields specified in the decorator are altered or changed, the decorated function is triggered, and the field's value is recalculated. This decorator provides a way to establish field dependencies across different screens and models.
+
+When working with a single record in a view (such as updating a record in a form view), self represents a pseudo record.
+
+When working with a set of records (for example, when using the write() method to update multiple records), self refers to the set of records.
 
 Example:
 
@@ -101,6 +107,17 @@ class MyModel(models.Model):
     def _compute_balance(self):
         for record in self:
             record.balance = record.debit - record.credit
+```
+
+Another way to write the code:
+
+```py
+    @api.depends('debit', 'credit')
+    def _compute_balance(self):
+        for record in self:
+            record.update({
+                'balance': record.debit - record.credit
+            })
 ```
 
 ### @api.depends_context
@@ -138,20 +155,28 @@ class MyModel(models.Model):
     _name = 'my.model'
 
     done = fields.Boolean()
-    partner_id = field.Many2one('res.partner')
+    nice_done = field.Char()
 
     @api.onchange('done')
     def _onchange_done(self):
-        self.partner_id.done = self.done
+        self.nice_done = 'Done' if self.done else 'TODO'
 ```
 
-Since `@onchange` returns a recordset of pseudo-records, calling any one of the CRUD methods (`create`, `read`, `write`, `unlink`) on the aforementioned recordset is undefined behaviour, as they potentially do not exist in the database yet.
+Since `@onchange` returns a pseudo-records, calling any one of the CRUD methods (`create`, `read`, `write`, `unlink`) on the aforementioned recordset is undefined behaviour, as they potentially do not exist in the database yet.
 
 Instead, simply set the record’s field like shown in the example above or call the `update` method.
 
-### @api.constraints
+```py
+    @api.onchange('done')
+    def _onchange_done(self):
+        self.update({
+            'nice_done': 'Done' if self.done else 'TODO'
+        })
+```
 
-The `@api.constraints` decorator is used to define constraints on a model. It allows you to specify rules that the model's records must follow to maintain data integrity. The decorated method is called whenever the constraint is evaluated.
+### @api.constrains
+
+The `@api.constrains` decorator is used to define constrains on a model. It allows you to specify rules that the model's records must follow to maintain data integrity. The decorated method is called whenever the constrain is evaluated.
 
 Example:
 
@@ -161,14 +186,14 @@ class MyModel(models.Model):
 
     field = fields.Integer()
 
-    @api.constraints('field')
-    def _check_field_constraint(self):
+    @api.constrains('field')
+    def _check_field_constrain(self):
         for record in self:
             if record.field < 0:
-                raise models.ValidationError("Field value must be positive.")
+                raise ValidationError("Field value must be positive.")
 ```
 
-`@constrains` will be triggered only if the declared fields in the decorated method are included in the `create` or `write` call. It implies that fields not present in a view will not trigger a call during a record creation. A override of `create` is necessary to make sure a constraint will always be triggered (e.g. to test the absence of value).
+`@constrains` will be triggered only if the declared fields in the decorated method are included in the `create` or `write` call. It implies that fields not present in a view will not trigger a call during a record creation. A override of `create` is necessary to make sure a constrain will always be triggered (e.g. to test the absence of value).
 
 ### @api.model_create_multi
 
