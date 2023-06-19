@@ -1,5 +1,6 @@
 ---
 layout: note
+title: Basic linux commands on Ubuntu 22.04
 draft: false
 date: 2023-06-16 09:37:00 +0200
 author: Victor Hachard

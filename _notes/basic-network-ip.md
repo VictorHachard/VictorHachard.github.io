@@ -7,13 +7,13 @@ author: Victor Hachard
 
 ## Address classes
 
-|Class|	Network mask|	Network addresses| Supports|
-|--- |--- |--- |--- |
-|A|	255.0.0.0|1.0.0.1 to 126.255.255.254| Supports 16 million hosts on each of 127 networks.|
-|B|	255.255.0.0|128.1.0.1 to 191.255.255.254| Supports 65,000 hosts on each of 16,000 networks.|
-|C|	255.255.255.0|192.0.1.1 to 223.255.254.254| Supports 254 hosts on each of 2 million networks.|
-|D|	not defined|224.0.0.0 to 239.255.255.255|	Reserved for multicast groups.|
-|E|	not defined|240.0.0.0 to 254.255.255.2545| Reserved for future use, or research and development purposes.|
+| Class |	Network mask | Network addresses | Supports |
+|--- | --- | --- | --- |
+| A | 255.0.0.0     | 1.0.0.1 to 126.255.255.254    | Supports 16 million hosts on each of 127 networks. |
+| B | 255.255.0.0   | 128.1.0.1 to 191.255.255.254  | Supports 65,000 hosts on each of 16,000 networks. |
+| C | 255.255.255.0 | 192.0.1.1 to 223.255.254.254  | Supports 254 hosts on each of 2 million networks. |
+| D | not defined   | 224.0.0.0 to 239.255.255.255  | Reserved for multicast groups. |
+| E | not defined   | 240.0.0.0 to 254.255.255.2545 | Reserved for future use, or research and development purposes. |
 
 ## Private IP address
 
