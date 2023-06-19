@@ -11,13 +11,21 @@ layout: default
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {{ page.date | date: date_format }}
       </time>
+      {%- if page.categories and page.categories.size != 0 -%}
+        •
+        {% for category in page.categories %}
+        <span itemprop="category" itemscope itemtype="http://schema.org/CategoryCode">
+          <a class="p-category h-card" itemprop="name" href="{{ site.baseurl }}/categories/{{ category | slugify }}">{{ category }} </a>{% unless forloop.last %}, {% endunless %}
+        </span>
+        {% endfor %}
+      {%- endif -%}
       {%- if page.author -%}
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span></span>
       {%- endif -%}
       {%- if page.references -%}
       <ul class="references">
         {% for reference in page.references %}
-            <li><a href="{{reference}}">{{ reference }}</a></li>
+          <li><a href="{{reference}}">{{ reference }}</a></li>
         {% endfor %}</ul>
       {%- endif -%}</p>
   </header>

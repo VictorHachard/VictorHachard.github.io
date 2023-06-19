@@ -3,9 +3,13 @@ layout: project
 draft: false
 date: 2021-06-24 00:00:00 +0200
 author: Victor Hachard
-languages: ["Angular", "Spring Boot (Java)", "PostgreSQL"]
-language: Angular, Spring Boot (Java), PostgreSQL
-githubs: ["github.com/VictorHachard/naturopath-tfe-api", "github.com/VictorHachard/naturopath-tfe-application"]
+languages:
+    - Angular
+    - Spring Boot (Java)
+    - PostgreSQL
+githubs: 
+    - github.com/VictorHachard/naturopath-tfe-api
+    - github.com/VictorHachard/naturopath-tfe-application
 image: https://victorhachard.github.io/res/naturopath/logo.png
 ---
 

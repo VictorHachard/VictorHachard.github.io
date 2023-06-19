@@ -24,6 +24,9 @@ github_username:  victorHachard
 linkedin_username: victor-hachard-96b4301b7
 
 collections:
+    categories:
+        output: true
+        permalink: /:collection/:name
     projects:
         output: true
         permalink: /:collection/:name

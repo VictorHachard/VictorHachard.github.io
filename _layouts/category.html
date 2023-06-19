@@ -1,19 +1,14 @@
 ---
-title: Notes
 layout: default
-permalink: /notes/
-order: "4"
 ---
 
-# Notes
+<h1 class="post-title">{{ page.title | escape }}</h1>
 
-Whenever I come across an insight that I anticipate forgetting, I make sure to share it here. If you have learn something, that's great. If you're an inspiration, that's better.
-
-&nbsp;
+<p>&nbsp;</p>
 
 <ul class="projects finished">
-{% for note in site.notes reversed %}
-    {% unless note.draft %}
+{% for note in site.notes %}
+    {% if note.categories contains page.category %}
         <li class="project">
             <h2>
                 <a class="name" href="{{ note.url | relative_url }}">
@@ -24,6 +19,6 @@ Whenever I come across an insight that I anticipate forgetting, I make sure to s
                 {{ note.content | number_of_words }} words published on {{ note.date | date: "%B %d, %Y" }}
             </p>
         </li>
-    {% endunless %}
+    {% endif %}
 {% endfor %}
 </ul>

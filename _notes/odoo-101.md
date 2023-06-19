@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2022-03-04 14:42:00 +0200
 author: Victor Hachard
+categories: ['Odoo']
 ---
 
 ## TODO

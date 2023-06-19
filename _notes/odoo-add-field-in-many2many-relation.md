@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2022-06-24 10:27:00 +0200
 author: Victor Hachard
+categories: ['Odoo']
 ---
 
 The `FieldMapperFieldMapperLineRel` class represents a relational table that establishes a many-to-many relationship between `FieldMapper` and `FieldMapperLine`.

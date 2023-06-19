@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2022-05-06 08:56:00 +0200
 author: Victor Hachard
+categories: ['Odoo']
 ---
 
 ## Sort by a field with a other field in an Odoo tree view

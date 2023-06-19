@@ -4,6 +4,7 @@ title: Odoo development setup on WSL Ubuntu 22.04
 draft: false
 date: 2023-06-16 09:49:00 +0200
 author: Victor Hachard
+categories: ['Odoo']
 ---
 
 # Generic configuration
