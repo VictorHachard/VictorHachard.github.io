@@ -107,8 +107,11 @@
   }
 
   function d(t, e, n, r) {
-    for (var i in t)
-      if (!p(t[i], r.exclude) && n.matches(t[i], e)) return t
+    for (var i in t) {
+      if (!p(t[i], r.exclude) && n.matches(t[i], e) && !r.excludeVariables.includes(i)) {
+        return t;
+      }
+    }
   }
 
   function p(t, e) {
@@ -152,14 +155,21 @@
         resultsContainer: null,
         json: [],
         success: Function.prototype,
-        searchResultTemplate: '<li><h3><a href="{url}" title="{desc}">{title}</a></h3></li>',
+        searchResultTemplate: '<li class="project">' +
+        '<h2>' +
+        '<a class="name" href="{url}">{title}</a>' +
+        '</h2>' +
+        '<p>{number_of_words} words published on {date} in {site}</p>' +
+        '</li>'
+        ,
         templateMiddleware: Function.prototype,
         sortMiddleware: function() {
           return 0
         },
         noResultsText: "No results found",
-        limit: 10,
+        limit: 20,
         fuzzy: !1,
+        excludeVariables: ["number_of_words", "site", "date"],
         exclude: []
       },
       n = ["searchInput", "resultsContainer", "json"],
@@ -220,6 +230,7 @@
       }), l.setOptions({
         fuzzy: o.fuzzy,
         limit: o.limit,
+        excludeVariables: o.excludeVariables,
         sort: o.sortMiddleware
       }), v.isJSON(o.json) ? i(o.json) : function e(n) {
         f.load(n, function(t, e) {

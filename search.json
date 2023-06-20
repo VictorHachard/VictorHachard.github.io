@@ -1,21 +1,15 @@
 ---
 ---
 [
-  {% for htd in site.htds %}
+  {% for htd in site.projects %}
     {
       "title"    : "{{ htd.title | escape }}",
       "url"      : "{{ site.baseurl }}{{ htd.url }}",
       "category" : "{{ htd.category }}",
       "tags"     : "{{ htd.tags | join: ', ' }}",
-      "date"     : "{{ htd.date }}"
-    } ,
-  {% endfor %}{% for htd in site.projects %}
-    {
-      "title"    : "{{ htd.title | escape }}",
-      "url"      : "{{ site.baseurl }}{{ htd.url }}",
-      "category" : "{{ htd.category }}",
-      "tags"     : "{{ htd.tags | join: ', ' }}",
-      "date"     : "{{ htd.date }}"
+      "date"     : "{{ htd.date | date: '%B %d, %Y' }}",
+      "site"     : "Project",
+      "number_of_words": "{{ htd.content | number_of_words }}"
     } ,
   {% endfor %}{% for htd in site.notes %}
     {
@@ -23,7 +17,9 @@
       "url"      : "{{ site.baseurl }}{{ htd.url }}",
       "category" : "{{ htd.category }}",
       "tags"     : "{{ htd.tags | join: ', ' }}",
-      "date"     : "{{ htd.date }}"
+      "date"     : "{{ htd.date | date: '%B %d, %Y' }}",
+      "site"     : "Note",
+      "number_of_words": "{{ htd.content | number_of_words }}"
     } {% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
