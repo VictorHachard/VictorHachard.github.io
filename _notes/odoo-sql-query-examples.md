@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2022-07-15 08:05:00 +0200
 author: Victor Hachard
+categories: ['Odoo']
 ---
 
 ## Get torrent that have an outdated revision

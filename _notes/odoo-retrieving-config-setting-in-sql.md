@@ -1,7 +1,8 @@
 ---
 layout: note
+title: Odoo Retrieving Config Setting in SQL
 draft: false
-date: 2023-06-20 14:44:00 +0200
+date: 2023-06-20 11:44:00 +0200
 author: Victor Hachard
 categories: ['Odoo']
 ---
