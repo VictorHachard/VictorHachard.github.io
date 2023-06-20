@@ -105,3 +105,35 @@ Output:
 ```py
 Hello John, you are 25 years old.
 ```
+
+## Convert Column Number to Excel-Style Column Label
+
+`get_letter` function takes an integer `i` representing a 1-relative column number and converts it to an Excel-style column label. For example, it converts 1 to 'A', 2 to 'B', 27 to 'AA', 28 to 'AB', and so on. 
+
+```py
+def get_letter(i: int) -> str:
+    """
+    Convert 1-relative column number to excel-style column label.
+    e.g. 1 -> A, 2 -> B, 27 -> AA, 28 -> AB, etc.
+    """
+    quot, rem = divmod(i - 1, 26)
+    return get_letter(quot) + chr(rem + ord('A')) if i != 0 else ''
+```
+
+## Convert Excel-Style Column Label to Column Number"
+
+`get_position` function takes a string `s` representing an Excel-style column label and converts it to a column number. For example, it converts 'A' to 1, 'B' to 2, 'Z' to 26, 'AA' to 27, 'AB' to 28, and so on.
+
+```py
+def get_position(s: str) -> int:
+    """
+    Convert a excel-style column label to a column number.
+    e.g. A -> 1, B -> 2, Z -> 26, AA -> 27, AB -> 28
+    """
+    if len(s) > 1:
+        pos = 0
+        for idx, letter in enumerate(s[::-1]):
+            pos += (get_position(letter) + (1 if idx != 0 else 0)) * 26 ** idx
+        return pos
+    return ord(s.lower()) - 97
+```

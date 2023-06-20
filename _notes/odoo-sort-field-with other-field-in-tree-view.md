@@ -6,8 +6,6 @@ author: Victor Hachard
 categories: ['Odoo']
 ---
 
-## Sort by a field with a other field in an Odoo tree view
-
 The Odoo model has the following fields:
 
 - name: Char field representing the name of the file.
