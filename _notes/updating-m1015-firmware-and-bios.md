@@ -4,6 +4,7 @@ title: Updating SuperMicro M1015 Firmware and BIOS
 draft: false
 date: 2020-10-11 47:40:00 +0200
 author: Victor Hachard
+categories: ['System Administration']
 ---
 
 ## Updating SuperMicro M1015 Firmware and BIOS
