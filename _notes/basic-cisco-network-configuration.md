@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2019-06-14 15:47:00 +0200
 author: Victor Hachard
+categories: ['Networking']
 ---
 
 ## Basic commands

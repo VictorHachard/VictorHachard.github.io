@@ -9,7 +9,7 @@
       "tags"     : "{{ htd.tags | join: ', ' }}",
       "date"     : "{{ htd.date | date: '%B %d, %Y' }}",
       "site"     : "Project",
-      "number_of_words": "{{ htd.content | number_of_words }}"
+      "number_of_words": "{{ htd.content | strip_html | number_of_words }}"
     } ,
   {% endfor %}{% for htd in site.notes %}
     {
@@ -19,7 +19,7 @@
       "tags"     : "{{ htd.tags | join: ', ' }}",
       "date"     : "{{ htd.date | date: '%B %d, %Y' }}",
       "site"     : "Note",
-      "number_of_words": "{{ htd.content | number_of_words }}"
+      "number_of_words": "{{ htd.content | strip_html | number_of_words }}"
     } {% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]

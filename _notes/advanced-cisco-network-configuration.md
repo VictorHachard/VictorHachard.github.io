@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2019-10-13 19:51:00 +0200
 author: Victor Hachard
+categories: ['Networking']
 ---
 
 ## Enable SSH

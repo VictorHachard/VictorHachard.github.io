@@ -21,7 +21,7 @@ Whenever I come across an insight that I anticipate forgetting, I make sure to s
                 </a>
             </h2>
             <p>
-                {{ note.content | number_of_words }} words published on {{ note.date | date: "%B %d, %Y" }} 
+                {{ note.content | strip_html | number_of_words }} words published on {{ note.date | date: "%B %d, %Y" }} 
                 {%- if note.categories and note.categories.size != 0 -%}
                     &nbsp;in
                     {% for category in note.categories %}

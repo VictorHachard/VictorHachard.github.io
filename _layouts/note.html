@@ -11,8 +11,9 @@ layout: default
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {{ page.date | date: date_format }}
       </time>
+      • <span>{{ page.content | reading_time }} </span>
       {%- if page.categories and page.categories.size != 0 -%}
-        •
+        • 
         {% for category in page.categories %}
         <span itemprop="category" itemscope itemtype="http://schema.org/CategoryCode">
           <a class="p-category h-card" itemprop="name" href="{{ site.baseurl }}/categories/{{ category | slugify }}">{{ category }} </a>{% unless forloop.last %}, {% endunless %}
