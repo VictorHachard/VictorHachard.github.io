@@ -76,39 +76,37 @@ class ResPartner(models.Model):
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
+    <data>
 
-		<record id="view_sale_configuration_settings_inherited" model="ir.ui.view">
-			<field name="name">sale.config.settings.inherit</field>
-			<field name="model">res.config.settings</field>
-			<field name="inherit_id" ref="sale.res_config_settings_view_form"/>
-			<field name="arch" type="xml">
-				<xpath expr="//div[@id='pricelist_configuration']//div[hasclass('content-group')]/div[hasclass('mt16')]" position="after">
-					<div class="form-group">
-						<label class="col-sm-3 control-label" for="partner_pricelist_id">
-							Default Pricelist for Partners
-						</label>
-						<div class="col-sm-9">
-							<field name="partner_pricelist_id" widget="selection"/>
-						</div>
-					</div>
-				</xpath>
-			</field>
-		</record>
+        <record id="view_sale_configuration_settings_inherited" model="ir.ui.view">
+            <field name="name">sale.config.settings.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='pricelist_configuration']//div[hasclass('content-group')]/div[hasclass('mt16')]" position="after">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="partner_pricelist_id">Default Pricelist for Partners</label>
+                        <div class="col-sm-9">
+                            <field name="partner_pricelist_id" widget="selection"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
 
-		<record id="res_partner_view_form_inherit" model="ir.ui.view">
+        <record id="res_partner_view_form_inherit" model="ir.ui.view">
             <field name="name">res.partner.form.inherit</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <field name="property_product_pricelist" position="replace">
-                    <field name="partner_pricelist_id" widget="selection" groups="product.group_product_pricelist"
-                           attrs="{'invisible': [('is_company', '=', False), ('parent_id', '!=', False)]}" required="1"/>
+            <field name="property_product_pricelist" position="replace">
+                <field name="partner_pricelist_id" widget="selection" groups="product.group_product_pricelist" required="1"
+                       attrs="{'invisible': [('is_company', '=', False), ('parent_id', '!=', False)]}"/>
                 </field>
             </field>
         </record>
 
-	</data>
+    </data>
 </odoo>
 ```
 
