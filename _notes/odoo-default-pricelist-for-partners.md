@@ -1,5 +1,6 @@
 ---
 layout: note
+title: Odoo Default Pricelist for Partners
 draft: false
 date: 2022-06-20 11:21:00 +0200
 author: Victor Hachard

@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2022-06-09 09:00:00 +0200
 author: Victor Hachard
+categories: ['System Administration']
 ---
 
 ## Command

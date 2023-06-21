@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2020-10-09 10:1:00 +0200
 author: Victor Hachard
+categories: ['System Administration']
 ---
 
 About the quite popular DS4243 (and other NetApp stuff)

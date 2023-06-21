@@ -1,5 +1,6 @@
 ---
 layout: note
+title: Odoo Sort Field with Other Field in Tree View
 draft: false
 date: 2022-05-06 08:56:00 +0200
 author: Victor Hachard

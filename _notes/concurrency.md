@@ -3,6 +3,7 @@ layout: note
 draft: true
 date: 2022-02-01 18:00:00 +0200
 author: Victor Hachard
+categories: ['Thinking']
 ---
 
 ## Two main solutions to this problem

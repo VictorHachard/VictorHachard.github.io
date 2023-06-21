@@ -1,5 +1,6 @@
 ---
 layout: note
+title: Odoo Add Field in Many2many Relation
 draft: false
 date: 2022-06-24 10:27:00 +0200
 author: Victor Hachard

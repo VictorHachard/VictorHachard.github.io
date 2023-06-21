@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2022-04-15 11:40:00 +0200
 author: Victor Hachard
+categories: ['Thinking']
 ---
 
 ## 1. Game where you collect virgins to sacrifice to a/the devil
