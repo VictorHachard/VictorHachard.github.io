@@ -9,7 +9,7 @@ categories: ['Networking']
 ## Address classes
 
 | Class |	Network mask | Network addresses | Supports |
-|--- | --- | --- | --- |
+| --- | --- | --- | --- |
 | A | 255.0.0.0     | 1.0.0.1 to 126.255.255.254    | Supports 16 million hosts on each of 127 networks. |
 | B | 255.255.0.0   | 128.1.0.1 to 191.255.255.254  | Supports 65,000 hosts on each of 16,000 networks. |
 | C | 255.255.255.0 | 192.0.1.1 to 223.255.254.254  | Supports 254 hosts on each of 2 million networks. |
@@ -20,21 +20,21 @@ categories: ['Networking']
 
 These private IP ranges are as follows:
 
-|Network addresses|
-|--- |
-|10.0.0.0 - 10.255.255.255|
-|172.16.0.0 - 172.31.255.255|
-|192.168.0.0 - 192.168.255.255|
+| Network addresses |
+| --- |
+| 10.0.0.0 - 10.255.255.255 |
+| 172.16.0.0 - 172.31.255.255 |
+| 192.168.0.0 - 192.168.255.255 |
 
 
 ## IP Subnet
 
-|Prefix size| Network mask|
-|--- |--- |
-|/1|	128.0.0.0|
-|/2|	192.0.0.0|
-|/3|	224.0.0.0|
-|/4|	240.0.0.0|
-|/5|	248.0.0.0|
-|/6|	252.0.0.0|
-|/7|	254.0.0.0|
+| Prefix size | Network mask |
+| --- | --- |
+| /1 | 128.0.0.0 |
+| /2 | 192.0.0.0 |
+| /3 | 224.0.0.0 |
+| /4 | 240.0.0.0 |
+| /5 | 248.0.0.0 |
+| /6 | 252.0.0.0 |
+| /7 | 254.0.0.0 |

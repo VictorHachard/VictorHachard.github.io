@@ -2,7 +2,21 @@
 layout: default
 ---
 
-<h1 class="post-title">{{ page.title | escape }}</h1>
+{% assign count = 0 %}
+{% for note in site.notes %}
+  {% if note.categories contains page.category %}
+    {% assign count = count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+<h1 class="post-title p-name">{{ page.title | escape }}</h1>
+<p class="post-meta">
+    {% if count == 1 %}
+        1 post
+    {% elsif count > 1 %}
+        {{ count }} posts
+    {% endif %}
+</p>
 
 {{ content }}
 

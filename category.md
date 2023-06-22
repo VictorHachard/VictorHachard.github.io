@@ -5,7 +5,15 @@ permalink: /categories/
 order: "5"
 ---
 
-# Categories
+<h1 class="post-title p-name">Categories</h1>
+<p class="post-meta">
+    {% assign categoriesCount = site.categories | size %}
+    {% if categoriesCount == 1 %}
+        1 category
+    {% elsif categoriesCount > 1 %}
+        {{ categoriesCount }} categories
+    {% endif %}
+</p>
 
 &nbsp;
 

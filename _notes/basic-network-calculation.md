@@ -6,8 +6,6 @@ author: Victor Hachard
 categories: ['Networking']
 ---
 
-**This page is not finish**
-
 ## Find the number of subnets for a network
 
 Subnetting is the process of diving a network into small networks and is a common task on IPV4 networks.

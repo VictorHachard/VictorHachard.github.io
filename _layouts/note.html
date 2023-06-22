@@ -11,7 +11,7 @@ layout: default
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {{ page.date | date: date_format }}
       </time>
-      <!-- • <span>{{ page.content | reading_time }} </span> -->
+      • {% include read_time.html %}
       {%- if page.categories and page.categories.size != 0 -%}
         • 
         {% for category in page.categories %}
@@ -28,6 +28,9 @@ layout: default
         {% for reference in page.references %}
           <li><a href="{{reference}}">{{ reference }}</a></li>
         {% endfor %}</ul>
+      {%- endif -%}</p>
+      {%- if page.draft -%}
+      <p class="post-meta">Work in progress</p>
       {%- endif -%}</p>
   </header>
 
