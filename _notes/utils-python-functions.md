@@ -49,23 +49,22 @@ Output:
 1.0KiB
 ```
 
-## Highlight Words in text
+## Highlight words in text
 
-`replace_words` function replaces words in a text with `<span>` tags containing the words in `words_to_replace`. It also keeps track of the positions where the words are found and replaces them in reverse order to avoid modifying the newly added `<span>` tags:
+`replace_words` function replaces words in a text with `<span>` tags containing the words. It also keeps track of the positions where the words are found and replaces them in reverse order to avoid modifying the newly added `<span>` tags:
 
 ```py
-def replace_words(text, words_to_replace, replace_start='<span>', replace_end='</span>'):
+def replace_words(text, words, replace_start='<span>', replace_end='</span>', case_insensitive=False):
     positions = []
     replaced_text = text
 
-    for word in words_to_replace:
-        start_index = 0
-        while start_index < len(replaced_text):
-            index = replaced_text.find(word, start_index)
-            if index == -1:
-                break
-            positions.append((index, index + len(word)))
-            start_index = index + len(word)
+    flags = re.IGNORECASE if case_insensitive else 0
+
+    for word in words:
+        pattern = re.compile(re.escape(word), flags)
+        matches = pattern.finditer(replaced_text)
+        for match in matches:
+            positions.append((match.start(), match.end()))
 
     # Replace words in reverse order to avoid modifying newly added <span> tags
     for start, end in reversed(positions):
