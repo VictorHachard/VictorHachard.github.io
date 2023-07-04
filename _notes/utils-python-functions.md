@@ -49,6 +49,48 @@ Output:
 1.0KiB
 ```
 
+## Highlight Words in text
+
+`replace_words` function replaces words in a text with `<span>` tags containing the words in `words_to_replace`. It also keeps track of the positions where the words are found and replaces them in reverse order to avoid modifying the newly added `<span>` tags:
+
+```py
+def replace_words(text, words_to_replace, replace_start='<span>', replace_end='</span>'):
+    positions = []
+    replaced_text = text
+
+    for word in words_to_replace:
+        start_index = 0
+        while start_index < len(replaced_text):
+            index = replaced_text.find(word, start_index)
+            if index == -1:
+                break
+            positions.append((index, index + len(word)))
+            start_index = index + len(word)
+
+    # Replace words in reverse order to avoid modifying newly added <span> tags
+    for start, end in reversed(positions):
+        replaced_text = replaced_text[:start] + replace_start + replaced_text[start:end] + replace_end + replaced_text[end:]
+
+    return replaced_text
+```
+
+Example:
+
+```py
+text = "Hello world! This is a sample text to demonstrate word replacement."
+words_to_replace = ["world", "sample", "replacement"]
+
+result = replace_words(text, words_to_replace)
+print(result)
+```
+
+Output:
+```py
+Hello <span>world</span>! This is a <span>sample</span> text to demonstrate word <span>replacement</span>.
+```
+
+In the output, you can see that the words "world," "sample," and "replacement" have been wrapped in `<span>` tags.
+
 ## Split a list into multiple parts
 
 `split_list` function is used to split a given list (alist) into a specified number of parts (wanted_parts). It has two parameters: alist, which is the list to be split, and wanted_parts, which is an optional parameter representing the desired number of parts to split the list into (default is 1).
@@ -137,3 +179,5 @@ def get_position(s: str) -> int:
         return pos
     return ord(s.lower()) - 97
 ```
+
+<div class="gist" id="/VictorHachard/03a35666fc8644afa7c1939e1a9b1cca/raw/f17945440d7e0d16625dd82694a9928faebdf662/date.py" lang="py"></div>
