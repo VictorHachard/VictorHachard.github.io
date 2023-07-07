@@ -1,6 +1,6 @@
 ---
 layout: note
-title: Odoo Get Translated Selection Values in Odoo
+title: Odoo Get Translated Selection Values
 draft: false
 date: 2023-06-14 14:44:00 +0200
 author: Victor Hachard
