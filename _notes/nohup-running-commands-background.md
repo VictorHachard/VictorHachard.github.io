@@ -7,7 +7,7 @@ author: Victor Hachard
 categories: ['System Administration']
 ---
 
-## What is `nohup`?
+## What is nohup?
 
 `nohup` stands for "no hang up," and it's a command used in Unix-like operating systems to execute other commands and disconnect them from the terminal session. This means that the command will continue running even if you close your terminal or log out of your system.
 
@@ -15,7 +15,7 @@ categories: ['System Administration']
 
 ### Scenario
 
-Suppose you have a large directory that you want to copy to another location, and you want the copy process to continue running even if you close your terminal or log out. Here's how you can use `nohup` for this task:
+Suppose you have a large directory that you want to copy to another location, and you want the copy process to continue running even if you close your terminal or log out. Here's how you can use `nohup` for this task.
 
 ### Step 1: Start the Copy Operation
 
