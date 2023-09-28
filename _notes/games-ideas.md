@@ -12,7 +12,7 @@ In this game, players would assume the role of a cult leader or a dark entity ai
 
 ## 2. Bugs in a House: Asymmetrical RTS
 
-"**Bugs in a House: Asymmetrical RTS**" is a game concept inspired by real-time strategy (RTS) games. It involves a unique twist where players control two distinct factions: bugs and humans. The bugs are trying to infiltrate and infest a house, while the humans must defend it and exterminate the pests. The gameplay would offer asymmetrical mechanics, with bugs relying on stealth, infiltration, and resource management, while humans would focus on defense, building structures, and coordinating attacks. The game could feature different scenarios, maps, and objectives to keep the gameplay engaging and challenging.
+The concept inspired by real-time strategy (RTS) games. It involves a unique twist where players control two distinct factions: bugs and humans. The bugs are trying to infiltrate and infest a house, while the humans must defend it and exterminate the pests. The gameplay would offer asymmetrical mechanics, with bugs relying on stealth, infiltration, and resource management, while humans would focus on defense, building structures, and coordinating attacks. The game could feature different scenarios, maps, and objectives to keep the gameplay engaging and challenging.
 
 ## 3. A game about planning theatrical heists, with heavy focus on the planning part.
 
@@ -28,9 +28,7 @@ In this game, players would begin with a comprehensive skill tree, offering a wi
 
 ## 6. A zombie horde controlling game
 
-This game idea centers around a unique perspective where players control the zombie horde instead of survivors. The gameplay would involve managing and directing a growing horde of zombies with the objective of infecting or eliminating human survivors. Players would need to strategically deploy different types of zombies, utilize their distinct abilities, and plan coordinated attacks to overcome the survivors' defenses. The game could feature various environments, challenges, and progression systems that allow players to evolve their horde and unlock new zombie types
-
-. Additionally, the game could include elements of resource management and strategic decision-making to further enhance the gameplay experience.
+This game idea centers around a unique perspective where players control the zombie horde instead of survivors. The gameplay would involve managing and directing a growing horde of zombies with the objective of infecting or eliminating human survivors. Players would need to strategically deploy different types of zombies, utilize their distinct abilities, and plan coordinated attacks to overcome the survivors' defenses. The game could feature various environments, challenges, and progression systems that allow players to evolve their horde and unlock new zombie types. Additionally, the game could include elements of resource management and strategic decision-making to further enhance the gameplay experience.
 
 ## 7. Roguelike where you continue playing as the enemy that defeated you
 

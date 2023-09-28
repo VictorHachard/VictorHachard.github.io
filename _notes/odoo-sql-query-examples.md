@@ -1,5 +1,6 @@
 ---
 layout: note
+title: Odoo SQL Query Examples
 draft: false
 date: 2022-07-15 08:05:00 +0200
 author: Victor Hachard
