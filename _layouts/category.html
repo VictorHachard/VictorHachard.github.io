@@ -23,7 +23,7 @@ layout: default
 <p>&nbsp;</p>
 
 <ul class="projects finished">
-{% for note in site.notes %}
+{% for note in site.notes reversed %}
     {% if note.categories contains page.category %}
         <li class="project">
             <h2>
