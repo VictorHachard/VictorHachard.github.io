@@ -32,3 +32,25 @@ If you want to monitor the progress of the copy operation, you can check the `no
 ```sh
 tail -f nohup.out
 ```
+
+### Step 3: Managing Background Processes
+
+#### Viewing Running Processes
+
+To view a list of background processes running with `nohup`, you can use the `ps` command with options to display the process details. For example:
+
+```sh
+ps aux | grep 'nohup'
+```
+
+This command will list all processes containing 'nohup' in their command lines.
+
+#### Killing a Process
+
+If you need to terminate a background process created with `nohup`, you can use the `kill` command along with the process ID (PID). First, identify the PID of the process you want to stop using the `ps` command, as shown above. Then, use `kill` with the PID:
+
+```sh
+kill PID
+```
+
+Replace `PID` with the actual process ID you obtained from the `ps` command.
