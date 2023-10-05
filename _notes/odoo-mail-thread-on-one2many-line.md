@@ -32,5 +32,4 @@ class SaleLine(models.Model):
                 tracking_value_ids=tracking_value_ids
             )
         return changes, tracking_value_ids
-    
 ```
