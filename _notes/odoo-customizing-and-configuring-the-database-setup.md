@@ -22,7 +22,7 @@ To customizing and configuring the database setup. Add a new key-value pair to t
         # Other module data files
     ],
     'installable': True,
-    'post_init_hook': 'your_module_name._post_init',
+    'post_init_hook': '_post_init',
 }
 ```
 
