@@ -6,8 +6,8 @@ start_year: october 2021
 end_year: now
 location: Tournai, Belgium
 business: BizzDev
-post: Junior developer
+post: Developer
 logo: none.png
 ---
 
-I carried out analyzes and developments under the Odoo ERP with the aim of providing non-existent functionalities. In addition I did customer support for Odoo applications.
+As an Odoo Specialist, I analyzed and estimated client needs, developed new features, integrated TFS for project management, and set up the infrastructure under Linux. I also provided client support.
