@@ -25,4 +25,7 @@ categories: ['System Administration', 'Windows']
 
 ## Example
 
-To stop your computer in 30 minutes `shutdown /s /f /t 1800`
+To stop your computer in 30 minutes :
+```sh
+shutdown /s /f /t 1800
+```

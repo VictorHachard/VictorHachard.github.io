@@ -10,12 +10,12 @@ categories: ['System Administration', 'Windows']
 
 - Press `Win + X`, selecting `Windows Terminal (Admin)`, and clicking `Yes` in the User Account Control dialog.
 - Run the following command to restore the old right-click context menu:
-```cmd
+```sh
 reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 ```
 
 If you want to restore the new context menu, run the following command:
-```cmd
+```sh
 reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f
 ```
 
@@ -23,7 +23,7 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 
 - Open the Registry Editor by pressing `Win + R`, typing `regedit`, and pressing `Enter`.
 - Navigate to the following key:
-```
+```sh
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\PasswordLess\Device
 ```
 - Set the value of `DevicePasswordLessBuildVersion` to `0` to remove the password requirement.
