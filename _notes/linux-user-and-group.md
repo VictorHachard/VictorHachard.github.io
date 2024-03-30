@@ -3,7 +3,7 @@ layout: note
 draft: false
 date: 2019-10-09 7:24:00 +0200
 author: Victor Hachard
-categories: ['System Administration']
+categories: ['System Administration', 'Linux']
 ---
 
 ## Create a new user

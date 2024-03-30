@@ -4,7 +4,7 @@ title: nohup for Running Commands in the Background
 draft: false
 date: 2023-09-28 09:49:00 +0200
 author: Victor Hachard
-categories: ['System Administration']
+categories: ['System Administration', 'Linux']
 ---
 
 ## What is nohup?
