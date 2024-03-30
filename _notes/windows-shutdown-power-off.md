@@ -3,6 +3,7 @@ layout: note
 draft: false
 date: 2019-06-20 23:28:00 +0200
 author: Victor Hachard
+categories: ['Windows']
 ---
 
 ## Commands
