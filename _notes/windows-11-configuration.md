@@ -2,8 +2,8 @@
 layout: note
 draft: false
 date: 2024-03-30 09:40:00 +0200
-author: Victor  Hachard
-categories: ['Windows']
+author: Victor Hachard
+categories: ['System Administration', 'Windows']
 ---
 
 ## 1 Restore old Right-click Context menu in Windows 11

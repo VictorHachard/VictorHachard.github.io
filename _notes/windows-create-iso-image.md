@@ -3,7 +3,7 @@ layout: note
 draft: false
 date: 2019-06-14 20:47:00 +0200
 author: Kari "Kalsarikänni"
-categories: ['Windows']
+categories: ['System Administration', 'Windows']
 ---
 
 [Original article](https://www.tenforums.com/tutorials/72031-create-windows-10-iso-image-existing-installation.html)
