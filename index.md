@@ -8,60 +8,6 @@ pagination:
 
 # Home
 
-Hi!👋️ My name is Victor.
+Hi there! I'm Victor, an Odoo Developer.
 
-I'm an Odoo Specialist / Business Analyst / Developer / IT
-
-## Skills
-
-<div class="m-skill">
-  <p><b>Languages:</b> French (mother tongue), English (full professional proficiency).</p>
-  <p><b>Langages:</b> Java, Python, PHP, SQL, C, C#, HTML, CSS, JavaScript/jQuery/TypeScript, Shell, Bash.</p>
-  <p><b>Technologies:</b> Odoo, Spring Boot, Angular.</p>
-  <p><b>Systems:</b> Windows, Linux, TrueNAS.</p>
-  <p><b>Cloud:</b> OVH, Oracle Cloud Infrastructure, CloudFlare.</p>
-</div>
-
-## Experiences
-
-<ul class="experiences finished">
-{% for experience in site.experiences reversed %}
-    <li class="experience">
-        <h3>{{ experience.post }}</h3>
-        <small><b>{{ experience.business }}</b> • <i>{{ experience.start_year }} - {{ experience.end_year }}</i></small>
-        <p>{{ experience.content }}</p>
-    </li>
-{% endfor %}
-</ul>
-
-## Certification
-
-<div class="m-skill">
-  <p><b>Oracle:</b> Oracle Cloud Infrastructure 2023 Foundations Associate (1Z0-1085-23).</p>
-</div>
-
-## Educations
-
-<ul class="educations finished">
-{% for education in site.educations reversed %}
-    <li class="education">
-        <h3>{{ education.study }}</h3>
-        <small><b>{{ education.degree }} • {{ education.school }}</b> • <i>{{ education.start_year }} - {{ education.end_year }}</i></small>
-    </li>
-{% endfor %}
-</ul>
-
-## Projects
-
-<ul class="projects finished">
-{% for project in site.projects reversed %}
-    {% unless project.draft %}
-        <li class="project">
-            <h3><a class="name" href="{{ project.url | relative_url }}">
-               {{ project.title }}
-            </a></h3>
-            {{ project.excerpt }}
-        </li>
-    {% endunless %}
-{% endfor %}
-</ul>
+This is my personal website where I share my skills, projects, and notes. If you have any questions or feedback, feel free to reach out to me.
