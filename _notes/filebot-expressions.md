@@ -8,12 +8,8 @@ categories: ['Media Management']
 
 ## Movies
 
-```sh
-{n} ({y}, {director}) {vf} {hdr}
-```
+```{n} ({y}, {director}) {vf} {hdr}```
 
 ## TV Shows
 
-```sh
-{n} - {s00e00} - {t}{subt} ({y}, {director}) {vf} {hdr}
-```
+```{n} - {s00e00} - {t}{subt} ({y}, {director}) {vf} {hdr}```
