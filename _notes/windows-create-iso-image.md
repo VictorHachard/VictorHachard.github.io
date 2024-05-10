@@ -72,10 +72,10 @@ categories: ['System Administration', 'Windows']
 
  Notice that software installed now will be included in ISO install media, and will be pre-installed for all users on each computer you install Windows to using this custom ISO
 
-4) Open Notepad, paste the following code to it, save it as File name: unattend.xml (exactly this name!) and Save as type: All files (important!) in C:\\Windows\\System32\\Sysprep folder
+4) Open Notepad, paste the following code to it, save it as File name: `unattend.xml` (exactly this name!) and Save as type: All files (important!) in `C:\\Windows\\System32\\Sysprep` folder
 
- 64 bit Windows:
- ```
+64 bit Windows:
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
     <settings pass="specialize">
@@ -86,8 +86,8 @@ categories: ['System Administration', 'Windows']
 </unattend>
 ```
 
- 32 bit Windows:
- ```
+32 bit Windows:
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
     <settings pass="specialize">
@@ -171,6 +171,32 @@ dism /capture-image /imagefile:E:\install.wim /capturedir:D:\ /ScratchDir:E:\Scr
 
   Don't panic! When done, restart the reference machine normally booting to desktop and jump to Part Five
 
+*Steps 4.6 through 4.13 for virtual machine users only:*
+
+6) On your host machine, open Disk Management (right click Start > Disk Management)
+
+7) Select Attach VHD from Action menu:
+
+ ![Page-10-Image-36]({{site.baseurl}}/res/create-w-10-iso-image/Page-10-Image-36.png)
+
+8) Browse to and select your reference virtual machine's VHD / VHDX file. If you have any checkpoints (AVHD / AVHDX files) created on this vm, select the one with most recent time stamp. Notice that you have to select show all files to be able to see checkpoint AVHD / AVHDX files:
+
+ ![Page-11-Image-37]({{site.baseurl}}/res/create-w-10-iso-image/Page-11-Image-37.png)
+
+9) Select (tick the box) Read-only (this is very important!), click OK:
+
+ ![Page-11-Image-38]({{site.baseurl}}/res/create-w-10-iso-image/Page-11-Image-38.png)
+
+Forgetting to select Read-only will especially when mounting a checkpoint AVHD / AVHDX file make it unusable for Hyper-V; you can use it for purpose of this tutorial but not boot the vm anymore in Hyper-V.
+
+10) Windows mounts the virtual hard disk, all its partitions as separate disk. In case of an MBR disk it even mounts the system reserved partition. Open the Windows system partition VHD to be sure that's the one where Windows is installed, note the drive letter your host assigned to it:
+
+ ![Page-11-Image-39]({{site.baseurl}}/res/create-w-10-iso-image/Page-11-Image-39.png)
+
+11) When done, detach the VHD / VHDX or AVHD / AVHDX file from host by right clicking it in Disk Management and selecting Detach VHD:
+
+ ![Page-12-Image-41]({{site.baseurl}}/res/create-w-10-iso-image/Page-12-Image-41.png)
+
 ## 5 Create a bootable ISO
 
 1) Mount a recent official Windows 10 ISO you have as a virtual DVD with double click. I used an official Windows 10 version 1607 build 14393 ISO downloaded from Microsoft today when creating customised build 14986 ISO (EDIT: now three months later I used the same 14393 ISO when creating my own Insider Build 15055 ISO).
@@ -185,10 +211,14 @@ dism /capture-image /imagefile:E:\install.wim /capturedir:D:\ /ScratchDir:E:\Scr
 
  ![Page-13-Image-45]({{site.baseurl}}/res/create-w-10-iso-image/Page-13-Image-45.png)
 
-3) If your host machine is not opted in to Insider builds, download the latest Windows Assessment and Deployment Kit (ADK) for Windows 10: Windows ADK downloads - Windows Hardware Dev Center
+*If the ISO you used in step 5.1 to get ISO files is made with Windows Media Creation Tool, the ISO_Files\Sources folder contains an install.esd file instead of install.wim.*
+
+*In this case you will naturally not get "File exists" prompt. Simply delete the install.esd file and paste your custom install.wim to replace it.*
+
+3) If your host machine is not opted in to Insider builds, download the latest Windows Assessment and Deployment Kit (ADK) for Windows 10: [Windows ADK downloads - Windows Hardware Dev Center](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)
 
  If your host has pre-release Windows Insider build installed, download
-Windows Insider Preview ADK instead: Windows Insider Preview ADK
+Windows Insider Preview ADK instead: [Windows Insider Preview ADK](https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewADK)
 
  Full download of ADK is about 7.5 GB but luckily we only need Deployment Tools. Unselect everything else and click Install:
 
@@ -202,7 +232,7 @@ Windows Insider Preview ADK instead: Windows Insider Preview ADK
 
  Enter the following command:
 
- ```
+```
 oscdimg.exe -m -o -u2 -udfver102 -bootdata:2#p0,e,bd:\iso_files\boot\etfsboot.com#pEF,e,bd:\iso_files\efi\microsoft\boot\efisys.bin d:\iso_files d:\14986PROx64.iso
 ```
 
@@ -212,4 +242,4 @@ oscdimg.exe -m -o -u2 -udfver102 -bootdata:2#p0,e,bd:\iso_files\boot\etfsboot.co
 
  Replace `d:\14986PROx64.iso` (highlighted red) with drive and path where you want to store the ISO image plus your preferred ISO file name.
 
- Although the command seems a bit complicated, everything in it is needed. See more about oscdimg command line options: Oscdimg Command-Line Options
+ Although the command seems a bit complicated, everything in it is needed. See more about oscdimg command line options: [Oscdimg Command-Line Options](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-vista/cc749036(v=ws.10)?redirectedfrom=MSDN)
