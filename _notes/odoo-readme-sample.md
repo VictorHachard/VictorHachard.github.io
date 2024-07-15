@@ -6,7 +6,7 @@ author: Victor Hachard
 categories: ['Odoo']
 ---
 
-# Odoo <odoo_version> - <project_name>
+# Odoo `<odoo_version>` - `<project_name>`
 
 ## Installation
 
@@ -16,7 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Requirements
 
-- [Odoo <odoo_version> - odoo_20240122](https://nightly.odoo.com/<odoo_version>.0/nightly/src/)
+- [Odoo `<odoo_version>` - odoo_20240122](https://nightly.odoo.com/`<odoo_version>`.0/nightly/src/)
 - [Python 3.10](https://www.python.org/downloads/release/python-310/)
 - [PostgresSQL 14](https://www.postgresql.org/download/)
 - [wkhtmltopdf 0.12.6.1 (with patched qt) / Windows](https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1/wkhtmltox-0.12.6-1.msvc2015-win64.exe)
@@ -36,12 +36,12 @@ In GitHub Desktop, select "Clone Repository," paste the repository URL in the "U
 
 Create a new Login Role with these parameters:
 
--   Name: `<project_name>_odoo_<odoo_version>`
+-   Name: ``<project_name>`_odoo_`<odoo_version>``
 -   Password: `odoo`
 -   Privileges: Can login, Create databases, Inherit right from the parent roles.
 
 ```sql
-CREATE USER <project_name>_odoo_<odoo_version> WITH PASSWORD 'odoo' CREATEDB;
+CREATE USER `<project_name>`_odoo_`<odoo_version>` WITH PASSWORD 'odoo' CREATEDB;
 ```
 
 #### Odoo configuration
@@ -54,7 +54,7 @@ admin_passwd = odoo
 addons_path = PATH_TO_ADDONS,PATH_TO_OTHER_ADDONS
 
 db_host = 127.0.0.1
-db_user = <project_name>_odoo_<odoo_version>
+db_user = `<project_name>`_odoo_`<odoo_version>`
 db_password = odoo
 
 db_port = 5432
@@ -69,7 +69,7 @@ db_maxconn = 200
 
 #### Pycharm project setting
 
-In the Pycharm settings, open the project settings, delete the existing root content, and replace it with a new root content directory such as `<project_name>/src`.
+In the Pycharm settings, open the project settings, delete the existing root content, and replace it with a new root content directory such as ``<project_name>`/src`.
 
 #### Pycharm interpreter setting
 
@@ -109,7 +109,7 @@ You can add more parameters (examples):
 
 ## Server Setup
 
-Used this on <date>:
+Used this on `<date>`:
 
 ```bash
 
