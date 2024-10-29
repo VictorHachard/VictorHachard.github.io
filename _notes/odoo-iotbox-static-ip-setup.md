@@ -1,5 +1,6 @@
 ---
 layout: note
+title: Odoo IoT Box Static IP Setup
 draft: false
 date: 2024-10-29 16:30:00 +0200
 author: Victor Hachard
