@@ -2,13 +2,12 @@
 layout: note
 title: Odoo & Docker
 draft: false
-date: 202-11-14 14:44:00 +0200
+date: 2024-11-14 14:44:00 +0200
 author: Victor Hachard
 categories: ['Odoo']
 ---
 
 ## Server Setup
-
 
 ### Install Docker
 
