@@ -802,7 +802,7 @@ The main services defined are:
 ```yaml
 services:
   web:
-    image: odoo-registry.bizzdev.net/odoo-16-soco-pro:<IMAGE_TAG>
+    image: <IMAGE>:<IMAGE_TAG>
     depends_on:
       - db
     healthcheck:
