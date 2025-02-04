@@ -320,11 +320,7 @@ The `Dockerfile` defines the custom Odoo Docker image.
 The main steps performed are:
 
 - **Using Debian as a base**: `debian:bullseye-slim` is chosen to ensure a lightweight and stable image.
-- **Installing system dependencies**:
-  - `build-essential`: Required for compiling certain Odoo dependencies.
-  - `python3, python3-dev, python3-pip`: Necessary for running Python-based Odoo.
-  - `libpq-dev, libldap2-dev, libsasl2-dev`: PostgreSQL and authentication-related libraries.
-  - `wkhtmltopdf`: Required for generating PDF reports in Odoo.
+- **Installing system dependencies**: Required packages such as build tools, fonts, and libraries are installed.
 - **Setting up PostgreSQL client**: Allows Odoo to communicate with the database.
 - **Creating an Odoo user**: The `odoo` user is created to run the application securely.
 - **Defining environment variables**: Key paths such as `ODOO_HOME` and `ODOO_RC` are set.
@@ -477,34 +473,9 @@ CMD ["odoo"]
 
 ### EntryPoint.sh: Configuring Odoo Container Execution
 
-The `entrypoint.sh` script is responsible for initializing the Odoo container with proper environment settings.
+Add the `entrypoint.sh` script to configure the Odoo container execution.
 
 💡 **Note:** Seq and colored logging are not included in Odoo by default. You may need to adjust the logging configuration to integrate with Seq.
-
-#### **Key Tasks Performed by entrypoint.sh**
-- **Database connection settings**:
-  - Reads PostgreSQL credentials from environment variables (`DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`).
-  - Passes them as arguments to the Odoo process if not defined in the config file.
-
-- **Dynamic Odoo configuration**:
-  - If `OVERRIDE_CONF_FILE` is not provided, it sets default values for:
-    - Number of workers.
-    - Memory and CPU limits.
-    - Proxy mode settings.
-    - Admin password.
-
-- **Logging integration with Seq**:
-  - If `SEQ_ADDRESS` is set, it enables Seq logging in `odoo.conf`.
-  - Otherwise, it removes Seq-related configuration.
-
-- **Database readiness check**:
-  - Uses `wait-for-psql.py` (detailed below) to ensure the PostgreSQL database is ready before launching Odoo.
-
-- **Customization of Odoo UI**:
-  - Changes the theme color by modifying `colors.scss`, if applicable.
-
-- **Executing Odoo**:
-  - Depending on the input command, either runs Odoo normally or executes administrative tasks like scaffolding new modules.
 
 ```bash
 #!/bin/bash
@@ -675,53 +646,7 @@ exit 1
 
 ### wait-for-psql.py: Ensuring PostgreSQL Readiness
 
-The `wait-for-psql.py` script ensures that Odoo does not start until PostgreSQL is available. This prevents startup failures due to database unavailability.
-
-💡 **Note:** The script is available in the Odoo Docker repository on GitHub. Make sure to use the version that matches your Odoo version.
-
-#### **How it Works**
-1. Accepts database connection parameters (`host`, `port`, `user`, `password`) as arguments.
-2. Repeatedly attempts to connect to PostgreSQL.
-3. If the connection is successful, the script exits normally.
-4. If the timeout limit is reached, it prints an error and exits with failure.
-
-```python
-import psycopg2
-import sys
-import time
-import argparse
-
-if __name__ == '__main__':
-    arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('--db_host', required=True)
-    arg_parser.add_argument('--db_port', required=True)
-    arg_parser.add_argument('--db_user', required=True)
-    arg_parser.add_argument('--db_password', required=True)
-    arg_parser.add_argument('--timeout', type=int, default=5)
-
-    args = arg_parser.parse_args()
-
-    start_time = time.time()
-    while (time.time() - start_time) < args.timeout:
-        try:
-            conn = psycopg2.connect(
-                user=args.db_user, 
-                host=args.db_host, 
-                port=args.db_port, 
-                password=args.db_password, 
-                dbname='postgres'
-            )
-            conn.close()
-            error = ''
-            break
-        except psycopg2.OperationalError as e:
-            error = e
-        time.sleep(1)
-
-    if error:
-        print("Database connection failure: %s" % error, file=sys.stderr)
-        sys.exit(1)
-```
+Add the `wait-for-psql.py` script available from [Odoo Docker repository](https://github.com/odoo/docker/blob/master/16.0/wait-for-psql.py) to ensure that Odoo does not start until PostgreSQL is available.
 
 ### Running Odoo with Docker Compose
 
@@ -810,19 +735,11 @@ networks:
     external: true
 ```
 
-### **DevOps Build Pipeline for Docker Image**
+### DevOps Build Pipeline for Docker Image
 
-This pipeline automates the building and pushing of Odoo Docker images with proper versioning.
+This pipeline automates the building and pushing of Odoo Docker images. It runs on Git tags (refs/tags/*), using the tag (e.g., v16.0.1) as the Docker image tag. If no tag is found, it defaults to the first seven characters of the commit hash.
 
-#### **Trigger and Versioning:**
-- The pipeline **only runs on Git tags** (`refs/tags/*`), ensuring only versioned releases are built.
-- If a Git tag exists (e.g., `v16.0.1`), it is used as the Docker tag.
-- If no tag is found, it falls back to the **first 7 characters** of the commit hash.
-
-#### **Build & Push Process:**
-1. **Extract version**: Detects a Git tag or falls back to the commit hash.
-2. **Builds Docker image** with the extracted tag.
-3. **Pushes the image** to the Azure DevOps Docker registry.
+The process extracts the version, builds the Docker image with the detected tag, and pushes it to the Docker registry.
 
 ```yaml
 trigger:
