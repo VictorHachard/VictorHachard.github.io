@@ -74,7 +74,7 @@ Refer to the official [Docker documentation](https://docs.docker.com/engine/inst
 
 Refer to the official [Portainer documentation](https://docs.portainer.io/start/install-ce/server/docker/linux) for the latest installation instructions.
 
-📌 **TL;DR**
+📌 **TL;DR:**
 
 ```bash
 sudo docker volume create portainer_data
@@ -115,9 +115,7 @@ volumes:
 
 Refer to the official [Portainer documentation](https://docs.portainer.io/admin/registries/add/custom#:~:text=From%20the%20menu%20select%20Registries,enter%20the%20username%20and%20password.) for detailed instructions.
 
-📌 **TL;DR**
-
-Navigate to the Portainer dashboard and add a new registry endpoint with the following details:
+📌 **TL;DR:** Navigate to the Portainer dashboard and add a new registry endpoint with the following details:
 
 - Name: `Odoo Registry`
 - Endpoint URL: `https://registry.example.com`
@@ -150,7 +148,7 @@ curl -u USERNAME:PASSWORD https://registry.example.com/v2/IMAGE_NAME/tags/list
 
 Refer to the official [Nginx Proxy Manager documentation](https://nginxproxymanager.com/setup/) for the latest installation instructions.
 
-📌 **TL;DR**
+📌 **TL;DR:**
 
 ```yaml
 services:
@@ -204,7 +202,7 @@ Add Nginx Proxy Manager as a proxy host in itself. Create a new proxy host with 
 
 Refer to the official [Seq documentation](https://hub.docker.com/r/datalust/seq) for the latest installation instructions.
 
-📌 **TL;DR**
+📌 **TL;DR:**
 
 ```yaml
 services:
@@ -237,7 +235,7 @@ After running the command, access the UI at `http://<your_server_ip>:8081`.
 - Add the `GELP Input` app to Seq to allow Odoo to send logs to Seq.
 - Add a retention policy to manage the amount of log data stored in Seq. For example, you can set a policy to delete logs older than 30 days.
 
-### Add a Grafana Dashboard
+### Install Grafana & Prometheus
 
 Install Grafana to visualize monitoring data collected by Prometheus.
 
@@ -306,7 +304,7 @@ volumes:
 After running the command, access the UI at `http://<your_server_ip>:3000`.
 Log in with the default credentials (`admin` / `admin`), then configure the Prometheus data source and import a dashboard as needed.
 
-#### Import a Dashboard
+#### Import Dashboards
 
 - [Docker monitoring](https://grafana.com/grafana/dashboards/193): 193
 - [Node Exporter Full](https://grafana.com/grafana/dashboards/1860): 1860
