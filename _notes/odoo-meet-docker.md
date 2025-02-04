@@ -1,104 +1,80 @@
 ---
 layout: note
-title: Odoo & Docker
+title: Odoo Deployment with Docker
 draft: false
 date: 2024-11-14 14:44:00 +0200
 author: Victor Hachard
 categories: ['Docker', 'Odoo', 'System Administration']
 ---
 
-## Introduction
+⚠️ **Warning:** tested on Odoo 16.0 with Ubuntu 24.04.1 LTS in early 2025.
 
-These instructions provide a comprehensive guide to deploying Odoo with Docker, including setting up a private registry, reverse proxy, and centralized logging, creating a custom Odoo image, configuring the container execution, and integrating with PostgreSQL and Seq for logging.
+## Overview  
 
-⚠️ **Warning:** The following guide is a working example for Odoo 16.0 on ubuntu 24.04.1 LTS early 2025.
+Deploy Odoo 16 with Docker on Ubuntu 24.04.1 LTS (early 2025). Covers private registry, reverse proxy, logging, custom image creation, container execution, PostgreSQL, and Seq integration.
 
-## Skills needed
+### Required Skills  
 
-- **Containerization & Orchestration**  
-  - **Docker**: Image creation, container management, volumes, and networks.  
-  - **Docker Compose**: Orchestrating multiple services with `docker-compose.yml`.
+- **Containerization & Orchestration:**  
+  - Docker (images, containers, volumes, networks)  
+  - Docker Compose (`docker-compose.yml`)  
 
-- **Image Management & Registries**  
-  - **Docker Private Registry**: Setting up and managing a private registry for custom images.
+- **Image Management:**  
+  - Private Docker Registry  
 
-- **Infrastructure & Administration**  
-  - **Portainer**: Web interface for managing Docker and Docker Compose.  
-  - **Linux Administration**: Filesystem, permissions, users, and process management.
+- **Infrastructure & Administration:**  
+  - Portainer (Docker management)  
+  - Linux (filesystem, permissions, users, process control)  
 
-- **Reverse Proxy & Security**  
-  - **Nginx Proxy Manager**: GUI for configuring Nginx as a reverse proxy.  
-  - **Nginx**: Web server and reverse proxy.
+- **Reverse Proxy & Security:**  
+  - Nginx Proxy Manager (GUI)  
+  - Nginx (reverse proxy)  
 
-- **Databases**  
-  - **PostgreSQL**: Managing Odoo's database (SQL commands, users, backups, and restores).
+- **Database:**  
+  - PostgreSQL (SQL, users, backups, restores)  
 
-- **Development & Logging**  
-  - **Odoo**: Understanding Odoo's architecture and containerized execution.  
-  - **Seq**: Centralized log management for system and application events.  
-  - **Bash & Automation**: Scripting for log management, container cleanup, and task automation.
+- **Development & Logging:**  
+  - Odoo (architecture, container execution)  
+  - Seq (centralized logging)  
+  - Bash (automation, log management)  
 
-- **CI/CD & Automation**  
-  - **Git**: Source code management and version control.  
-  - **CI/CD with GitHub Actions & DevOps**: Automating builds and deployments.  
-  - **Webhooks & DevOps Pipelines**: Creating workflows for container build, test, and deployment automation.
+- **CI/CD & Automation:**  
+  - Git (version control)  
+  - GitHub Actions & DevOps (CI/CD pipelines, webhooks)  
 
-- **Networking & Container Communication**  
-  - **DNS & Internal Routing**: Configuring service communication and internal domain management with Docker.
+- **Networking:**  
+  - DNS & Internal Routing (Docker service communication)  
 
 ## Server Setup
 
 ### Install Docker
 
-Docker is a platform for developing, shipping, and running applications in containers. You can install Docker on your server using Snap or apt.
+Install Docker using Snap or APT.
 
 #### Install Docker with Snap
 
 Docker can be installed using Snap during the Ubuntu setup or manually afterward.
 
-⚠️ **Warning:** To prevent unexpected interruptions due to automatic updates, configure Snap to control Docker updates.
+⚠️ **Warning:** To avoid unexpected interruptions due to automatic updates, configure Snap to control Docker updates.
 
-First, check the current refresh schedule:
+Set a specific update window to limit when Docker updates can occur (e.g., every Monday between 03:15 and 03:30 AM):
 
 ```bash
 sudo snap refresh --time
-```
-
-Then, set a specific update window to limit when Docker updates can occur (e.g., every Monday between 03:15 and 03:30 AM):
-
-```bash
 sudo snap set system refresh.timer=mon,3:15-3:30
 ```
 
 This ensures that Docker updates only during the defined time, reducing the risk of unexpected downtime.
 
-#### Install Docker with apt
+#### Install Docker with APT
 
-You can install Docker on your server by running the following commands:
-
-```bash
-sudo apt-get update
-sudo apt-get install ca-certificates curl -y
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-```
-
-After adding the Docker repository, you can install Docker by running the following command:
-
-```bash
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-```
+Refer to the official [Docker documentation](https://docs.docker.com/engine/install/ubuntu/) for the latest installation instructions.
 
 ### Install Portainer
 
-Portainer is a lightweight management UI that allows you to easily manage your Docker environments. You can install Portainer using Docker by running the following command:
+Refer to the official [Portainer documentation](https://docs.portainer.io/start/install-ce/server/docker/linux) for the latest installation instructions.
+
+📌 **TL;DR**
 
 ```bash
 sudo docker volume create portainer_data
@@ -109,7 +85,7 @@ After running the command, access the UI at `http://<your_server_ip>:9443`.
 
 ### Install Docker Registry
 
-A **Docker registry** is a system for storing and delivering Docker images, allowing you to manage different versions using tags. You can deploy a registry on your server using the following **Docker Compose** configuration:
+Install a private Docker registry to store and manage custom images.
 
 ```yaml
 services:
@@ -137,17 +113,21 @@ volumes:
 
 #### Link the Registry to Portainer
 
-To link the registry to Portainer, navigate to the Portainer dashboard and add a new registry endpoint with the following details:
+Refer to the official [Portainer documentation](https://docs.portainer.io/admin/registries/add/custom#:~:text=From%20the%20menu%20select%20Registries,enter%20the%20username%20and%20password.) for detailed instructions.
+
+📌 **TL;DR**
+
+Navigate to the Portainer dashboard and add a new registry endpoint with the following details:
 
 - Name: `Odoo Registry`
-- Endpoint URL: `https://odoo-registry.example.com`
+- Endpoint URL: `https://registry.example.com`
 - Authentication: `Yes`
 - Username: `USERNAME`
 - Password: `PASSWORD`
 
 #### Create a User for the Registry
 
-To secure your registry, create a new user by generating a bcrypt-encrypted password and storing it in the `htpasswd` file:
+To secure the registry, create a new user by generating a bcrypt-encrypted password and storing it in the `htpasswd` file:
 
 ```bash
 docker run --entrypoint htpasswd httpd:2 -Bbn USERNAME PASSWORD > PATH_TOVOLUME/htpasswd
@@ -159,40 +139,23 @@ Alternatively, manually add a new user to the `htpasswd` file:
 echo 'USERNAME:BCRYPT_PASSWORD' >> /auth/htpasswd
 ```
 
-#### List Images and Tags in the Registry
-
-##### List all images in the registry:
+#### List Registry Images & Tags
 
 ```bash
-curl -X GET -u USERNAME:PASSWORD https://odoo-registry.example.com/v2/_catalog
-```
-
-Or access the catalog via a web browser:
-
-```
-https://odoo-registry.example.com/v2/_catalog
-```
-
-##### List all tags of a specific image:
-
-```bash
-curl -u USERNAME:PASSWORD https://odoo-registry.example.com/v2/IMAGE_NAME/tags/list
-```
-
-Or open the following URL in your browser:
-
-```
-https://odoo-registry.example.com/v2/IMAGE_NAME/tags/list
+curl -X GET -u USERNAME:PASSWORD https://registry.example.com/v2/_catalog
+curl -u USERNAME:PASSWORD https://registry.example.com/v2/IMAGE_NAME/tags/list
 ```
 
 ### Install Nginx Proxy Manager
 
-Nginx Proxy Manager provides a simple UI for managing reverse proxies and SSL certificates. You can install Nginx Proxy Manager using Docker by running the following command:
+Refer to the official [Nginx Proxy Manager documentation](https://nginxproxymanager.com/setup/) for the latest installation instructions.
+
+📌 **TL;DR**
 
 ```yaml
 services:
   app:
-    image: 'jc21/nginx-proxy-manager:latest'
+    image: jc21/nginx-proxy-manager:latest
     container_name: nginx
     restart: unless-stopped
     ports:
@@ -239,7 +202,9 @@ Add Nginx Proxy Manager as a proxy host in itself. Create a new proxy host with 
 
 ### Install Seq
 
-Seq is a log server that collects, stores, and analyzes log data. You can install Seq using Docker by running the following command:
+Refer to the official [Seq documentation](https://hub.docker.com/r/datalust/seq) for the latest installation instructions.
+
+📌 **TL;DR**
 
 ```yaml
 services:
@@ -267,17 +232,14 @@ networks:
 
 After running the command, access the UI at `http://<your_server_ip>:8081`.
 
-#### Add an Apps to allow odoo to send logs to Seq
+#### Configure Seq
 
-Add the `GELP Input` app to Seq to allow Odoo to send logs to Seq.
-
-#### Add a retention policy
-
-Add a retention policy to manage the amount of log data stored in Seq. For example, you can set a policy to delete logs older than 30 days.
+- Add the `GELP Input` app to Seq to allow Odoo to send logs to Seq.
+- Add a retention policy to manage the amount of log data stored in Seq. For example, you can set a policy to delete logs older than 30 days.
 
 ### Add a Grafana Dashboard
 
-Grafana is a open-source analytics and monitoring platform combined with prometheus and cadvisor to monitor the server. You can install Grafana using Docker by running the following command:
+Install Grafana to visualize monitoring data collected by Prometheus.
 
 ```yaml
 services:
@@ -346,9 +308,6 @@ Log in with the default credentials (`admin` / `admin`), then configure the Prom
 
 #### Import a Dashboard
 
-Import a pre-built dashboard to visualize the monitoring data collected by Prometheus. You can find a variety of dashboards on the Grafana website or create your own custom dashboards.
-
-Recommended dashboards:
 - [Docker monitoring](https://grafana.com/grafana/dashboards/193): 193
 - [Node Exporter Full](https://grafana.com/grafana/dashboards/1860): 1860
 
