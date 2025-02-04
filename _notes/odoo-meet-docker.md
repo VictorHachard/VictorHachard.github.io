@@ -315,7 +315,7 @@ Log in with the default credentials (`admin` / `admin`), then configure the Prom
 
 The `Dockerfile` defines the custom Odoo Docker image.
 
-💡 **Note:** Seq is not included in Odoo's default setup. You may need to adjust the logging configuration to integrate with Seq.
+💡 **Note:** Seq is not included in Odoo's default setup. You may need to adjust Odoo.
 
 The main steps performed are:
 
@@ -475,7 +475,7 @@ CMD ["odoo"]
 
 Add the `entrypoint.sh` script to configure the Odoo container execution.
 
-💡 **Note:** Seq and colored logging are not included in Odoo by default. You may need to adjust the logging configuration to integrate with Seq.
+💡 **Note:** Seq logging and colored configuration are not included in Odoo by default. You may need to adjust Odoo.
 
 ```bash
 #!/bin/bash
@@ -593,7 +593,7 @@ check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
 
 ODOO_ARGS=("${DB_ARGS[@]}")
-# Append --update and --workers if applicable
+
 if [ -n "${UPDATE}" ]; then
     ODOO_ARGS+=("--update=${UPDATE}")
 fi
@@ -737,7 +737,7 @@ networks:
 
 ### DevOps Build Pipeline for Docker Image
 
-This pipeline automates the building and pushing of Odoo Docker images. It runs on Git tags (refs/tags/*), using the tag (e.g., v16.0.1) as the Docker image tag. If no tag is found, it defaults to the first seven characters of the commit hash.
+This pipeline automates the building and pushing of Odoo Docker images. It runs on Git tags (`refs/tags/*`), using the tag (e.g., `v16.0.1`) as the Docker image tag. If no tag is found, it defaults to the first seven characters of the commit hash.
 
 The process extracts the version, builds the Docker image with the detected tag, and pushes it to the Docker registry.
 
