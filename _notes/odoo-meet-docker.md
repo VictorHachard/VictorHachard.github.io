@@ -40,6 +40,30 @@ Deploy Odoo 16 with Docker on Ubuntu 24.04.1 LTS (early 2025). Covers private re
 
 ## Server Setup
 
+### Prerequisites
+
+- Updating and upgrading the system
+- Setting the timezone (Brussel)
+- Installing and configuring ufw (allow SSH, HTTP, HTTPS)
+- Installing and activate unattended upgrades (activate: Distro-Update, Remove-Unused-Kernel-Packages, Remove-New-Unused-Dependencies, Remove-Unused-Dependencies, Automatic-Reboot, Automatic-Reboot-Time)
+
+📌 **TL;DR:**
+
+```bash
+# Update and upgrade
+sudo apt update && sudo apt upgrade -y
+
+# Set timezone
+sudo timedatectl set-timezone Europe/Brussels
+
+# Install and configure ufw
+sudo apt install ufw -y && sudo ufw allow OpenSSH && sudo ufw allow http && sudo ufw allow https && sudo ufw enable
+
+# Install and activate unattended upgrades
+sudo apt install unattended-upgrades -y
+sudo dpkg-reconfigure -f noninteractive unattended-upgrades
+```
+
 ### Install Docker
 
 Install Docker using Snap or APT.
@@ -772,4 +796,24 @@ jobs:
       containerRegistry: DEVOPS_DOCKER_REGISTRY
       repository: $(Build.Repository.Name)
       tags: $(dockertag)
+```
+
+For greater control over the build and push process, the separates the Docker@2 build and push commands:
+
+```yaml
+- task: Docker@2
+  displayName: Build
+  inputs:
+    containerRegistry: 'Registry'
+    repository: '$(Build.Repository.Name)'
+    command: build
+    tags: '$(dockertag)'
+
+- task: Docker@2
+  displayName: Push
+  inputs:
+    containerRegistry: 'Registry'
+    repository: '$(Build.Repository.Name)'
+    command: push
+    tags: '$(dockertag)'
 ```
