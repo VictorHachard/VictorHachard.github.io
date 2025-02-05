@@ -3,7 +3,7 @@ layout: note
 draft: false
 date: 2025-01-31 14:00:00 +0200
 author: Victor Hachard
-categories: ['Docker', Linux']
+categories: ['Docker', 'Linux']
 ---
 
 This Bash script lists Docker images sorted by creation date (most recent first), grouped by repository. It excludes specific repositories like debian and ubuntu and removes old images from the same repository, keeping only the most recent one. It also prunes unused Docker objects after the cleanup.
