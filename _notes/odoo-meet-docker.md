@@ -656,26 +656,26 @@ The `docker-compose.yml` file defines the services required to run Odoo with Pos
 
 Configuration options:
 
-| Variable            | Description                               | Valeur par défaut |
-|---------------------|-------------------------------------------|-------------------|
-| HOST               | PostgreSQL database host                 | db               |
-| PORT               | PostgreSQL database port                 | 5432             |
-| USER               | PostgreSQL database user                 | odoo             |
-| PASSWORD           | PostgreSQL database password             | odoo             |
-| WORKERS            | Nombre de processus workers              | 0                |
-| MAX_CRON_THREADS   | Nombre max de threads cron               | 1                |
-| LIMIT_MEMORY_SOFT  | Limite mémoire soft                      | 2147483648       |
-| LIMIT_MEMORY_HARD  | Limite mémoire hard                      | 2684354560       |
-| LIMIT_TIME_CPU     | Limite temps CPU (secondes)              | 60               |
-| LIMIT_TIME_REAL    | Limite temps réel d'exécution (secondes) | 120              |
-| LIMIT_REQUEST      | Limite du nombre de requêtes             | 65536            |
-| LIST_DB            | Autoriser la liste des bases de données  | True             |
-| PROXY_MODE         | Activer le mode proxy                    | False            |
-| COLOR_CODE         | Code hexadécimal du thème                | 71639E           |
-| SEQ_ADDRESS        | Adresse pour Seq logging                 | seq:12201        |
-| ADMIN_PASSWD       | Mot de passe administrateur Odoo         | odoo             |
-| SERVER_WIDE_MODULES| Liste des modules serveur larges         | N/A              |
-| OVERRIDE_CONF_FILE | Fichier de configuration personnalisé    | N/A              |
+| Variable           | Description                              | Valeur par défaut |
+|--------------------|------------------------------------------|-------------------|
+| HOST               | PostgreSQL database host                 | db                |
+| PORT               | PostgreSQL database port                 | 5432              |
+| USER               | PostgreSQL database user                 | odoo              |
+| PASSWORD           | PostgreSQL database password             | odoo              |
+| WORKERS            | Nombre de processus workers              | 0                 |
+| MAX_CRON_THREADS   | Nombre max de threads cron               | 1                 |
+| LIMIT_MEMORY_SOFT  | Limite mémoire soft                      | 2147483648        |
+| LIMIT_MEMORY_HARD  | Limite mémoire hard                      | 2684354560        |
+| LIMIT_TIME_CPU     | Limite temps CPU (secondes)              | 60                |
+| LIMIT_TIME_REAL    | Limite temps réel d'exécution (secondes) | 120               |
+| LIMIT_REQUEST      | Limite du nombre de requêtes             | 65536             |
+| LIST_DB            | Autoriser la liste des bases de données  | True              |
+| PROXY_MODE         | Activer le mode proxy                    | False             |
+| COLOR_CODE         | Code hexadécimal du thème                | N/A               |
+| SEQ_ADDRESS        | Adresse pour Seq logging                 | N/A               |
+| ADMIN_PASSWD       | Mot de passe administrateur Odoo         | N/A               |
+| SERVER_WIDE_MODULES| Liste des modules serveur larges         | N/A               |
+| OVERRIDE_CONF_FILE | Fichier de configuration personnalisé    | N/A               |
 
 When using a custom configuration file (`OVERRIDE_CONF_FILE`), the script will not apply the default settings. Ensure that the custom configuration file contains all necessary settings.
 
