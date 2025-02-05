@@ -314,15 +314,15 @@ The `Dockerfile` defines the custom Odoo Docker image.
 
 The main steps performed are:
 
-- **Using Debian as a base**: `debian:bullseye-slim` is chosen to ensure a lightweight and stable image.
-- **Installing system dependencies**: Required packages such as build tools, fonts, and libraries are installed.
-- **Setting up PostgreSQL client**: Allows Odoo to communicate with the database.
-- **Creating an Odoo user**: The `odoo` user is created to run the application securely.
-- **Defining environment variables**: Key paths such as `ODOO_HOME` and `ODOO_RC` are set.
-- **Exposing necessary ports**: Odoo uses ports `8069`, `8071`, and `8072` for web, chat, and longpolling services.
-- **Configuring default Odoo directories**: Directories for addons and data storage are defined.
-- **Installing Python dependencies**: The `requirements.txt` file is used to install required Python libraries.
-- **Copying source files**: The Odoo core, custom addons, and configuration files are included in the image.
+- Using Debian as a base: `debian:bullseye-slim` is chosen to ensure a lightweight and stable image.
+- Installing system dependencies: Required packages such as build tools, fonts, and libraries are installed.
+- Setting up PostgreSQL client: Allows Odoo to communicate with the database.
+- Creating an Odoo user: The `odoo` user is created to run the application securely.
+- Defining environment variables: Key paths such as `ODOO_HOME` and `ODOO_RC` are set.
+- Exposing necessary ports: Odoo uses ports `8069`, `8071`, and `8072` for web, chat, and longpolling services.
+- Configuring default Odoo directories: Directories for addons and data storage are defined.
+- Installing Python dependencies: The `requirements.txt` file is used to install required Python libraries.
+- Copying source files: The Odoo core, custom addons, and configuration files are included in the image.
 
 ```dockerfile
 FROM debian:bullseye-slim
