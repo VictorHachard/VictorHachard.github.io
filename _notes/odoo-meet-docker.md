@@ -15,34 +15,27 @@ Deploy Odoo 16 with Docker on Ubuntu 24.04.1 LTS (early 2025). Covers private re
 
 ### Required Skills  
 
-- **Containerization & Orchestration:**  
+- Containerization & Orchestration:
   - Docker (images, containers, volumes, networks)  
   - Docker Compose (`docker-compose.yml`)  
-
-- **Image Management:**  
+- Image Management:
   - Private Docker Registry  
-
-- **Infrastructure & Administration:**  
+- Infrastructure & Administration:
   - Portainer (Docker management)  
   - Linux (filesystem, permissions, users, process control)  
-
-- **Reverse Proxy & Security:**  
+- Reverse Proxy & Security:
   - Nginx Proxy Manager (GUI)  
   - Nginx (reverse proxy)  
-
-- **Database:**  
+- Database:
   - PostgreSQL (SQL, users, backups, restores)  
-
-- **Development & Logging:**  
+- Development & Logging:
   - Odoo (architecture, container execution)  
   - Seq (centralized logging)  
   - Bash (automation, log management)  
-
-- **CI/CD & Automation:**  
+- CI/CD & Automation:
   - Git (version control)  
   - GitHub Actions & DevOps (CI/CD pipelines, webhooks)  
-
-- **Networking:**  
+- Networking:
   - DNS & Internal Routing (Docker service communication)  
 
 ## Server Setup
@@ -309,11 +302,13 @@ Log in with the default credentials (`admin` / `admin`), then configure the Prom
 - [Docker monitoring](https://grafana.com/grafana/dashboards/193): 193
 - [Node Exporter Full](https://grafana.com/grafana/dashboards/1860): 1860
 
-## Installing and Configuring Odoo in a Docker Container
+## Odoo in a Docker Container
 
 ### Dockerfile: Creating the Odoo Image
 
 The `Dockerfile` defines the custom Odoo Docker image.
+
+⚠️ **Warning:** The `Dockerfile` should be updated regularly, as it uses a Python-based image without specifying a fixed Python version.
 
 💡 **Note:** Seq is not included in Odoo's default setup. You may need to adjust Odoo.
 
@@ -473,7 +468,7 @@ CMD ["odoo"]
 
 ### EntryPoint.sh: Configuring Odoo Container Execution
 
-Add the `entrypoint.sh` script to configure the Odoo container execution.
+Add the `entrypoint.sh` script to configure the Odoo container execution. The script is a fork of the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/16.0/entrypoint.sh)
 
 💡 **Note:** Seq logging and colored configuration are not included in Odoo by default. You may need to adjust Odoo.
 
