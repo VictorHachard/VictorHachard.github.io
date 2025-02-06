@@ -332,7 +332,7 @@ Log in with the default credentials (`admin` / `admin`), then configure the Prom
 
 The `Dockerfile` defines the custom Odoo Docker image.
 
-⚠️ **Warning:** The `Dockerfile` should be updated regularly, as it uses a Python-based image without specifying a fixed Python version.
+⚠️ **Warning:** The `Dockerfile` relies on a Python-based image without specifying a fixed Python version. This can lead to unexpected changes when new versions are released. If specifying a version, consider using a PPA (Personal Package Archive) for better control. However, be aware that at some point, certain images may no longer provide the specified version.
 
 💡 **Note:** Seq is not included in Odoo's default setup. You may need to adjust Odoo.
 
@@ -793,7 +793,7 @@ jobs:
   - task: Docker@2
     displayName: Build and Push Docker Image
     inputs:
-      containerRegistry: DEVOPS_DOCKER_REGISTRY
+      containerRegistry: 'Registry'
       repository: $(Build.Repository.Name)
       tags: $(dockertag)
 ```
