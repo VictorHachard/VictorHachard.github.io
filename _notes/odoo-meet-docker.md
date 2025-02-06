@@ -756,7 +756,13 @@ networks:
     external: true
 ```
 
-### DevOps Build Pipeline for Docker Image
+## DevOps Pipeline
+
+#### Devops Agent
+
+The DevOps agent must run on a Linux machine with Docker installed.  
+
+#### Devops Build Pipeline
 
 This pipeline automates the building and pushing of Odoo Docker images. It runs on Git tags (`refs/tags/*`), using the tag (e.g., `v16.0.1`) as the Docker image tag. If no tag is found, it defaults to the first seven characters of the commit hash.
 
