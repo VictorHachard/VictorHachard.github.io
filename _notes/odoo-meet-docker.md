@@ -334,6 +334,8 @@ The `Dockerfile` defines the custom Odoo Docker image.
 
 ⚠️ **Warning:** The `Dockerfile` relies on a Python-based image without specifying a fixed Python version. This can lead to unexpected changes when new versions are released. If specifying a version, consider using a PPA (Personal Package Archive) for better control. However, be aware that at some point, certain images may no longer provide the specified version.
 
+⚠️ **Warning:**  Build the Docker image on a Linux machine. Windows systems have a carriage return issue that is not always resolved by the `dos2unix` command.
+
 💡 **Note:** Seq is not included in Odoo's default setup. You may need to adjust Odoo.
 
 The main steps performed are:
