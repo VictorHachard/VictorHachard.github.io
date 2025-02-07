@@ -334,7 +334,7 @@ The `Dockerfile` defines the custom Odoo Docker image.
 
 ⚠️ **Warning:** The `Dockerfile` relies on a Python-based image without specifying a fixed Python version. This can lead to unexpected changes when new versions are released. If specifying a version, consider using a PPA (Personal Package Archive) for better control. However, be aware that at some point, certain images may no longer provide the specified version.
 
-⚠️ **Warning:**  Build the Docker image on a Linux machine. Windows systems have a carriage return issue that is not always resolved by the `dos2unix` command.
+💡 **Note:** Remove line ending fixes if the build is not on Windows, as they are only needed to handle Windows-specific line break differences.
 
 💡 **Note:** Seq is not included in Odoo's default setup. You may need to adjust Odoo.
 
@@ -439,25 +439,20 @@ RUN mkdir -p /etc/systemd/system && \
 # Create Odoo binary
 RUN mkdir -p /usr/bin && \
     echo "#!/usr/bin/env python3" > /usr/bin/odoo && \
-    echo "" >> /usr/bin/odoo && \
-    echo "# set server timezone in UTC before time module imported" >> /usr/bin/odoo && \
     echo "__import__('os').environ['TZ'] = 'UTC'" >> /usr/bin/odoo && \
     echo "import odoo" >> /usr/bin/odoo && \
-    echo "" >> /usr/bin/odoo && \
     echo "if __name__ == \"__main__\":" >> /usr/bin/odoo && \
     echo "    odoo.cli.main()" >> /usr/bin/odoo && \
     chmod +x /usr/bin/odoo
 
-# Copy entrypoint script, Odoo configuration file, and Odoo binary
+# Copy entrypoint and wait-for-psql scripts
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
+RUN chmod +x /usr/local/bin/wait-for-psql.py
 
-# Fix line endings in scripts
-RUN apt-get update && apt-get install -y dos2unix && \
-    dos2unix /usr/bin/odoo && \
-    dos2unix /etc/odoo/odoo.conf && \
-    dos2unix /entrypoint.sh && \
-    dos2unix /etc/systemd/system/odoo.service
+# Fix line endings in scripts (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/bin/odoo /etc/odoo/odoo.conf /usr/local/bin/wait-for-psql.py /entrypoint.sh /etc/systemd/system/odoo.service
 
 # Create odoo
 RUN mkdir -p /var/lib/odoo && chown -R odoo /var/lib/odoo
@@ -467,7 +462,7 @@ COPY requirements.txt $ODOO_HOME/
 RUN pip3 install --no-cache-dir -U pip setuptools wheel && \
     pip3 install --no-cache-dir -r $ODOO_HOME/requirements.txt
 
-# Copy Odoo source files and custom addons
+# Copy Odoo source files and addons
 COPY --chown=odoo:odoo odoo $ODOO_HOME/odoo
 COPY --chown=odoo:odoo app_addons $ODOO_HOME/app_addons
 COPY --chown=odoo:odoo custom_addons $ODOO_HOME/custom_addons
@@ -480,9 +475,6 @@ EXPOSE 8069 8071 8072
 
 # Set default environment variables
 ENV ODOO_RC=/etc/odoo/odoo.conf
-
-COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
-RUN chmod +x /usr/local/bin/wait-for-psql.py
 
 # Set default user when running the container
 USER odoo
@@ -645,21 +637,15 @@ fi
 case "$1" in
     -- | odoo)
         shift
-        if [[ "$1" == "scaffold" ]] ; then
-            exec odoo "$@"
-        else
-            wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-            echo odoo "$@" "${ODOO_ARGS[@]}"
-            exec odoo "$@" "${ODOO_ARGS[@]}"
-        fi
+        wait-for-psql.py ${DB_ARGS[@]} --timeout=30
+        echo "Executing: odoo $@ ${ODOO_ARGS[@]}"
+        exec odoo "$@" "${ODOO_ARGS[@]}"
         ;;
     -*)
         wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-        echo odoo "$@" "${ODOO_ARGS[@]}"
+        echo "Executing: odoo $@ ${ODOO_ARGS[@]}"
         exec odoo "$@" "${ODOO_ARGS[@]}"
         ;;
-    *)
-        exec "$@"
 esac
 
 exit 1
