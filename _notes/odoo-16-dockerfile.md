@@ -65,36 +65,19 @@ SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 # Generate locale C.UTF-8 for PostgreSQL and general locale data
 ENV LANG=C.UTF-8
 
-# Install prerequisites for adding PPA
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        software-properties-common \
-        gpg-agent \
-        gnupg \
-        dirmngr \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Add deadsnakes PPA
-RUN add-apt-repository ppa:deadsnakes/ppa
-
-# Install system dependencies and Python 3.11
+# Install system dependencies and Python 3.12
 # Removed fonts-noto-cjk (add if needed for Chinese, Japanese, Korean support)
 # Removed npm (add if needed for RTL language support)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
+        dirmngr \
+        gnupg \
         libssl-dev libpq-dev \
         libldap2-dev libsasl2-dev \
-        npm \
+        python3 python3-dev python3-pip python3-venv python3-wheel \
         xz-utils \
-        python3.11 python3.11-distutils python3.11-venv python3.11-dev \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Set Python 3.11 as the default Python version
-RUN ln -sf /usr/bin/python3.11 /usr/bin/python3 && \
-    ln -sf /usr/bin/python3.11 /usr/bin/python && \
-    python3.11 -m ensurepip && \
-    python3.11 -m pip install --upgrade pip
+        && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install wkhtmltopdf
 RUN apt-get update && \
