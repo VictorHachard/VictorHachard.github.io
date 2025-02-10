@@ -9,19 +9,17 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ⚠️ **Warning:** This setup has been tested as of early 2025. Future Ubuntu updates may require modifications to maintain compatibility.
 
-## Purpose
+## Purpose  
 
-Odoo 15, originally released in 2021 and with support ending in October 2024, is an older version that poses compatibility challenges on modern systems due to outdated dependencies. The main issues include:
+Odoo 15, originally released in 2021 and with support ending in October 2024. It is compatible with Python versions 3.8 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.  
 
-- Python 3.12 Requirement: Odoo 15 is incompatible with Python 3.13 and later. To run it, we need **Python 3.12**. which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
-    - Disclaimer: PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
-    - Alternative to deadsnakes PPA: If deadsnakes PPA is unavailable, consider using pyenv to install Python without system conflicts. Alternatively, compile Python from source, though this requires manual updates. Pyenv is the preferred option for easier management.
+⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.  
 
-This setup includes a modified Dockerfile specifically designed to run Odoo 15 on modern systems by:
+This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:  
 
-- Uses **Ubuntu 24.04 (Noble)** as the base image.
-- Adds the **deadsnakes PPA** to install Python 3.12.
-- Utilizes virtual environments to prevent conflicts with system packages.
+- **Ubuntu 24.04 (Noble)** as the base image.  
+- Installation of **Python 3.12** via the **deadsnakes PPA**.  
+- Use of **virtual environments** to prevent conflicts with system packages.  
 
 ## Prerequisites
 

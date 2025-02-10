@@ -1,31 +1,35 @@
 ---
 layout: note
-title: Docker Setup for Long-Term Odoo 11 Deployment
+title: Docker Setup for Long-Term Odoo 16 Deployment
 draft: false
 date: 2025-02-06 14:00:00 +0200
 author: Victor Hachard
 categories: ['Docker', 'Odoo', 'System Administration']
 ---
 
+🎯 **TODO:** Update this guide when Odoo becomes compatible with Python 3.13 or when Python 3.12 will fully be compatible.
+
+⚠️ **Warning:** The latest Odoo version does not yet fully support Python 3.12. For now, a Dockerfile is available with **Ubuntu 24.04 (Noble) and Python 3.11** to ensure compatibility.
+
 ⚠️ **Warning:** This setup has been tested as of early 2025. Future Ubuntu updates may require modifications to maintain compatibility.
 
-## Purpose  
+## Purpose
 
-Odoo 11, originally released in 2017 and with support ending in 2020. It is compatible with Python versions 3.5 to 3.7 but **does not support Python 3.8 or later**. To ensure compatibility, we must use **Python 3.7**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.  
+Odoo 16, originally released in 2022 and with support ending in October 2025. It is compatible with Python versions 3.7 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
 
-⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.  
+⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.
 
-This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:  
+This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:
 
-- **Ubuntu 22.04 (Jammy)** or **Ubuntu 24.04 (Noble)** as the base image.
-- Installation of **Python 3.7** via the **deadsnakes PPA**.  
-- Use of **virtual environments** to prevent conflicts with system packages.  
+- **Ubuntu 24.04 (Noble)** as the base image.
+- Installation of **Python 3.12** via the **deadsnakes PPA**.
+- Use of **virtual environments** to prevent conflicts with system packages.
 
 ## Prerequisites
 
 ### Odoo version
 
-Odoo 11.0 needs to be updated with the latest nightly build because Python 3.7 was not supported when Odoo 11.0 was initially released.
+Odoo 16.0 needs to be updated with the latest nightly build because Python 3.12 was not supported when Odoo 16.0 was initially released.
 
 ### Directory Structure
 
@@ -43,25 +47,22 @@ src/
 └── wait-for-psql.py 🐳
 ```  
 
-`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). For best compatibility, use the Odoo 18.0 version of both scripts:
-  - `wait-for-psql.py` **has not changed** between Odoo 11.0 and 18.0, so it remains fully compatible.
-  - `entrypoint.sh` has been updated to improve security: it now supports reading the database password from a file instead of using environment variables.
+`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). Use the **18.0 version** of both scripts:
+  - `wait-for-psql.py` **has not changed** between Odoo 16.0 and 18.0, so it remains fully compatible.  
+  - `entrypoint.sh` **has not changed** between Odoo 16.0 and 18.0, so it remains fully compatible.
 
-For reference, the older version of the scripts from Odoo 11.0 can be found in the [Odoo Docker 11.0 repository](https://github.com/odoo/docker/tree/1bddcda4b2ef30c7443ebe0cae43d17f92aa43cd/11.0).
+For reference, the scripts from Odoo 16.0 can be found in the [Odoo Docker 16.0 repository](https://github.com/odoo/docker/tree/master/16.0).
 
-## Dockerfile (Jammy)
+## Dockerfile (Noble)
 
-⚠️ **Warning:** Ubuntu 22.04 Jammy will receive official security updates and maintenance until May 31, 2027. 
+⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029.
 
 ```dockerfile
-FROM ubuntu:jammy
+FROM ubuntu:noble
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
 # Generate locale C.UTF-8 for PostgreSQL and general locale data
 ENV LANG=C.UTF-8
-
-# Retrieve the target architecture to install the correct wkhtmltopdf package
-ARG TARGETARCH
 
 # Install prerequisites for adding PPA
 RUN apt-get update && \
@@ -75,7 +76,7 @@ RUN apt-get update && \
 # Add deadsnakes PPA
 RUN add-apt-repository ppa:deadsnakes/ppa
 
-# Install system dependencies and Python 3.7
+# Install system dependencies and Python 3.11
 # Removed fonts-noto-cjk (add if needed for Chinese, Japanese, Korean support)
 # Removed npm (add if needed for RTL language support)
 RUN apt-get update && \
@@ -85,21 +86,14 @@ RUN apt-get update && \
         libldap2-dev libsasl2-dev \
         npm \
         xz-utils \
-        python3.7 python3.7-distutils python3.7-venv python3.7-dev \
+        python3.11 python3.11-distutils python3.11-venv python3.11-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set Python 3.7 as the default Python version
-RUN ln -sf /usr/bin/python3.7 /usr/bin/python3 && \
-    ln -sf /usr/bin/python3.7 /usr/bin/python && \
-    python3.7 -m ensurepip && \
-    python3.7 -m pip install --upgrade pip
-
-# Verify Python 3.7 installation and pip version
-RUN python --version | grep "3.7" && pip --version
-
-# Install less and less-plugin-clean-css
-# RUN npm install -g rtlcss
-RUN npm install -g less@3.10.3 less-plugin-clean-css
+# Set Python 3.11 as the default Python version
+RUN ln -sf /usr/bin/python3.11 /usr/bin/python3 && \
+    ln -sf /usr/bin/python3.11 /usr/bin/python && \
+    python3.11 -m ensurepip && \
+    python3.11 -m pip install --upgrade pip
 
 # Install wkhtmltopdf
 RUN apt-get update && \
@@ -120,7 +114,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 # Install PostgreSQL client
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ noble-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
     && GNUPGHOME="$(mktemp -d)" \
     && export GNUPGHOME \
     && repokey='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8' \
@@ -150,7 +144,7 @@ ENV PYTHONPATH="$ODOO_HOME:$PYTHONPATH"
 RUN mkdir -p /etc/odoo && \
     chown odoo:odoo /etc/odoo && \
     echo "[options]" > /etc/odoo/odoo.conf && \
-    echo "addons_path = /opt/odoo/odoo/addons,/opt/odoo/custom_addons" >> /etc/odoo/odoo.conf && \
+    echo "addons_path = /opt/odoo/odoo/addons,/opt/odoo/app_addons,/opt/odoo/custom_addons" >> /etc/odoo/odoo.conf && \
     echo "data_dir = /var/lib/odoo" >> /etc/odoo/odoo.conf && \
     chown odoo:odoo /etc/odoo/odoo.conf
 
@@ -174,8 +168,11 @@ RUN mkdir -p /etc/systemd/system && \
 # Create Odoo binary
 RUN mkdir -p /usr/bin && \
     echo "#!/usr/bin/env python3" > /usr/bin/odoo && \
+    echo "" >> /usr/bin/odoo && \
+    echo "# set server timezone in UTC before time module imported" >> /usr/bin/odoo && \
     echo "__import__('os').environ['TZ'] = 'UTC'" >> /usr/bin/odoo && \
     echo "import odoo" >> /usr/bin/odoo && \
+    echo "" >> /usr/bin/odoo && \
     echo "if __name__ == \"__main__\":" >> /usr/bin/odoo && \
     echo "    odoo.cli.main()" >> /usr/bin/odoo && \
     chmod +x /usr/bin/odoo
@@ -193,17 +190,17 @@ RUN sed -i 's/\r$//' /usr/bin/odoo /etc/odoo/odoo.conf /usr/local/bin/wait-for-p
 RUN mkdir -p /var/lib/odoo && chown -R odoo /var/lib/odoo
 
 # Create and activate Python virtual environment (useful to avoid conflicts with system packages)
-RUN python3.7 -m venv $ODOO_HOME/venv && \
+RUN python3 -m venv $ODOO_HOME/venv && \
     source $VENV_PATH/bin/activate
 
-# Install Odoo dependencies (install setuptools and wheel first to avoid Use_2to3 error)
+# Install Odoo dependencies
 COPY requirements.txt $ODOO_HOME/
 RUN $VENV_PATH/bin/pip install --no-cache-dir --upgrade pip && \
-    $VENV_PATH/bin/pip install setuptools==57.5.0 wheel && \
     $VENV_PATH/bin/pip install --no-cache-dir -r $ODOO_HOME/requirements.txt
 
 # Copy Odoo source files and custom addons
 COPY --chown=odoo:odoo odoo $ODOO_HOME/odoo
+COPY --chown=odoo:odoo app_addons $ODOO_HOME/app_addons
 COPY --chown=odoo:odoo custom_addons $ODOO_HOME/custom_addons
 
 # Expose volumes and ports (8069: Odoo, 8071: XML-RPC, 8072: longpolling)
@@ -213,7 +210,7 @@ EXPOSE 8069 8071 8072
 # Set default environment variables
 ENV ODOO_RC=/etc/odoo/odoo.conf
 
-# Set the user to run Odoo
+# Set default user when running the container
 USER odoo
 
 # Entrypoint
@@ -221,29 +218,44 @@ ENTRYPOINT ["/entrypoint.sh"]
 CMD ["odoo"]
 ```
 
-## Dockerfile (Noble)
+## Dockerfile (Noble - Python 3.11)
 
 ⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029.
 
-Replace the base image with **Ubuntu 24.04 (Noble)**:
+Replace the system dependencies with the following:
 
 ```dockerfile
-FROM ubuntu:noble
-```
+# Install prerequisites for adding PPA
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        software-properties-common \
+        gpg-agent \
+        gnupg \
+        dirmngr \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-Update the PostgreSQL repository from `jammy-pgdg` to `noble-pgdg`:
-    
-```dockerfile
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ noble-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
-    && GNUPGHOME="$(mktemp -d)" \
-    && export GNUPGHOME \
-    && repokey='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8' \
-    && gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${repokey}" \
-    && gpg --batch --armor --export "${repokey}" > /etc/apt/trusted.gpg.d/pgdg.gpg.asc \
-    && gpgconf --kill all \
-    && rm -rf "$GNUPGHOME" \
-    && apt-get update \
-    && apt-get install --no-install-recommends -y postgresql-client \
-    && rm -f /etc/apt/sources.list.d/pgdg.list \
-    && rm -rf /var/lib/apt/lists/*
+# Add deadsnakes PPA
+RUN add-apt-repository ppa:deadsnakes/ppa
+
+# Install system dependencies and Python 3.11
+# Removed fonts-noto-cjk (add if needed for Chinese, Japanese, Korean support)
+# Removed npm (add if needed for RTL language support)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libssl-dev libpq-dev \
+        libldap2-dev libsasl2-dev \
+        npm \
+        xz-utils \
+        python3.11 python3.11-distutils python3.11-venv python3.11-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.11 as the default Python version
+RUN ln -sf /usr/bin/python3.11 /usr/bin/python3 && \
+    ln -sf /usr/bin/python3.11 /usr/bin/python && \
+    python3.11 -m ensurepip && \
+    python3.11 -m pip install --upgrade pip
+
+# Verify Python 3.11 installation and pip version
+RUN python --version | grep "3.11" && pip --version
 ```
