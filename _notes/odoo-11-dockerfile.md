@@ -86,7 +86,7 @@ RUN ln -sf /usr/bin/python3.7 /usr/bin/python3 && \
     python3.7 -m ensurepip && \
     python3.7 -m pip install --upgrade pip
 
-# Verify Python 3.7 installation
+# Verify Python 3.7 installation and pip version
 RUN python --version | grep "3.7" && pip --version
 
 # Install wkhtmltopdf
@@ -128,7 +128,7 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main' > /etc/a
 # Add if needed for RTL language support
 # RUN npm install -g rtlcss
 
-# Create Odoo user
+# Create Odoo system user and group
 RUN groupadd -r odoo && useradd -r -g odoo -m -d /home/odoo -s /bin/bash odoo
 
 # Set Odoo environment variables
@@ -180,7 +180,7 @@ RUN chmod +x /usr/local/bin/wait-for-psql.py
 # Fix line endings in scripts (Windows compatibility)
 RUN sed -i 's/\r$//' /usr/bin/odoo /etc/odoo/odoo.conf /usr/local/bin/wait-for-psql.py /entrypoint.sh /etc/systemd/system/odoo.service
 
-# Create odoo
+# Create odoo directory and set permissions
 RUN mkdir -p /var/lib/odoo && chown -R odoo /var/lib/odoo
 
 # Create and activate Python virtual environment (useful to avoid conflicts with system packages)
@@ -197,16 +197,14 @@ RUN $VENV_PATH/bin/pip install --no-cache-dir --upgrade pip && \
 COPY --chown=odoo:odoo odoo $ODOO_HOME/odoo
 COPY --chown=odoo:odoo custom_addons $ODOO_HOME/custom_addons
 
-# Expose volumes for Odoo data
+# Expose volumes and ports (8069: Odoo, 8071: XML-RPC, 8072: longpolling)
 VOLUME ["/var/lib/odoo"]
-
-# Expose Odoo ports
 EXPOSE 8069 8071 8072
 
 # Set default environment variables
 ENV ODOO_RC=/etc/odoo/odoo.conf
 
-# Set default user when running the container
+# Set the user to run Odoo
 USER odoo
 
 # Entrypoint
