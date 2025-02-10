@@ -16,7 +16,7 @@ Odoo 11, originally released in 2017, is an older version that poses compatibili
 - Python 3.7 Requirement: Odoo 11 is incompatible with Python 3.8 and later. To run it, we need **Python 3.7**, which can be installed via the **deadsnakes PPA**.  
 - Legacy Libraries: Some dependencies required by Odoo 11 have been deprecated in newer Ubuntu versions.  
 
-To mitigate these challenges, this setup:  
+This setup includes a modified Dockerfile specifically designed to run Odoo 11 on modern systems by:
 
 - Uses **Ubuntu 22.04 (Jammy)** or **Ubuntu 20.04 (Noble)** as the base image.  
 - Adds the **deadsnakes PPA** to install Python 3.7.  
@@ -39,9 +39,11 @@ src/
 └── wait-for-psql.py 🐳
 ```  
 
-The `wait-for-psql.py` and `entrypoint.sh` scripts are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/).  
+`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). Use the **18.0 version** of both scripts:  
+  - `wait-for-psql.py` **has not changed** between Odoo 11.0 and 18.0, so it remains fully compatible.  
+  - `entrypoint.sh` has been updated to improve security: it now supports reading the database password from a file instead of using environment variables.
 
-This guide focuses on the `Dockerfile`, which is a modified version of the official Odoo Dockerfile, adapted for Odoo 11 compatibility.  
+For reference, the older version of the scripts from Odoo 11.0 can be found in the [Odoo Docker 11.0 repository](https://github.com/odoo/docker/tree/1bddcda4b2ef30c7443ebe0cae43d17f92aa43cd/11.0).
 
 ## Dockerfile (Jammy)
 
