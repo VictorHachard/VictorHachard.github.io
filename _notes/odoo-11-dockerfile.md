@@ -7,7 +7,11 @@ author: Victor Hachard
 categories: ['Docker', 'Odoo', 'System Administration']
 ---
 
-⚠️ **Warning:** This setup has been tested as of early 2025.
+⚠️ **Warning:** This setup has been tested as of early 2025. Future Ubuntu updates may require modifications to maintain compatibility.
+
+⚠️ **Disclaimer:** PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
+
+💡 **Alternative to deadsnakes PPA:** If deadsnakes PPA is unavailable, use **pyenv** to install Python 3.7 without system conflicts. Alternatively, compile it from source, though this requires manual updates. Pyenv is the preferred option for easier management.
 
 ## Purpose
 
@@ -39,7 +43,7 @@ src/
 └── wait-for-psql.py 🐳
 ```  
 
-`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). Use the **18.0 version** of both scripts:
+`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). For best compatibility, use the Odoo 18.0 version of both scripts:
   - `wait-for-psql.py` **has not changed** between Odoo 11.0 and 18.0, so it remains fully compatible.
   - `entrypoint.sh` has been updated to improve security: it now supports reading the database password from a file instead of using environment variables.
 
