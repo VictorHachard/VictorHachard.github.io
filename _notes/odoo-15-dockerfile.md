@@ -1,6 +1,6 @@
 ---
 layout: note
-title: Dockerfile for Odoo 15
+title: Docker Setup for Long-Term Odoo 15 Deployment
 draft: false
 date: 2025-02-06 14:00:00 +0200
 author: Victor Hachard
@@ -9,32 +9,13 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ⚠️ **Warning:** This setup has been tested as of early 2025. Future Ubuntu updates may require modifications to maintain compatibility.
 
-⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029. 
-
-⚠️ **Warning:** Ubuntu 24.04 (Noble) includes Python 3.12 by default, so the **deadsnakes PPA does not currently support Python 3.12**. While this guide use PPA, for the moment don't use PPA:
-
-```dockerfile
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        build-essential \
-        dirmngr \
-        gnupg \
-        libssl-dev libpq-dev \
-        libldap2-dev libsasl2-dev \
-        python3 python3-dev python3-pip python3-venv python3-wheel python3-setuptools \
-        xz-utils \
-        && apt-get clean && rm -rf /var/lib/apt/lists/*
-```
-
-⚠️ **Disclaimer:** PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
-
-💡 **Alternative to deadsnakes PPA:** If deadsnakes PPA is unavailable, use **pyenv** to install Python without system conflicts. Alternatively, compile it from source, though this requires manual updates. Pyenv is the preferred option for easier management.
-
 ## Purpose
 
 Odoo 15, originally released in 2021 and with support ending in October 2024, is an older version that poses compatibility challenges on modern systems due to outdated dependencies. The main issues include:
 
 - Python 3.12 Requirement: Odoo 15 is incompatible with Python 3.13 and later. To run it, we need **Python 3.12**. which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
+    - Disclaimer: PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
+    - Alternative to deadsnakes PPA: If deadsnakes PPA is unavailable, consider using pyenv to install Python without system conflicts. Alternatively, compile Python from source, though this requires manual updates. Pyenv is the preferred option for easier management.
 
 This setup includes a modified Dockerfile specifically designed to run Odoo 15 on modern systems by:
 
@@ -43,6 +24,12 @@ This setup includes a modified Dockerfile specifically designed to run Odoo 15 o
 - Utilizes virtual environments to prevent conflicts with system packages.
 
 ## Prerequisites
+
+### Odoo version
+
+Odoo 15.0 needs to be updated with the latest nightly build because Python 3.12 was not supported when Odoo 15.0 was initially released.
+
+### Directory Structure
 
 Ensure your project follows this directory structure:
 
@@ -64,7 +51,11 @@ src/
 
 For reference, the older version of the scripts from Odoo 15.0 can be found in the [Odoo Docker 15.0 repository](https://github.com/odoo/docker/tree/5fb6a842747c296099d9384587cd89640eb7a615/15.0).
 
-## Dockerfile
+## Dockerfile (Noble)
+
+⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029.
+
+💡 **Note:** Ubuntu 24.04 Noble comes with Python 3.12 by default, so no additional PPA is required.
 
 ```dockerfile
 FROM ubuntu:noble
@@ -76,36 +67,19 @@ ENV LANG=C.UTF-8
 # Retrieve the target architecture to install the correct wkhtmltopdf package
 ARG TARGETARCH
 
-# Install prerequisites for adding PPA
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        software-properties-common \
-        gpg-agent \
-        gnupg \
-        dirmngr \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Add deadsnakes PPA
-RUN add-apt-repository ppa:deadsnakes/ppa
-
-# Install system dependencies and Python 3.7
+# Install system dependencies and Python 3.12 (default in Ubuntu 24.04)
 # Removed fonts-noto-cjk (add if needed for Chinese, Japanese, Korean support)
 # Removed npm (add if needed for RTL language support)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
-        ca-certificates \
+        dirmngr \
+        gnupg \
         libssl-dev libpq-dev \
         libldap2-dev libsasl2-dev \
+        python3 python3-dev python3-pip python3-venv python3-wheel python3-setuptools \
         xz-utils \
-        python3.12 python3.12-distutils python3.12-venv python3.12-dev \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Set Python 3.12 as the default Python version
-RUN ln -sf /usr/bin/python3.7 /usr/bin/python3 && \
-    ln -sf /usr/bin/python3.7 /usr/bin/python && \
-    python3.7 -m ensurepip && \
-    python3.7 -m pip install --upgrade pip
+        && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Verify Python 3.12 installation and pip version
 RUN python --version | grep "3.12" && pip --version
@@ -201,7 +175,7 @@ RUN sed -i 's/\r$//' /usr/bin/odoo /etc/odoo/odoo.conf /usr/local/bin/wait-for-p
 RUN mkdir -p /var/lib/odoo && chown -R odoo /var/lib/odoo
 
 # Create and activate Python virtual environment (useful to avoid conflicts with system packages)
-RUN python3.7 -m venv $ODOO_HOME/venv && \
+RUN python3 -m venv $ODOO_HOME/venv && \
     source $VENV_PATH/bin/activate
 
 # Install Odoo dependencies

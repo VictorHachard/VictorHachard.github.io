@@ -1,6 +1,6 @@
 ---
 layout: note
-title: Dockerfile for Odoo 11
+title: Docker Setup for Long-Term Odoo 11 Deployment
 draft: false
 date: 2025-02-06 14:00:00 +0200
 author: Victor Hachard
@@ -9,15 +9,13 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ⚠️ **Warning:** This setup has been tested as of early 2025. Future Ubuntu updates may require modifications to maintain compatibility.
 
-⚠️ **Disclaimer:** PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
-
-💡 **Alternative to deadsnakes PPA:** If deadsnakes PPA is unavailable, use **pyenv** to install Python without system conflicts. Alternatively, compile it from source, though this requires manual updates. Pyenv is the preferred option for easier management.
-
 ## Purpose
 
 Odoo 11, originally released in 2017 and with support ending in 2020, is an older version that poses compatibility challenges on modern systems due to outdated dependencies. The main issues include:
 
 - Python 3.7 Requirement: Odoo 11 is incompatible with Python 3.8 and later. To run it, we need **Python 3.7**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
+    - Disclaimer: PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
+    - Alternative to deadsnakes PPA: If deadsnakes PPA is unavailable, consider using pyenv to install Python without system conflicts. Alternatively, compile Python from source, though this requires manual updates. Pyenv is the preferred option for easier management.
 - Legacy Libraries: Some dependencies required by Odoo 11 have been deprecated in newer Ubuntu versions.
 
 This setup includes a modified Dockerfile specifically designed to run Odoo 11 on modern systems by:
@@ -28,6 +26,12 @@ This setup includes a modified Dockerfile specifically designed to run Odoo 11 o
 - Utilizes virtual environments to prevent conflicts with system packages.
 
 ## Prerequisites
+
+### Odoo version
+
+Odoo 11.0 needs to be updated with the latest nightly build because Python 3.7 was not supported when Odoo 11.0 was initially released.
+
+### Directory Structure
 
 Ensure your project follows this directory structure:
 
@@ -223,7 +227,7 @@ CMD ["odoo"]
 
 ## Dockerfile (Noble)
 
-⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029. 
+⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029.
 
 Replace the base image with **Ubuntu 24.04 (Noble)**:
 
