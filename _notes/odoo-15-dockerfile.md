@@ -13,6 +13,7 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 Odoo 15, originally released in 2021 and with support ending in October 2024. It is compatible with Python versions 3.8 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.  
 
+⚠️ **Warning:** Python 3.12 will receive official security updates and maintenance until October 2028.
 ⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.  
 
 This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:  
@@ -25,7 +26,7 @@ This setup includes a customized **Dockerfile** optimized for running Odoo 15 on
 
 ### Odoo version
 
-Odoo 15.0 needs to be updated with the latest nightly build because Python 3.12 was not supported when Odoo 15.0 was initially released.
+Odoo 15.0 needs to be updated with the latest nightly build because Python 3.12 was not supported when Odoo 15.0 was initially released. You can find the Odoo version in the `release.py` file within the Odoo source code.
 
 ### Directory Structure
 
@@ -51,7 +52,7 @@ For reference, the older version of the scripts from Odoo 15.0 can be found in t
 
 ## Dockerfile (Noble)
 
-⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029.
+⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until April 2029.
 
 💡 **Note:** Ubuntu 24.04 Noble comes with Python 3.12 by default, so no additional PPA is required.
 

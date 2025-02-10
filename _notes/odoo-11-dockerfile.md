@@ -11,21 +11,22 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ## Purpose  
 
-Odoo 11, originally released in 2017 and with support ending in 2020. It is compatible with Python versions 3.5 to 3.7 but **does not support Python 3.8 or later**. To ensure compatibility, we must use **Python 3.7**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.  
+Odoo 11, originally released in 2017 and with support ending in 2020. It is compatible with Python versions 3.5 to 3.7 but **does not support Python 3.8 or later**. To ensure compatibility, we must use **Python 3.7**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
 
-⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.  
+⚠️ **Warning:** Official security updates and maintenance for Python 3.7 ended in June 2023.
+⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.
 
-This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:  
+This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:
 
 - **Ubuntu 22.04 (Jammy)** or **Ubuntu 24.04 (Noble)** as the base image.
-- Installation of **Python 3.7** via the **deadsnakes PPA**.  
-- Use of **virtual environments** to prevent conflicts with system packages.  
+- Installation of **Python 3.7** via the **deadsnakes PPA**.
+- Use of **virtual environments** to prevent conflicts with system packages.
 
 ## Prerequisites
 
 ### Odoo version
 
-Odoo 11.0 needs to be updated with the latest nightly build because Python 3.7 was not supported when Odoo 11.0 was initially released.
+Odoo 11.0 needs to be updated with the latest nightly build because Python 3.7 was not supported when Odoo 11.0 was initially released. You can find the Odoo version in the `release.py` file within the Odoo source code.
 
 ### Directory Structure
 
@@ -51,7 +52,7 @@ For reference, the older version of the scripts from Odoo 11.0 can be found in t
 
 ## Dockerfile (Jammy)
 
-⚠️ **Warning:** Ubuntu 22.04 Jammy will receive official security updates and maintenance until May 31, 2027. 
+⚠️ **Warning:** Ubuntu 22.04 Jammy will receive official security updates and maintenance until April 2027. 
 
 ```dockerfile
 FROM ubuntu:jammy
@@ -223,7 +224,7 @@ CMD ["odoo"]
 
 ## Dockerfile (Noble)
 
-⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029.
+⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until April 2029.
 
 Replace the base image with **Ubuntu 24.04 (Noble)**:
 
