@@ -7,25 +7,25 @@ author: Victor Hachard
 categories: ['Docker', 'Odoo', 'System Administration']
 ---
 
-⚠️ **Warning:** This setup has been tested as of early 2025.  
+⚠️ **Warning:** This setup has been tested as of early 2025.
 
-## Purpose  
+## Purpose
 
-Odoo 11, originally released in 2017, is an older version that poses compatibility challenges on modern systems due to outdated dependencies. The key issues include:  
+Odoo 11, originally released in 2017 and with support ending in 2020, is an older version that poses compatibility challenges on modern systems due to outdated dependencies. The main issues include:
 
-- Python 3.7 Requirement: Odoo 11 is incompatible with Python 3.8 and later. To run it, we need **Python 3.7**, which can be installed via the **deadsnakes PPA**.  
-- Legacy Libraries: Some dependencies required by Odoo 11 have been deprecated in newer Ubuntu versions.  
+- Python 3.7 Requirement: Odoo 11 is incompatible with Python 3.8 and later. To run it, we need **Python 3.7**, which can be installed via the **deadsnakes PPA**.
+- Legacy Libraries: Some dependencies required by Odoo 11 have been deprecated in newer Ubuntu versions.
 
 This setup includes a modified Dockerfile specifically designed to run Odoo 11 on modern systems by:
 
-- Uses **Ubuntu 22.04 (Jammy)** or **Ubuntu 20.04 (Noble)** as the base image.  
-- Adds the **deadsnakes PPA** to install Python 3.7.  
-- Installs necessary legacy dependencies.  
-- Utilizes virtual environments to prevent conflicts with system packages.  
+- Uses **Ubuntu 22.04 (Jammy)** or **Ubuntu 24.04 (Noble)** as the base image.
+- Adds the **deadsnakes PPA** to install Python 3.7.
+- Installs necessary legacy dependencies.
+- Utilizes virtual environments to prevent conflicts with system packages.
 
-## Prerequisites  
+## Prerequisites
 
-Ensure your project follows this directory structure:  
+Ensure your project follows this directory structure:
 
 ```plaintext
 src/
@@ -39,8 +39,8 @@ src/
 └── wait-for-psql.py 🐳
 ```  
 
-`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). Use the **18.0 version** of both scripts:  
-  - `wait-for-psql.py` **has not changed** between Odoo 11.0 and 18.0, so it remains fully compatible.  
+`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). Use the **18.0 version** of both scripts:
+  - `wait-for-psql.py` **has not changed** between Odoo 11.0 and 18.0, so it remains fully compatible.
   - `entrypoint.sh` has been updated to improve security: it now supports reading the database password from a file instead of using environment variables.
 
 For reference, the older version of the scripts from Odoo 11.0 can be found in the [Odoo Docker 11.0 repository](https://github.com/odoo/docker/tree/1bddcda4b2ef30c7443ebe0cae43d17f92aa43cd/11.0).
@@ -63,18 +63,18 @@ RUN apt-get update && \
         software-properties-common \
         gpg-agent \
         gnupg \
-        dirmngr && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+        dirmngr \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Add deadsnakes PPA
 RUN add-apt-repository ppa:deadsnakes/ppa
 
 # Install system dependencies and Python 3.7
-# Remove fonts-noto-cjk (add if needed for Chinese, Japanese, Korean support)
+# Removed fonts-noto-cjk (add if needed for Chinese, Japanese, Korean support)
+# Removed npm (add if needed for RTL language support)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
-        ca-certificates \
         libssl-dev libpq-dev \
         libldap2-dev libsasl2-dev \
         npm \
@@ -90,6 +90,10 @@ RUN ln -sf /usr/bin/python3.7 /usr/bin/python3 && \
 
 # Verify Python 3.7 installation and pip version
 RUN python --version | grep "3.7" && pip --version
+
+# Install less and less-plugin-clean-css
+# RUN npm install -g rtlcss
+RUN npm install -g less@3.10.3 less-plugin-clean-css
 
 # Install wkhtmltopdf
 RUN apt-get update && \
@@ -108,9 +112,6 @@ RUN apt-get update && \
     && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
     && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
-
-# Install less and less-plugin-clean-css
-RUN npm install -g less@3.10.3 less-plugin-clean-css
 
 # Install PostgreSQL client
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
@@ -216,7 +217,7 @@ CMD ["odoo"]
 
 ## Dockerfile (Noble)
 
-Replace the base image with **Ubuntu 20.04 (Noble)**:
+Replace the base image with **Ubuntu 24.04 (Noble)**:
 
 ```dockerfile
 FROM ubuntu:noble
