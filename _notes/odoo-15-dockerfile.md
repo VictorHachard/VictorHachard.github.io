@@ -9,7 +9,7 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ⚠️ **Warning:** This setup has been tested as of early 2025. Future Ubuntu updates may require modifications to maintain compatibility.
 
-⚠️ **Disclaimer:** PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
+⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029. 
 
 ⚠️ **Warning:** Ubuntu 24.04 (Noble) includes Python 3.12 by default, so the **deadsnakes PPA does not currently support Python 3.12**. While this guide use PPA, for the moment don't use PPA:
 
@@ -26,9 +26,11 @@ RUN apt-get update && \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 ```
 
-💡 **Alternative to deadsnakes PPA:** If deadsnakes PPA is unavailable, use **pyenv** to install Python 3.7 without system conflicts. Alternatively, compile it from source, though this requires manual updates. Pyenv is the preferred option for easier management.
+⚠️ **Disclaimer:** PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
 
-## Purpose  
+💡 **Alternative to deadsnakes PPA:** If deadsnakes PPA is unavailable, use **pyenv** to install Python without system conflicts. Alternatively, compile it from source, though this requires manual updates. Pyenv is the preferred option for easier management.
+
+## Purpose
 
 Odoo 15, originally released in 2021 and with support ending in October 2024, is an older version that poses compatibility challenges on modern systems due to outdated dependencies. The main issues include:
 
@@ -40,9 +42,9 @@ This setup includes a modified Dockerfile specifically designed to run Odoo 15 o
 - Adds the **deadsnakes PPA** to install Python 3.12.
 - Utilizes virtual environments to prevent conflicts with system packages.
 
-## Prerequisites  
+## Prerequisites
 
-Ensure your project follows this directory structure:  
+Ensure your project follows this directory structure:
 
 ```plaintext
 src/

@@ -11,7 +11,7 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ⚠️ **Disclaimer:** PPAs are community-maintained and may not receive timely updates, including security patches. Deprecated libraries can introduce vulnerabilities and compatibility issues. Use in production or security-sensitive environments at your own risk.
 
-💡 **Alternative to deadsnakes PPA:** If deadsnakes PPA is unavailable, use **pyenv** to install Python 3.7 without system conflicts. Alternatively, compile it from source, though this requires manual updates. Pyenv is the preferred option for easier management.
+💡 **Alternative to deadsnakes PPA:** If deadsnakes PPA is unavailable, use **pyenv** to install Python without system conflicts. Alternatively, compile it from source, though this requires manual updates. Pyenv is the preferred option for easier management.
 
 ## Purpose
 
@@ -50,6 +50,8 @@ src/
 For reference, the older version of the scripts from Odoo 11.0 can be found in the [Odoo Docker 11.0 repository](https://github.com/odoo/docker/tree/1bddcda4b2ef30c7443ebe0cae43d17f92aa43cd/11.0).
 
 ## Dockerfile (Jammy)
+
+⚠️ **Warning:** Ubuntu 22.04 Jammy will receive official security updates and maintenance until May 31, 2027. 
 
 ```dockerfile
 FROM ubuntu:jammy
@@ -220,6 +222,8 @@ CMD ["odoo"]
 ```
 
 ## Dockerfile (Noble)
+
+⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until May 31, 2029. 
 
 Replace the base image with **Ubuntu 24.04 (Noble)**:
 
