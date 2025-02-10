@@ -17,7 +17,7 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 Odoo 11, originally released in 2017 and with support ending in 2020, is an older version that poses compatibility challenges on modern systems due to outdated dependencies. The main issues include:
 
-- Python 3.7 Requirement: Odoo 11 is incompatible with Python 3.8 and later. To run it, we need **Python 3.7**, which can be installed via the **deadsnakes PPA**.
+- Python 3.7 Requirement: Odoo 11 is incompatible with Python 3.8 and later. To run it, we need **Python 3.7**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
 - Legacy Libraries: Some dependencies required by Odoo 11 have been deprecated in newer Ubuntu versions.
 
 This setup includes a modified Dockerfile specifically designed to run Odoo 11 on modern systems by:

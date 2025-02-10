@@ -32,7 +32,7 @@ RUN apt-get update && \
 
 Odoo 15, originally released in 2021 and with support ending in October 2024, is an older version that poses compatibility challenges on modern systems due to outdated dependencies. The main issues include:
 
-- Python 3.12 Requirement: Odoo 15 is incompatible with Python 3.13 and later. To run it, we need **Python 3.12**. which can be installed via the **deadsnakes PPA**.
+- Python 3.12 Requirement: Odoo 15 is incompatible with Python 3.13 and later. To run it, we need **Python 3.12**. which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
 
 This setup includes a modified Dockerfile specifically designed to run Odoo 15 on modern systems by:
 
