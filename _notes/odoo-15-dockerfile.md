@@ -14,6 +14,7 @@ categories: ['Docker', 'Odoo', 'System Administration']
 Odoo 15, originally released in 2021 and with support ending in October 2024. It is compatible with Python versions 3.8 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.  
 
 ⚠️ **Warning:** Python 3.12 will receive official security updates and maintenance until October 2028.
+
 ⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.  
 
 This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:  
