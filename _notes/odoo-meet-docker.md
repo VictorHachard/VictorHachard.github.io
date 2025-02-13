@@ -15,22 +15,32 @@ Deploy Odoo 16 with Docker on Ubuntu 24.04.1 LTS (early 2025). Covers private re
 
 <pre class="mermaid">
 flowchart LR
-    A[Define Dockerfile] -->|Pipeline Execution| DP -->|Push| C[Docker Registry]
-    
-    subgraph DP[DevOps Pipeline]
-        direction TB
-        B1[Trigger Pipeline] --> B2[Build Odoo Image] --> B3[Push to Registry]
-    end
+  A[Define Dockerfile] -->|Pipeline Execution| DP -->|Push| C[Docker Registry]
+  
+  subgraph DP[DevOps Pipeline]
+    direction TB
+    B1[Trigger Pipeline] --> B2[Build Odoo Image] --> B3[Push to Registry]
+  end
 
-    C -->|Pull| D1
-    D3[Docker Hub] -->|Pull| D2
-    
-    subgraph DCD[Docker Compose Deployment]
-        D1[Odoo Container]
-        D2[PostgreSQL Container]
-    end
-    
-    DCD -->|Serve| F[Odoo Application]
+  C -->|Pull| D1
+  D3[Docker Hub] -->|Pull| D2
+  
+  subgraph DCD[Docker Compose Deployment]
+    D1[Odoo Container]
+    D2[PostgreSQL Container]
+  end
+  
+  DCD -->|Serve| F[Odoo Application]
+</pre>
+
+<pre class="mermaid">
+flowchart LR
+  O[Operators with Browser]
+  O -->|Access| CF[Cloudflare]
+  CF -->|Proxy| N[Nginx Reverse Proxy]
+  subgraph Docker
+    N -->|Frontend| Odoo[Odoo Application]
+  end
 </pre>
 
 ### Required Skills  
@@ -358,6 +368,8 @@ The `Dockerfile` defines the custom Odoo Docker image.
 
 ### Update `entrypoint.sh`
 
+The `entrypoint.sh` script is used to configure the Odoo container at runtime.
+
 Refer to [entrypoint.sh for Odoo Docker](https://victorhachard.github.io/notes/odoo-docker-entrypoint).
 
 💡 **Note:** Seq logging and colored configuration are not included in Odoo by default. You may need to adjust Odoo.
@@ -365,24 +377,24 @@ Refer to [entrypoint.sh for Odoo Docker](https://victorhachard.github.io/notes/o
 ```bash
 if [ -z "${OVERRIDE_CONF_FILE}" ]; then
   if [ -n "${SEQ_ADDRESS}" ]; then
-      # If SEQ_ADDRESS is set, update or add log_seq in odoo.conf
-      if grep -q -E "^\s*log_seq\s*=" "$ODOO_RC" ; then
-          sed -i "s/^\s*log_seq\s*=.*/log_seq = ${SEQ_ADDRESS}/" "$ODOO_RC"
-      else
-          echo "log_seq = ${SEQ_ADDRESS}" >> "$ODOO_RC"
-      fi
+    # If SEQ_ADDRESS is set, update or add log_seq in odoo.conf
+    if grep -q -E "^\s*log_seq\s*=" "$ODOO_RC" ; then
+      sed -i "s/^\s*log_seq\s*=.*/log_seq = ${SEQ_ADDRESS}/" "$ODOO_RC"
+    else
+      echo "log_seq = ${SEQ_ADDRESS}" >> "$ODOO_RC"
+    fi
   else
-      # If SEQ_ADDRESS is not set, remove the log_seq line from odoo.conf
-      sed -i "/^\s*log_seq\s*=/d" "$ODOO_RC"
+    # If SEQ_ADDRESS is not set, remove the log_seq line from odoo.conf
+    sed -i "/^\s*log_seq\s*=/d" "$ODOO_RC"
   fi
 fi
 
 # Change color in colors.scss
 if [ -f /opt/odoo/app_addons/color_theme/static/src/colors.scss ]; then
-    sed -i "s/#7B92AD/#${COLOR_CODE}/g" /opt/odoo/app_addons/color_theme/static/src/colors.scss
-    echo "Color changed to #${COLOR_CODE} in colors.scss."
+  sed -i "s/#7B92AD/#${COLOR_CODE}/g" /opt/odoo/app_addons/color_theme/static/src/colors.scss
+  echo "Color changed to #${COLOR_CODE} in colors.scss."
 else
-    echo "File /opt/odoo/app_addons/color_theme/static/src/colors.scss not found."
+  echo "File /opt/odoo/app_addons/color_theme/static/src/colors.scss not found."
 fi
 ```
 
@@ -391,31 +403,6 @@ fi
 The `docker-compose.yml` file defines the services required to run Odoo with PostgreSQL.
 
 💡 **Note**: Seq is not included in the services configuration. To centralize all logs in a single Seq instance, create a shared network for Seq and run an additional service to forward logs to Seq.
-
-Configuration options:
-
-| Variable           | Description                              | Valeur par défaut |
-|--------------------|------------------------------------------|-------------------|
-| HOST               | PostgreSQL database host                 | db                |
-| PORT               | PostgreSQL database port                 | 5432              |
-| USER               | PostgreSQL database user                 | odoo              |
-| PASSWORD           | PostgreSQL database password             | odoo              |
-| WORKERS            | Nombre de processus workers              | 0                 |
-| MAX_CRON_THREADS   | Nombre max de threads cron               | 1                 |
-| LIMIT_MEMORY_SOFT  | Limite mémoire soft                      | 2147483648        |
-| LIMIT_MEMORY_HARD  | Limite mémoire hard                      | 2684354560        |
-| LIMIT_TIME_CPU     | Limite temps CPU (secondes)              | 60                |
-| LIMIT_TIME_REAL    | Limite temps réel d'exécution (secondes) | 120               |
-| LIMIT_REQUEST      | Limite du nombre de requêtes             | 65536             |
-| LIST_DB            | Autoriser la liste des bases de données  | True              |
-| PROXY_MODE         | Activer le mode proxy                    | False             |
-| COLOR_CODE         | Code hexadécimal du thème                | N/A               |
-| SEQ_ADDRESS        | Adresse pour Seq logging                 | N/A               |
-| ADMIN_PASSWD       | Mot de passe administrateur Odoo         | N/A               |
-| SERVER_WIDE_MODULES| Liste des modules serveur larges         | N/A               |
-| OVERRIDE_CONF_FILE | Fichier de configuration personnalisé    | N/A               |
-
-When using a custom configuration file (`OVERRIDE_CONF_FILE`), the script will not apply the default settings. Ensure that the custom configuration file contains all necessary settings.
 
 The main services defined are:
 
