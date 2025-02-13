@@ -28,6 +28,28 @@ services:
       ADMIN_PASSWD: odoo
 ```
 
+Configuration options:
+
+| Variable            | Description                                   | Default Value     |
+|---------------------|-----------------------------------------------|-------------------|
+| HOST                | PostgreSQL database host                      | db                |
+| PORT                | PostgreSQL database port                      | 5432              |
+| USER                | PostgreSQL database user                      | odoo              |
+| PASSWORD            | PostgreSQL database password                  | odoo              |
+| WORKERS             | Number of worker processes                    | 0                 |
+| MAX_CRON_THREADS    | Maximum number of cron threads                | 1                 |
+| LIMIT_MEMORY_SOFT   | Soft memory limit                             | 2147483648        |
+| LIMIT_MEMORY_HARD   | Hard memory limit                             | 2684354560        |
+| LIMIT_TIME_CPU      | CPU time limit (seconds)                      | 60                |
+| LIMIT_TIME_REAL     | Execution time limit (seconds)                | 120               |
+| LIMIT_REQUEST       | Maximum number of requests                    | 65536             |
+| LIST_DB             | Allow database listing                        | True              |
+| PROXY_MODE          | Enable proxy mode                             | False             |
+| ADMIN_PASSWD        | Odoo administrator password                   | N/A               |
+| SERVER_WIDE_MODULES | List of globally available server modules     | N/A               |
+
+### Custom Configuration File
+
 Alternatively, you can configure Odoo using a custom configuration file by setting the `OVERRIDE_CONF_FILE` environment variable. This approach provides greater flexibility for defining Odoo settings.
 
 💡 **Note:** When using a custom configuration file, ensure that the **`addons_path`** and **`data_dir`** are properly defined. You can check the `entrypoint.sh` script for default values.
