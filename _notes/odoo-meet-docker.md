@@ -358,72 +358,11 @@ The `Dockerfile` defines the custom Odoo Docker image.
 
 ### Update `entrypoint.sh`
 
-Add the `entrypoint.sh` script to configure the Odoo container execution. The script is a fork of the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/16.0/entrypoint.sh)
+Refer to [entrypoint.sh for Odoo Docker](https://victorhachard.github.io/notes/odoo-docker-entrypoint).
 
 💡 **Note:** Seq logging and colored configuration are not included in Odoo by default. You may need to adjust Odoo.
 
 ```bash
-#!/bin/bash
-
-set -e
-
-if [ -v PASSWORD_FILE ]; then
-    PASSWORD="$(< $PASSWORD_FILE)"
-fi
-
-# set the postgres database host, port, user and password according to the environment
-# and pass them as arguments to the odoo process if not present in the config file
-: ${HOST:=${DB_PORT_5432_TCP_ADDR:='db'}}
-: ${PORT:=${DB_PORT_5432_TCP_PORT:=5432}}
-: ${USER:=${DB_ENV_POSTGRES_USER:=${POSTGRES_USER:='odoo'}}}
-: ${PASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD:='odoo'}}}
-
-if [ -n "${OVERRIDE_CONF_FILE}" ]; then
-  if [ -n "${WORKERS}" ] ||
-     [ -n "${MAX_CRON_THREADS}" ] ||
-     [ -n "${LIMIT_MEMORY_SOFT}" ] ||
-     [ -n "${LIMIT_MEMORY_HARD}" ] ||
-     [ -n "${LIMIT_TIME_CPU}" ] ||
-     [ -n "${LIMIT_TIME_REAL}" ] ||
-     [ -n "${LIMIT_REQUEST}" ] ||
-     [ -n "${LIST_DB}" ] ||
-     [ -n "${PROXY_MODE}" ] ||
-     [ -n "${ADMIN_PASSWD}" ] ||
-     [ -n "${SERVER_WIDE_MODULES}" ] ||
-     [ -n "${SEQ_ADDRESS}" ]; then
-
-    echo "Error: The following environment variables cannot be set when using a custom Odoo configuration:"
-    echo "       WORKERS, MAX_CRON_THREADS, LIMIT_MEMORY_SOFT, LIMIT_MEMORY_HARD, LIMIT_TIME_CPU, LIMIT_TIME_REAL, LIMIT_REQUEST, LIST_DB, PROXY_MODE, ADMIN_PASSWD, SERVER_WIDE_MODULES, SEQ_ADDRESS"
-    exit 1
-  fi
-fi
-
-: ${WORKERS:=0}
-: ${MAX_CRON_THREADS:=1}
-: ${LIMIT_MEMORY_SOFT:=2147483648}
-: ${LIMIT_MEMORY_HARD:=2684354560}
-: ${LIMIT_TIME_CPU:=60}
-: ${LIMIT_TIME_REAL:=120}
-: ${LIMIT_REQUEST:=65536}
-
-: ${LIST_DB:='True'}
-: ${PROXY_MODE:='False'}
-
-: ${COLOR_CODE:='71639E'}
-
-if [ -n "${OVERRIDE_CONF_FILE}" ]; then
-    echo "Applying custom Odoo configuration."
-    echo "${OVERRIDE_CONF_FILE}" > /etc/odoo/odoo.conf
-else
-    echo "Restoring default Odoo configuration."
-    cat <<EOL > /etc/odoo/odoo.conf
-[options]
-addons_path = /opt/odoo/odoo/addons,/opt/odoo/app_addons,/opt/odoo/custom_addons
-data_dir = /var/lib/odoo
-EOL
-    chown odoo:odoo /etc/odoo/odoo.conf
-fi
-
 if [ -z "${OVERRIDE_CONF_FILE}" ]; then
   if [ -n "${SEQ_ADDRESS}" ]; then
       # If SEQ_ADDRESS is set, update or add log_seq in odoo.conf
@@ -436,66 +375,6 @@ if [ -z "${OVERRIDE_CONF_FILE}" ]; then
       # If SEQ_ADDRESS is not set, remove the log_seq line from odoo.conf
       sed -i "/^\s*log_seq\s*=/d" "$ODOO_RC"
   fi
-
-  if [ -n "${ADMIN_PASSWD}" ]; then
-      # If ADMIN_PASSWD is set, update or add admin_passwd in odoo.conf
-      if grep -q -E "^\s*admin_passwd\s*=" "$ODOO_RC" ; then
-          sed -i "s/^\s*admin_passwd\s*=.*/admin_passwd = ${ADMIN_PASSWD}/" "$ODOO_RC"
-      else
-          echo "admin_passwd = ${ADMIN_PASSWD}" >> "$ODOO_RC"
-      fi
-  else
-      # If ADMIN_PASSWD is not set, remove the admin_passwd line from odoo.conf
-      sed -i "/^\s*admin_passwd\s*=/d" "$ODOO_RC"
-  fi
-
-  if [ -n "${SERVER_WIDE_MODULES}" ]; then
-      # If SERVER_WIDE_MODULES is set, update or add server_mode in odoo.conf
-      if grep -q -E "^\s*server_wide_modules\s*=" "$ODOO_RC" ; then
-          sed -i "s/^\s*server_wide_modules\s*=.*/server_wide_modules = ${SERVER_WIDE_MODULES}/" "$ODOO_RC"
-      else
-          echo "server_wide_modules = ${SERVER_WIDE_MODULES}" >> "$ODOO_RC"
-      fi
-  else
-      # If SERVER_WIDE_MODULES is not set, remove the server_wide_modules line from odoo.conf
-      sed -i "/^\s*server_wide_modules\s*=/d" "$ODOO_RC"
-  fi
-fi
-
-DB_ARGS=()
-function check_config() {
-    param="$1"
-    value="$2"
-    if grep -q -E "^\s*\b${param}\b\s*=" "$ODOO_RC" ; then
-        value=$(grep -E "^\s*\b${param}\b\s*=" "$ODOO_RC" |cut -d " " -f3|sed 's/["\n\r]//g')
-    fi;
-    DB_ARGS+=("--${param}")
-    DB_ARGS+=("${value}")
-}
-check_config "db_host" "$HOST"
-check_config "db_port" "$PORT"
-check_config "db_user" "$USER"
-check_config "db_password" "$PASSWORD"
-
-ODOO_ARGS=("${DB_ARGS[@]}")
-
-if [ -n "${UPDATE}" ]; then
-    ODOO_ARGS+=("--update=${UPDATE}")
-fi
-if [ -z "${OVERRIDE_CONF_FILE}" ]; then
-  ODOO_ARGS+=("--workers=${WORKERS}")
-  ODOO_ARGS+=("--max-cron-threads=${MAX_CRON_THREADS}")
-  ODOO_ARGS+=("--limit-memory-soft=${LIMIT_MEMORY_SOFT}")
-  ODOO_ARGS+=("--limit-memory-hard=${LIMIT_MEMORY_HARD}")
-  ODOO_ARGS+=("--limit-time-cpu=${LIMIT_TIME_CPU}")
-  ODOO_ARGS+=("--limit-time-real=${LIMIT_TIME_REAL}")
-  ODOO_ARGS+=("--limit-request=${LIMIT_REQUEST}")
-  if [ -n "${LIST_DB}" ] && [ "${LIST_DB}" = "False" ]; then
-      ODOO_ARGS+=("--no-database-list")
-  fi
-  if [ -n "${PROXY_MODE}" ] && [ "${PROXY_MODE}" = "True" ]; then
-      ODOO_ARGS+=("--proxy-mode")
-  fi
 fi
 
 # Change color in colors.scss
@@ -505,22 +384,6 @@ if [ -f /opt/odoo/app_addons/color_theme/static/src/colors.scss ]; then
 else
     echo "File /opt/odoo/app_addons/color_theme/static/src/colors.scss not found."
 fi
-
-case "$1" in
-    -- | odoo)
-        shift
-        wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-        echo "Executing: odoo $@ ${ODOO_ARGS[@]}"
-        exec odoo "$@" "${ODOO_ARGS[@]}"
-        ;;
-    -*)
-        wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-        echo "Executing: odoo $@ ${ODOO_ARGS[@]}"
-        exec odoo "$@" "${ODOO_ARGS[@]}"
-        ;;
-esac
-
-exit 1
 ```
 
 ### Running Odoo with Docker Compose
