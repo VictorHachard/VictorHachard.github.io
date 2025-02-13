@@ -1,32 +1,48 @@
 ---
 layout: note
 draft: false
+title: Configuring Odoo Logging to Seq with pygelf
 date: 2022-05-11 09:55:00 +0200
 author: Victor Hachard
 categories: ['Odoo']
 ---
 
-This has been tested on Odoo 13.0, 15.0 and 16.0.
+⚠️ **Warning:** tested on Odoo 11.0, 13.0, 15.0, 16.0, 17.0, and 18.0.
 
-## Add the `pygelf` package:
+## Install the pygelf package
 
-Add the following lines in the `requirements.txt` file:
+⚠️ **Warning:** the latest release of pygelf is version 0.4.2, and it has not been updated since October 2021.
 
-```py
-pygelf
+Install the `pygelf` package using pip:
+
+```bash
+pip install pygelf
 ```
 
-## The `odoo/service/server.py` file:
+## Update the Odoo configuration
 
-In the `__init__(self, fname=None)` method from the `configmanager` class add the following lines:
+In the `__init__(self, fname=None)` method from the `configmanager` class, add this line to introduce a new logging option for Seq::
 
 ```py
 group.add_option('--log-seq', dest='log_seq', help="Logging to seq")
 ```
 
-## The `odoo/netscv` file:
+When starting the Odoo server, you can specify the Seq server in one of two ways:
 
-Add the following lines in the `odoo/netsvc.py` file:
+- **Command Line:**  
+  ```bash
+  ./odoo-bin --log-seq=seq-server:port
+  ```
+  
+- **Configuration File:**  
+  Add the following to your `odoo.conf` file:
+  ```ini
+  log_seq = seq-server:port
+  ```
+
+## Modify the Odoo Logger
+
+ Add Custom Logging Filters and Formatter. In the file `odoo/netsvc.py` , include the following classes:
 
 ```py
 class uidFilterSeq(logging.Filter):
@@ -70,7 +86,7 @@ class DBFormatterSeq(logging.Formatter):
         return logging.Formatter.format(self, record)
 ```
 
-After the if `tools.config['syslog']:` and `elif tools.config['logfile']:` add the following lines:
+Integrate the Seq Logging Handler. After the blocks handling `tools.config['syslog']:` and `elif tools.config['logfile']:`, add this snippet to configure Seq logging:
 
 ```py
 elif tools.cronfig['log_seq']:
@@ -90,19 +106,11 @@ elif tools.cronfig['log_seq']:
                                 debug=Tue)
 ```
 
-Between the `if os.name == 'posix' and isinstance(handler, logging.StreamHandler) and is_a_tty(handler.stream):` and the `else:` add the following lines:
+Then, between the block that checks for a POSIX system with a TTY stream and the `else:` clause, insert the following code:
 
 ```py
 elif isinstance(handler, GelfUdpHandler):
     formatter = DBFormatterSeq(format)
     perf_filter = PerfFilterSeq()
     handler.addFilter(uidFilterSeq())
-```
-
-## In the config file:
-
-Add the following lines in the config file (replace the IP address and the port if needed):
-
-```py
-log_seq = 127.0.0.1:12201
 ```
