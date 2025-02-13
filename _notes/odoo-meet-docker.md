@@ -332,159 +332,11 @@ Log in with the default credentials (`admin` / `admin`), then configure the Prom
 
 The `Dockerfile` defines the custom Odoo Docker image.
 
-⚠️ **Warning:** The `Dockerfile` relies on a Python-based image without specifying a fixed Python version. This can lead to unexpected changes when new versions are released. If specifying a version, consider using a PPA (Personal Package Archive) for better control. However, be aware that at some point, certain images may no longer provide the specified version.
+- For Odoo 11, refer to [Docker Setup for Long-Term Odoo 11 Deployment](https://victorhachard.github.io/notes/odoo-11-dockerfile).
+- For Odoo 15, refer to [Docker Setup for Long-Term Odoo 15 Deployment](https://victorhachard.github.io/notes/odoo-15-dockerfile).
+- For Odoo 16, refer to [Docker Setup for Long-Term Odoo 16 Deployment](https://victorhachard.github.io/notes/odoo-16-dockerfile).
 
-💡 **Note:** Remove line ending fixes if the build is not on Windows, as they are only needed to handle Windows-specific line break differences.
-
-💡 **Note:** Seq is not included in Odoo's default setup. You may need to adjust Odoo.
-
-The main steps performed are:
-
-- Using Debian as a base: `debian:bullseye-slim` is chosen to ensure a lightweight and stable image.
-- Installing system dependencies: Required packages such as build tools, fonts, and libraries are installed.
-- Setting up PostgreSQL client: Allows Odoo to communicate with the database.
-- Creating an Odoo user: The `odoo` user is created to run the application securely.
-- Defining environment variables: Key paths such as `ODOO_HOME` and `ODOO_RC` are set.
-- Exposing necessary ports: Odoo uses ports `8069`, `8071`, and `8072` for web, chat, and longpolling services.
-- Configuring default Odoo directories: Directories for addons and data storage are defined.
-- Installing Python dependencies: The `requirements.txt` file is used to install required Python libraries.
-- Copying source files: The Odoo core, custom addons, and configuration files are included in the image.
-
-```dockerfile
-FROM debian:bullseye-slim
-
-SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
-
-# Generate locale C.UTF-8 for PostgreSQL and general locale data
-ENV LANG=C.UTF-8
-
-# Install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        build-essential \
-        ca-certificates \
-        curl \
-        dirmngr \
-        fonts-noto-cjk \
-        gnupg \
-        libssl-dev \
-        libpq-dev \
-        libldap2-dev \
-        libsasl2-dev \
-        node-less \
-        npm \
-        python3 \
-        python3-dev \
-        python3-pip \
-        python3-venv \
-        python3-wheel \
-        xz-utils \
-        && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install wkhtmltopdf
-RUN curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_amd64.deb \
-    && echo 'ea8277df4297afc507c61122f3c349af142f31e5 wkhtmltox.deb' | sha1sum -c - \
-    && apt-get update && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
-    && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
-
-# Install PostgreSQL client
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
-    && GNUPGHOME="$(mktemp -d)" \
-    && export GNUPGHOME \
-    && repokey='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8' \
-    && gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${repokey}" \
-    && gpg --batch --armor --export "${repokey}" > /etc/apt/trusted.gpg.d/pgdg.gpg.asc \
-    && gpgconf --kill all \
-    && rm -rf "$GNUPGHOME" \
-    && apt-get update \
-    && apt-get install --no-install-recommends -y postgresql-client \
-    && rm -f /etc/apt/sources.list.d/pgdg.list \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install rtlcss (for right-to-left language support)
-RUN npm install -g rtlcss
-
-# Create Odoo user
-RUN groupadd -r odoo && useradd -r -g odoo -m -d /home/odoo -s /bin/bash odoo
-
-# Set Odoo environment variables
-ENV ODOO_HOME=/opt/odoo
-ENV PYTHONPATH="$ODOO_HOME:$PYTHONPATH"
-
-# Create Odoo configuration file
-RUN mkdir -p /etc/odoo && \
-    chown odoo:odoo /etc/odoo && \
-    echo "[options]" > /etc/odoo/odoo.conf && \
-    echo "addons_path = /opt/odoo/odoo/addons,/opt/odoo/app_addons,/opt/odoo/custom_addons" >> /etc/odoo/odoo.conf && \
-    echo "data_dir = /var/lib/odoo" >> /etc/odoo/odoo.conf && \
-    chown odoo:odoo /etc/odoo/odoo.conf
-
-# Create systemd service file
-RUN mkdir -p /etc/systemd/system && \
-    echo "[Unit]" > /etc/systemd/system/odoo.service && \
-    echo "Description=Odoo Open Source ERP and CRM" >> /etc/systemd/system/odoo.service && \
-    echo "After=network.target" >> /etc/systemd/system/odoo.service && \
-    echo "" >> /etc/systemd/system/odoo.service && \
-    echo "[Service]" >> /etc/systemd/system/odoo.service && \
-    echo "Type=simple" >> /etc/systemd/system/odoo.service && \
-    echo "User=odoo" >> /etc/systemd/system/odoo.service && \
-    echo "Group=odoo" >> /etc/systemd/system/odoo.service && \
-    echo "ExecStart=/usr/bin/odoo --config /etc/odoo/odoo.conf " >> /etc/systemd/system/odoo.service && \
-    echo "KillMode=mixed" >> /etc/systemd/system/odoo.service && \
-    echo "" >> /etc/systemd/system/odoo.service && \
-    echo "[Install]" >> /etc/systemd/system/odoo.service && \
-    echo "WantedBy=multi-user.target" >> /etc/systemd/system/odoo.service && \
-    chown odoo:odoo /etc/systemd/system/odoo.service
-
-# Create Odoo binary
-RUN mkdir -p /usr/bin && \
-    echo "#!/usr/bin/env python3" > /usr/bin/odoo && \
-    echo "__import__('os').environ['TZ'] = 'UTC'" >> /usr/bin/odoo && \
-    echo "import odoo" >> /usr/bin/odoo && \
-    echo "if __name__ == \"__main__\":" >> /usr/bin/odoo && \
-    echo "    odoo.cli.main()" >> /usr/bin/odoo && \
-    chmod +x /usr/bin/odoo
-
-# Copy entrypoint and wait-for-psql scripts
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
-RUN chmod +x /usr/local/bin/wait-for-psql.py
-
-# Fix line endings in scripts (Windows compatibility)
-RUN sed -i 's/\r$//' /usr/bin/odoo /etc/odoo/odoo.conf /usr/local/bin/wait-for-psql.py /entrypoint.sh /etc/systemd/system/odoo.service
-
-# Create odoo
-RUN mkdir -p /var/lib/odoo && chown -R odoo /var/lib/odoo
-
-# Install Odoo dependencies
-COPY requirements.txt $ODOO_HOME/
-RUN pip3 install --no-cache-dir -U pip setuptools wheel && \
-    pip3 install --no-cache-dir -r $ODOO_HOME/requirements.txt
-
-# Copy Odoo source files and addons
-COPY --chown=odoo:odoo odoo $ODOO_HOME/odoo
-COPY --chown=odoo:odoo app_addons $ODOO_HOME/app_addons
-COPY --chown=odoo:odoo custom_addons $ODOO_HOME/custom_addons
-
-# Expose volumes for Odoo data
-VOLUME ["/var/lib/odoo"]
-
-# Expose Odoo ports
-EXPOSE 8069 8071 8072
-
-# Set default environment variables
-ENV ODOO_RC=/etc/odoo/odoo.conf
-
-# Set default user when running the container
-USER odoo
-
-# Entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["odoo"]
-```
-
-### EntryPoint.sh: Configuring Odoo Container Execution
+### Update `entrypoint.sh`
 
 Add the `entrypoint.sh` script to configure the Odoo container execution. The script is a fork of the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/16.0/entrypoint.sh)
 
@@ -650,10 +502,6 @@ esac
 
 exit 1
 ```
-
-### wait-for-psql.py: Ensuring PostgreSQL Readiness
-
-Add the `wait-for-psql.py` script available from [Odoo Docker repository](https://github.com/odoo/docker/blob/master/16.0/wait-for-psql.py) to ensure that Odoo does not start until PostgreSQL is available.
 
 ### Running Odoo with Docker Compose
 
