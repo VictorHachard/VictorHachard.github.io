@@ -47,7 +47,7 @@ services:
         admin_passwd = odoo
 ```
 
-## `entrypoint.sh` Script
+## entrypoint.sh Script
 
 💡 **Note:** If an Odoo parameter is missing from the script, you can add it by referring to the Odoo source code. Check the `ConfigManager` class in `tools/config.py`. The second argument in the `add_option` method will guide you on how to correctly integrate it into the launch process.
 
