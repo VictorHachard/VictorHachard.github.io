@@ -13,6 +13,26 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 Deploy Odoo 16 with Docker on Ubuntu 24.04.1 LTS (early 2025). Covers private registry, reverse proxy, logging, custom image creation, container execution, PostgreSQL, and Seq integration.
 
+<pre class="mermaid">
+flowchart LR
+    A[Define Dockerfile] -->|Pipeline Execution| DP -->|Push| C[Docker Registry]
+    
+    subgraph DP[DevOps Pipeline]
+        direction TB
+        B1[Trigger Pipeline] --> B2[Build Odoo Image] --> B3[Push to Registry]
+    end
+
+    C -->|Pull| D1
+    D3[Docker Hub] -->|Pull| D2
+    
+    subgraph DCD[Docker Compose Deployment]
+        D1[Odoo Container]
+        D2[PostgreSQL Container]
+    end
+    
+    DCD -->|Serve| F[Odoo Application]
+</pre>
+
 ### Required Skills  
 
 - Containerization & Orchestration:
