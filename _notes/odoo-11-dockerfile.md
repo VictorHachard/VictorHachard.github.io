@@ -17,7 +17,7 @@ Odoo 11, originally released in 2017 and with support ending in 2020. It is comp
 
 ⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.
 
-This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:
+This setup includes a customized **Dockerfile** optimized for running Odoo 11 on modern systems. Key modifications include:
 
 - **Ubuntu 22.04 (Jammy)** or **Ubuntu 24.04 (Noble)** as the base image.
 - Installation of **Python 3.7** via the **deadsnakes PPA**.
