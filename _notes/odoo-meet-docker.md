@@ -360,19 +360,21 @@ Log in with the default credentials (`admin` / `admin`), then configure the Prom
 
 ### Dockerfile: Creating the Odoo Image
 
-The `Dockerfile` defines the custom Odoo Docker image.
+To deploy Odoo in a Docker container, you need to create a customized Odoo image. Below are guides for different Odoo versions:
 
-- For Odoo 11, refer to [Docker Setup for Long-Term Odoo 11 Deployment](https://victorhachard.github.io/notes/odoo-11-dockerfile).
-- For Odoo 15, refer to [Docker Setup for Long-Term Odoo 15 Deployment](https://victorhachard.github.io/notes/odoo-15-dockerfile).
-- For Odoo 16, refer to [Docker Setup for Long-Term Odoo 16 Deployment](https://victorhachard.github.io/notes/odoo-16-dockerfile).
+- **Odoo 11**: [Docker Setup for Long-Term Odoo 11 Deployment](https://victorhachard.github.io/notes/odoo-11-dockerfile)
+- **Odoo 15**: [Docker Setup for Long-Term Odoo 15 Deployment](https://victorhachard.github.io/notes/odoo-15-dockerfile)
+- **Odoo 16**: [Docker Setup for Long-Term Odoo 16 Deployment](https://victorhachard.github.io/notes/odoo-16-dockerfile)
 
 ### Update `entrypoint.sh`
 
-The `entrypoint.sh` script is used to configure the Odoo container at runtime.
+The `entrypoint.sh` script is essential for configuring the Odoo container at runtime. Follow this guide for modifying the script: [entrypoint.sh for Odoo Docker](https://victorhachard.github.io/notes/odoo-docker-entrypoint).
 
-Refer to [entrypoint.sh for Odoo Docker](https://victorhachard.github.io/notes/odoo-docker-entrypoint).
+#### Add Seq Logging
 
-💡 **Note:** Seq logging and colored configuration are not included in Odoo by default. You may need to adjust Odoo.
+To add Seq logging to Odoo refer to [Configuring Odoo Logging to Seq with pygelf](https://victorhachard.github.io/notes/odoo-add-seq-logger).
+
+Update the `entrypoint.sh` script to add Seq logging :
 
 ```bash
 if [ -z "${OVERRIDE_CONF_FILE}" ]; then
@@ -388,7 +390,22 @@ if [ -z "${OVERRIDE_CONF_FILE}" ]; then
     sed -i "/^\s*log_seq\s*=/d" "$ODOO_RC"
   fi
 fi
+```
 
+Define `SEQ_ADDRESS` in the Docker environment:
+  
+```yaml
+environment:
+  SEQ_ADDRESS: seq:12201
+```
+
+#### Add a Custom Color Theme
+
+🎯 **TODO:** Update this guide to add the module to allow color theme.
+
+Update the `entrypoint.sh` script to add a custom color theme:
+
+```bash
 # Change color in colors.scss
 if [ -f /opt/odoo/app_addons/color_theme/static/src/colors.scss ]; then
   sed -i "s/#7B92AD/#${COLOR_CODE}/g" /opt/odoo/app_addons/color_theme/static/src/colors.scss
@@ -398,11 +415,16 @@ else
 fi
 ```
 
+Define `COLOR_CODE` in the Docker environment:
+
+```yaml
+environment:
+  COLOR_CODE: 71639E
+```
+
 ### Running Odoo with Docker Compose
 
 The `docker-compose.yml` file defines the services required to run Odoo with PostgreSQL.
-
-💡 **Note**: Seq is not included in the services configuration. To centralize all logs in a single Seq instance, create a shared network for Seq and run an additional service to forward logs to Seq.
 
 The main services defined are:
 
@@ -466,9 +488,13 @@ networks:
 
 The DevOps agent must run on a Linux machine with Docker installed.  
 
+💡 **Note:** Implement a cleanup script on the machine, as the build process generates a significant amount of cached data. You can refer to this guide for automated Docker image cleanup: [Automated Cleanup of Docker Images](https://victorhachard.github.io/notes/automated-cleanup-docker-images).
+
 #### Devops Build Pipeline
 
 This pipeline automates the building and pushing of Odoo Docker images. It runs on Git tags (`refs/tags/*`), using the tag (e.g., `v16.0.1`) as the Docker image tag. If no tag is found, it defaults to the first seven characters of the commit hash.
+
+![Devops Pipeline Trigger]({{site.baseurl}}/res/odoo-meet-docker/trigger-tags.png)
 
 The process extracts the version, builds the Docker image with the detected tag, and pushes it to the Docker registry.
 
