@@ -14,32 +14,38 @@ pre::-webkit-scrollbar-thumb:hover {
 }
 
 #search-input {
-    display: block;
-    width: 100%;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #f8f9fa; /* Light text for contrast */
-    background-color: #222; /* Dark background */
-    background-clip: padding-box;
-    border: 1px solid #444; /* Darker border */
-    border-radius: .25rem;
-    margin-bottom: 1.5rem;
-    max-width: 715px;
-    
-    /* Add focus effect */
-    &:focus {
-      color: #fff;
-      background-color: #333;
-      border-color: #666; /* Slightly lighter border on focus */
-      outline: none; /* Remove default outline */
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Subtle glow effect */
-    }
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #f8f9fa; /* Light text for contrast */
+  background-color: #222; /* Dark background */
+  background-clip: padding-box;
+  border: 1px solid #444; /* Darker border */
+  border-radius: .25rem;
+  margin-bottom: 1.5rem;
+  max-width: 715px;
   
-    /* Placeholder text */
-    &::placeholder {
-      color: #bbb; /* Light gray for better readability */
-    }
+  /* Add focus effect */
+  &:focus {
+    color: #fff;
+    background-color: #333;
+    border-color: #666; /* Slightly lighter border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Subtle glow effect */
   }
-  
+
+  /* Placeholder text */
+  &::placeholder {
+    color: #bbb; /* Light gray for better readability */
+  }
+}
+
+pre.mermaid text, pre.mermaid marker path {
+  fill: #eeeeff !important;
+}
+pre.mermaid line, pre.mermaid marker, pre.mermaid marker path {
+  stroke: #eeeeff !important;
+}

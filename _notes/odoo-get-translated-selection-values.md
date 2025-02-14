@@ -10,8 +10,9 @@ categories: ['Odoo']
 Retrieve translated selection values in Odoo by utilizing the `fields_get` function. The provided code snippet demonstrates how to display the translated labels of a selection field in the generated display names of records.
 
 ```py
-invoice_recurrence = fields.Selection([('months', 'Monthly'), ('years', 'Yearly')], required=True,
-                                          string='Invoice Recurrence')
+invoice_recurrence = fields.Selection([
+    ('months', 'Monthly'), ('years', 'Yearly')
+    ], required=True, string='Invoice Recurrence')
 
 def name_get(self):
     res = []

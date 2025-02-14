@@ -23,6 +23,15 @@ Ensure that:
 
 ## Workflow Breakdown
 
+<pre class="mermaid">
+graph LR
+    B[Checkout code]
+    B --> C[Get short commit hash]
+    C --> D[Log in to GHCR]
+    D --> E[Build Docker image]
+    E --> F[Push Docker image]
+</pre>
+
 The workflow file `.github/workflows/docker-build-push.yml` follows a structured format. The resulting Docker image will be named as `ghcr.io/<REPO_OWNER>/<REPO_NAME>:<TAG>`. The tagging mechanism differentiates between two scenarios:
 - For non-tag pushes (Manual dispatch), the image is tagged using the short commit hash.
 - For tag pushes, the image is tagged with the corresponding tag nam

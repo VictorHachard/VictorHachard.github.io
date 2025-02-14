@@ -1,17 +1,39 @@
 ---
 layout: note
-title: Odoo Implementing Real-Time Product Updates (16)
+title: Odoo 16.0 Implementing Real-Time Product Updates
 draft: false
 date: 2024-06-12 21:42:00 +0200
 author: Victor Hachard
 categories: ['Odoo']
 ---
 
+## Purpose
+
 The goal is to refresh product information dynamically when there are changes.
 
-## 1. Python Controller Backend
+## Implementation
 
-### Render Website Products
+<pre class="mermaid">
+sequenceDiagram
+    autonumber
+    participant DB as Odoo Backend
+    participant WS as WebSocket (bus.bus)
+    participant PY as Python Controller
+    participant JS as JavaScript (Frontend)
+    participant HTML as Website UI
+    
+    DB->>WS: Notify WebSocket on Product Update
+    WS->>JS: Send Notification with Product ID
+    JS->>PY: Call /product/tree/sync with Product ID
+    PY->>DB: Fetch Updated Product Data
+    DB->>PY: Return Product Data
+    PY->>JS: Send Rendered HTML
+    JS->>HTML: Replace Product Section in DOM
+</pre>
+
+### 1. Python Controller Backend
+
+#### Render Website Products
 
 This method is responsible for rendering the product information using the specified template.
 
@@ -28,7 +50,7 @@ def _render_website_products(self, product_obj):
     }
 ```
 
-### Product Sync Endpoint
+#### Product Sync Endpoint
 
 This method is exposed as a public route to allow the JavaScript code to request updated product information.
 
@@ -39,9 +61,7 @@ def product_tree_sync(self, product_id):
     return self._render_website_products(product_obj)
 ```
 
-## 2. Python Backend
-
-### Notify WebSocket
+### 2. Python Backend
 
 This method sends a notification to the WebSocket service when there is an update in the product status.
 
@@ -53,9 +73,7 @@ def notify_websocket(self):
     })
 ```
 
-## 3. JavaScript Frontend
-
-### Module Definition
+### 3. JavaScript Frontend
 
 Define a JavaScript module to handle WebSocket connections and update the DOM when there are notifications.
 
@@ -106,9 +124,9 @@ export const websiteSaleTreeWs = {
 registry.category("services").add("websiteSaleTreeWs", websiteSaleTreeWs);
 ```
 
-## 4. XML Templates
+### 4. XML Templates
 
-### Product Description Template
+#### Product Description Template
 
 This template contains the structure for rendering product information.
 
@@ -126,7 +144,7 @@ This template contains the structure for rendering product information.
 </template>
 ```
 
-### Inherited Product Template
+#### Inherited Product Template
 
 This template extends the existing product template to include data attributes.
 
