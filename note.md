@@ -40,7 +40,7 @@ Whenever I come across an insight that I anticipate forgetting, I make sure to s
                     &nbsp;in
                     {% for category in note.categories %}
                         <span itemprop="category" itemscope itemtype="http://schema.org/CategoryCode">
-                        <a class="p-category h-card" itemprop="name" href="{{ site.baseurl }}/categories/{{ category | slugify }}">{{ category }} </a>{% unless forloop.last %}, {% endunless %}
+                        <a class="p-category h-card" itemprop="name" href="{{ site.baseurl }}/categories/{{ category | slugify }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
                         </span>
                     {% endfor %}
                 {%- endif -%}
