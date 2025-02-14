@@ -1,2 +1,45 @@
 // Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+pre::-webkit-scrollbar-thumb {
+    background-color: #444; /* Dark grey thumb */
+    border-radius: 4px;
+}
+  
+pre::-webkit-scrollbar-track {
+    background-color: #222; /* Darker track */
+}
+  
+pre::-webkit-scrollbar-thumb:hover {
+    background-color: #666; /* Lighter grey on hover */
+}
+
+#search-input {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #f8f9fa; /* Light text for contrast */
+    background-color: #222; /* Dark background */
+    background-clip: padding-box;
+    border: 1px solid #444; /* Darker border */
+    border-radius: .25rem;
+    margin-bottom: 1.5rem;
+    max-width: 715px;
+    
+    /* Add focus effect */
+    &:focus {
+      color: #fff;
+      background-color: #333;
+      border-color: #666; /* Slightly lighter border on focus */
+      outline: none; /* Remove default outline */
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Subtle glow effect */
+    }
+  
+    /* Placeholder text */
+    &::placeholder {
+      color: #bbb; /* Light gray for better readability */
+    }
+  }
+  
