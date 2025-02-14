@@ -1,7 +1,8 @@
 ---
 layout: note
 title: Docker Setup for Long-Term Odoo 16 Deployment
-draft: true
+draft: false
+active: false
 date: 2025-02-06 14:00:00 +0200
 author: Victor Hachard
 categories: ['Docker', 'Odoo', 'System Administration']

@@ -4,9 +4,11 @@ layout: default
 
 {% assign count = 0 %}
 {% for note in site.notes %}
-  {% if note.categories contains page.category %}
-    {% assign count = count | plus: 1 %}
-  {% endif %}
+    {% if note.active != false %}
+        {% if note.categories contains page.category %}
+            {% assign count = count | plus: 1 %}
+        {% endif %}
+    {% endif %}
 {% endfor %}
 
 <h1 class="post-title p-name">{{ page.title | escape }}</h1>
@@ -24,17 +26,19 @@ layout: default
 
 <ul class="projects finished">
 {% for note in site.notes reversed %}
-    {% if note.categories contains page.category %}
-        <li class="project">
-            <h2>
-                <a class="name" href="{{ note.url | relative_url }}">
-                    {{ note.title }}
-                </a>
-            </h2>
-            <p>
-                {{ note.content | number_of_words }} words published on {{ note.date | date: "%B %d, %Y" }}
-            </p>
-        </li>
+    {% if note.active != false %}
+        {% if note.categories contains page.category %}
+            <li class="project">
+                <h2>
+                    <a class="name" href="{{ note.url | relative_url }}">
+                        {{ note.title }}
+                    </a>
+                </h2>
+                <p>
+                    {{ note.content | number_of_words }} words published on {{ note.date | date: "%B %d, %Y" }}
+                </p>
+            </li>
+        {% endif %}
     {% endif %}
 {% endfor %}
 </ul>
