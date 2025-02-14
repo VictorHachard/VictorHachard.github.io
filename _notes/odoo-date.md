@@ -6,6 +6,8 @@ author: Victor Hachard
 categories: ['Odoo']
 ---
 
+To get the user-formatted datetime in Odoo, you can use the following method:
+
 ```py
 def _get_user_formatted_datetime(self, date):
     tz = pytz.timezone(self.env.user.tz or 'UTC')

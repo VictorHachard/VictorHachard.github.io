@@ -7,6 +7,30 @@ author: Victor Hachard
 categories: ['Odoo']
 ---
 
+<pre class="mermaid">
+classDiagram
+    class FieldMapper {
+        technical_name: Char
+        name: Char
+        field_mapper_line_ids: FieldMapperLine
+        field_mapper_ids: FieldMapperFieldMapperLineRel
+    }
+    class FieldMapperLine {
+        target_field: Char
+        field_mapper_ids: FieldMapper
+        field_mapper_line_ids: FieldMapperFieldMapperLineRel
+    }
+    class FieldMapperFieldMapperLineRel {
+        field_mapper_id: FieldMapper
+        field_mapper_line_id: FieldMapperLine
+        sequence: Integer
+    }
+    
+    FieldMapper -- FieldMapperFieldMapperLineRel
+    FieldMapperLine -- FieldMapperFieldMapperLineRel
+    FieldMapper -- FieldMapperLine
+</pre>
+
 The `FieldMapperFieldMapperLineRel` class represents a relational table that establishes a many-to-many relationship between `FieldMapper` and `FieldMapperLine`.
 
 ```py

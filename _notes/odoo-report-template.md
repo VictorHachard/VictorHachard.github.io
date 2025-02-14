@@ -55,19 +55,25 @@ Optionally, you can remove the white background of the original pdf file with th
 
 ```py
 header_str = str(header)
-header_str = header_str.replace('<meta charset="utf-8"/>',
-                                '<meta charset="utf-8"/><style>body, div , main {background-color: transparent !important;}</style>')
+header_str = header_str.replace(
+    '<meta charset="utf-8"/>',
+    '<meta charset="utf-8"/><style>body, div , main {background-color: transparent !important;}</style>'
+)
 header = M(header_str)
 
 footer_str = str(footer)
-footer_str = footer_str.replace('<meta charset="utf-8"/>',
-                                '<meta charset="utf-8"/><style>body, div , main {background-color: transparent !important;}</style>')
+footer_str = footer_str.replace(
+    '<meta charset="utf-8"/>',
+    '<meta charset="utf-8"/><style>body, div , main {background-color: transparent !important;}</style>'
+)
 footer = M(footer_str)
 bodiesd = []
 for body in bodies:
     body_str = str(body)
-    body_str = body_str.replace('<meta charset="utf-8"/>',
-                                '<meta charset="utf-8"/><style>body, div , main {background-color: transparent !important;}</style>')
+    body_str = body_str.replace(
+        '<meta charset="utf-8"/>',
+        '<meta charset="utf-8"/><style>body, div , main {background-color: transparent !important;}</style>'
+)
     body = M(body_str)
     bodiesd.append(body)
 bodies = bodiesd

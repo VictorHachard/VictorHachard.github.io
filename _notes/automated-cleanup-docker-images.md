@@ -38,9 +38,12 @@ docker images --format "{{.Repository}} {{.ID}} {{.CreatedAt}}" | \
         fi
     done
 
-# Indicate completion of cleanup
-echo "Cleanup completed."
+# Indicate completion of image cleanup
+echo "Image cleanup completed."
 
 # Prune unused Docker objects
 sudo docker system prune -f
+
+# Indicate completion of Docker object cleanup
+echo "Docker object cleanup completed."
 ```

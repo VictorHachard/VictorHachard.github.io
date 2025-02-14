@@ -100,10 +100,10 @@ elif tools.cronfig['log_seq']:
         return record
 
     logging.setLogRecordFactory(record_factory_seq)
-    handler = GelfUdpHandler(host=str(loghost.split(':')[0]),
-                                port=int(loghost.split(':')[1]),
-                                include_extra_fields=True,
-                                debug=Tue)
+    handler = GelfUdpHandler(
+        host=str(loghost.split(':')[0]), port=int(loghost.split(':')[1]),
+        include_extra_fields=True, debug=True
+    )
 ```
 
 Then, between the block that checks for a POSIX system with a TTY stream and the `else:` clause, insert the following code:

@@ -46,6 +46,9 @@ pre::-webkit-scrollbar-thumb:hover {
 pre.mermaid text, pre.mermaid marker path {
   fill: #eeeeff !important;
 }
-pre.mermaid line, pre.mermaid marker, pre.mermaid marker path {
+pre.mermaid line, pre.mermaid marker, pre.mermaid marker path, pre.mermaid .edgePaths path {
   stroke: #eeeeff !important;
+}
+pre.mermaid .edgeTerminals span {
+  color: #eeeeff !important;
 }
