@@ -1,6 +1,7 @@
 ---
 layout: note
 draft: false
+active: false
 date: 2024-07-15 11:36:00 +0200
 author: Victor Hachard
 categories: ['Odoo']

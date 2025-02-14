@@ -5,13 +5,19 @@ permalink: /projects/
 order: "2"
 ---
 
+{% assign count = 0 %}
+{% for note in site.projects %}
+    {% if note.active != false %}
+        {% assign count = count | plus: 1 %}
+    {% endif %}
+{% endfor %}
+
 <h1 class="post-title p-name">Projects</h1>
 <p class="post-meta">
-    {% assign projectsCount = site.projects | size %}
-    {% if projectsCount == 1 %}
+    {% if count == 1 %}
         1 project
-    {% elsif projectsCount > 1 %}
-        {{ projectsCount }} projects
+    {% elsif count > 1 %}
+        {{ count }} projects
     {% endif %}
 </p>
 
