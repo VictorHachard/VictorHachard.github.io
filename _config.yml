@@ -47,6 +47,8 @@ collections:
 markdown: kramdown
 theme: minima
 # plugins:
+minima:
+  skin: dark
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

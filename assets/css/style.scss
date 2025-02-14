@@ -2,7 +2,9 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@import "minima";
+@import
+  "minima/skins/{{ site.minima.skin | default: 'classic' }}",
+  "minima/initialize";
 
 .site-header {
   border-top: 0 !important;
@@ -68,8 +70,8 @@ pre.highlight {
   right: 8px;
   padding: 4px 8px 2px 8px;
   border-radius: 2px;
-  border: 1px solid #373737;
-  background-color: #eef;
+  border: 1px solid #646464;
+  background-color: #373737;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
