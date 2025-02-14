@@ -108,14 +108,6 @@ You can add more parameters (examples):
 - the `-u <module list>` allows you to specify modules to update on startup
 - the `-i <module list>` allows you to specify modules to install on startup
 
-## Server Setup
-
-Used this on `<date>`:
-
-```bash
-
-```
-
 ## Migration
 
 If you update the code to a new version read this first. We added a few new features to the code that are hardcoded in the code.
