@@ -16,7 +16,7 @@ layout: default
         • 
         {% for category in page.categories %}
         <span itemprop="category" itemscope itemtype="http://schema.org/CategoryCode">
-          <a class="p-category h-card" itemprop="name" href="{{ site.baseurl }}/categories/{{ category | slugify }}">{{ category }} </a>{% unless forloop.last %}, {% endunless %}
+          <a class="p-category h-card" itemprop="name" href="{{ site.baseurl }}/categories/{{ category | slugify }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
         </span>
         {% endfor %}
       {%- endif -%}
