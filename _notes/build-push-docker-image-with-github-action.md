@@ -32,9 +32,11 @@ graph LR
     E --> F[Push Docker image]
 </pre>
 
-The workflow file `.github/workflows/docker-build-push.yml` follows a structured format. The resulting Docker image will be named as `ghcr.io/<REPO_OWNER>/<REPO_NAME>:<TAG>`. The tagging mechanism differentiates between two scenarios:
+The workflow automates the building and pushing of Odoo Docker images. The resulting Docker image will be named as `ghcr.io/<REPO_OWNER>/<REPO_NAME>:<TAG>`. The tagging mechanism differentiates between two scenarios:
 - For non-tag pushes (Manual dispatch), the image is tagged using the short commit hash.
-- For tag pushes, the image is tagged with the corresponding tag nam
+- For tag pushes, the image is tagged with the corresponding tag name
+
+The file is stored in `.github/workflows/build-and-push.yml`, and the contents are as follows:
 
 ```yaml
 name: Build and Push Docker Image

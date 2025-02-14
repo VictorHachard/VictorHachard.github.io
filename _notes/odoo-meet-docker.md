@@ -5,10 +5,10 @@ draft: false
 active: false
 date: 2024-11-14 14:44:00 +0200
 author: Victor Hachard
-categories: ['Docker', 'Odoo', 'System Administration']
+categories: ['Docker', 'Odoo', 'CI/CD', 'System Administration']
 ---
 
-⚠️ **Warning:** tested on Odoo 16.0 with Ubuntu 24.04.1 LTS in early 2025.
+⚠️ **Warning:** tested on Odoo 11.0, 15.0, 16.0, 17.0, and 18.0 with Ubuntu 24.04.1 LTS in early 2025.
 
 ## Overview  
 
@@ -483,76 +483,9 @@ networks:
     external: true
 ```
 
-## DevOps Pipeline
+## CI/CD 
 
-#### Devops Agent
-
-The DevOps agent must run on a Linux machine with Docker installed.  
-
-💡 **Note:** Implement a cleanup script on the machine, as the build process generates a significant amount of cached data. You can refer to this guide for automated Docker image cleanup: [Automated Cleanup of Docker Images](https://victorhachard.github.io/notes/automated-cleanup-docker-images).
-
-#### Devops Build Pipeline
-
-This pipeline automates the building and pushing of Odoo Docker images. It runs on Git tags (`refs/tags/*`), using the tag (e.g., `v16.0.1`) as the Docker image tag. If no tag is found, it defaults to the first seven characters of the commit hash.
-
-![Devops Pipeline Trigger]({{site.baseurl}}/res/odoo-meet-docker/trigger-tags.png)
-
-The process extracts the version, builds the Docker image with the detected tag, and pushes it to the Docker registry.
-
-```yaml
-trigger:
-  branches:
-    include:
-      - refs/tags/*
-
-jobs:
-- job: Build_and_Push
-  displayName: Build and Push Docker Image
-  pool:
-    name: DOCKER
-
-  steps:
-  - checkout: self
-
-  - task: Bash@3
-    displayName: Extract Version (Tag or Commit Hash)
-    inputs:
-      targetType: inline
-      script: |
-        if [[ "$(Build.SourceBranch)" == refs/tags/* ]]; then
-            dockertag=$(echo $(Build.SourceBranch) | sed -e "s/^refs\/tags\///")
-            echo "##vso[task.setvariable variable=dockertag;]$dockertag"
-            echo "Version tag detected: $dockertag"
-        else
-            dockertag=$(echo $(Build.SourceVersion) | cut -c-7)
-            echo "##vso[task.setvariable variable=dockertag;]$dockertag"
-            echo "No tag detected, using commit hash: $dockertag"
-        fi
-
-  - task: Docker@2
-    displayName: Build and Push Docker Image
-    inputs:
-      containerRegistry: 'Registry'
-      repository: $(Build.Repository.Name)
-      tags: $(dockertag)
-```
-
-For greater control over the build and push process, the separates the Docker@2 build and push commands:
-
-```yaml
-- task: Docker@2
-  displayName: Build
-  inputs:
-    containerRegistry: 'Registry'
-    repository: '$(Build.Repository.Name)'
-    command: build
-    tags: '$(dockertag)'
-
-- task: Docker@2
-  displayName: Push
-  inputs:
-    containerRegistry: 'Registry'
-    repository: '$(Build.Repository.Name)'
-    command: push
-    tags: '$(dockertag)'
-```
+To automate the build and push of Odoo Docker images follow these guides:
+ - [Build and Push Docker Image with GitHub Actions](https://victorhachard.github.io/notes/build-push-docker-image-with-github-action)
+ - [Build and Push Docker Image with DevOps Pipeline](https://victorhachard.github.io/notes/build-push-docker-image-with-devops-pipeline)
+ 
