@@ -19,6 +19,8 @@ The domain whitelisting feature allows which domains are allowed to send emails 
 
 The alias system allows sending emails using aliases instead of actual email address to protect privacy.
 
+## Code Example
+
 ```html
 <form action="https://mail-it.example.com/you_email@example.com" method="POST">
     <input type="text" name="fromName" placeholder="Your name">
@@ -28,3 +30,11 @@ The alias system allows sending emails using aliases instead of actual email add
     <input type="submit" value="Send Email">
 </form>
 ```
+
+The [wiki](https://github.com/VictorHachard/mail-it/wiki/Angular-implementation) contains additional code examples.
+
+## What I Learned
+
+- Spring Boot
+- Google's email service
+- Server-side development (services, nginx, etc.)
