@@ -5,8 +5,10 @@ draft: false
 date: 2025-02-21 00:00:00 +0200
 author: Victor Hachard
 languages:
-    - Java
-    - JavaFX
+    - Odoo
+    - Python
+    - JavaScript
+    - XML
 githubs: 
     - github.com/VictorHachard/odoo-modules
 ---
