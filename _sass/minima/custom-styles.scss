@@ -52,3 +52,9 @@ pre.mermaid line, pre.mermaid marker, pre.mermaid marker path, pre.mermaid .edge
 pre.mermaid .edgeTerminals span {
   color: #eeeeff !important;
 }
+
+// Update the .site-footer padding to make it more compact
+
+.site-footer {
+  padding: 1rem 0;
+}
