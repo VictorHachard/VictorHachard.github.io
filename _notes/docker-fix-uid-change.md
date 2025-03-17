@@ -15,6 +15,14 @@ Solution:
 
 To fix this issue, you need to change the permissions of the directory to the new UID.
 
+First, get the container ID by running the following command:
+
+```bash
+docker ps
+```
+
+Then, exec into the container with the following command:
+
 ```bash
 docker exec -it --user root container_id /bin/bash
 ```
