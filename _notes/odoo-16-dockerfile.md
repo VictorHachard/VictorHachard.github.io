@@ -8,9 +8,7 @@ author: Victor Hachard
 categories: ['Docker', 'Odoo', 'System Administration']
 ---
 
-🎯 **TODO:** Update this guide when Odoo becomes compatible with Python 3.13 or when Python 3.12 will fully be compatible.
-
-⚠️ **Warning:** The latest Odoo version does not yet fully support Python 3.12. For now, a Dockerfile is available with **Ubuntu 24.04 (Noble) and Python 3.11** to ensure compatibility.
+🎯 **TODO:** Update this guide when Odoo becomes compatible with Python 3.13.
 
 ⚠️ **Warning:** This setup has been tested as of early 2025. Future Ubuntu updates may require modifications to maintain compatibility.
 
@@ -22,7 +20,7 @@ Odoo 16, originally released in 2022 and with support ending in October 2025. It
 
 ⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.
 
-This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:
+This setup includes a customized **Dockerfile** optimized for running Odoo 16 on modern systems. Key modifications include:
 
 - **Ubuntu 24.04 (Noble)** as the base image.
 - Installation of **Python 3.12** via the **deadsnakes PPA**.
@@ -202,47 +200,4 @@ USER odoo
 # Entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["odoo"]
-```
-
-## Dockerfile (Noble - Python 3.11)
-
-⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until April 2029.
-
-⚠️ **Warning:** Python 3.11 will receive official security updates and maintenance until October 2027.
-
-Replace the system dependencies with the following:
-
-```dockerfile
-# Install prerequisites for adding PPA
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        software-properties-common \
-        gpg-agent \
-        gnupg \
-        dirmngr \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Add deadsnakes PPA
-RUN add-apt-repository ppa:deadsnakes/ppa
-
-# Install system dependencies and Python 3.11
-# Removed fonts-noto-cjk (add if needed for Chinese, Japanese, Korean support)
-# Removed npm (add if needed for RTL language support)
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        build-essential \
-        libssl-dev libpq-dev \
-        libldap2-dev libsasl2-dev \
-        xz-utils \
-        python3.11 python3.11-distutils python3.11-venv python3.11-dev \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Set Python 3.11 as the default Python version
-RUN ln -sf /usr/bin/python3.11 /usr/bin/python3 && \
-    ln -sf /usr/bin/python3.11 /usr/bin/python && \
-    python3.11 -m ensurepip && \
-    python3.11 -m pip install --upgrade pip
-
-# Verify Python 3.11 installation and pip version
-RUN python --version | grep "3.11" && pip --version
 ```
