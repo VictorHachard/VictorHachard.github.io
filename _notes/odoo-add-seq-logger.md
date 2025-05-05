@@ -9,6 +9,8 @@ categories: ['Odoo']
 
 ⚠️ **Warning:** tested on Odoo 11.0, 13.0, 15.0, 16.0, 17.0, and 18.0.
 
+⚠️ **Warning:** Seq logging captures user data, starting the service may lock the `users` and `partners` tables, which can block or even crash updates. To prevent this, temporarily disable Seq logging during any update operations.
+
 ## Install the pygelf package
 
 ⚠️ **Warning:** the latest release of pygelf is version 0.4.2, and it has not been updated since October 2021.
