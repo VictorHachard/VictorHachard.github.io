@@ -463,6 +463,7 @@ services:
 
   db:
     image: postgres:17
+    shm_size: 256mb  # Increase shared memory size for PostgreSQL (optional if there are issues like "could not resize shared memory segment")
     environment:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: odoo
