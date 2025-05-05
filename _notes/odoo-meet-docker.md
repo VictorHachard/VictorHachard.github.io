@@ -366,6 +366,7 @@ To deploy Odoo in a Docker container, you need to create a customized Odoo image
 - **Odoo 11**: [Docker Setup for Long-Term Odoo 11 Deployment](https://victorhachard.github.io/notes/odoo-11-dockerfile)
 - **Odoo 15**: [Docker Setup for Long-Term Odoo 15 Deployment](https://victorhachard.github.io/notes/odoo-15-dockerfile)
 - **Odoo 16**: [Docker Setup for Long-Term Odoo 16 Deployment](https://victorhachard.github.io/notes/odoo-16-dockerfile)
+- **Odoo 17**: [Docker Setup for Long-Term Odoo 17 Deployment](https://victorhachard.github.io/notes/odoo-17-dockerfile)
 
 ### Update `entrypoint.sh`
 

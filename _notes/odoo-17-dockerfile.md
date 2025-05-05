@@ -1,6 +1,6 @@
 ---
 layout: note
-title: Docker Setup for Long-Term Odoo 16 Deployment
+title: Docker Setup for Long-Term Odoo 17 Deployment
 draft: false
 active: false
 date: 2025-02-06 14:00:00 +0200
@@ -14,7 +14,7 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ## Purpose
 
-Odoo 16, originally released in 2022 and with support ending in October 2025. It is compatible with Python versions 3.7 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
+Odoo 17, originally released in 2023 and with support ending in October 2026. It is compatible with Python versions 3.10 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
 
 ⚠️ **Warning:** Python 3.12 will receive official security updates and maintenance until October 2028.
 
@@ -30,7 +30,7 @@ This setup includes a customized **Dockerfile** optimized for running Odoo 16 on
 
 ### Odoo version
 
-Odoo 16.0 needs to be updated with the latest nightly build because Python 3.12 was not supported when Odoo 16.0 was initially released. You can find the Odoo version in the `release.py` file within the Odoo source code.
+Odoo 17.0 needs to be updated with the latest nightly build because Python 3.12 was not supported when Odoo 17.0 was initially released. You can find the Odoo version in the `release.py` file within the Odoo source code.
 
 ### Directory Structure
 
@@ -49,10 +49,10 @@ src/
 ```  
 
 `wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). Use the **18.0 version** of both scripts:
-  - `wait-for-psql.py` **has not changed** between Odoo 16.0 and 18.0, so it remains fully compatible.  
-  - `entrypoint.sh` **has not changed** between Odoo 16.0 and 18.0, so it remains fully compatible.
+  - `wait-for-psql.py` **has not changed** between Odoo 17.0 and 18.0, so it remains fully compatible.  
+  - `entrypoint.sh` **has not changed** between Odoo 17.0 and 18.0, so it remains fully compatible.
 
-For reference, the scripts from Odoo 16.0 can be found in the [Odoo Docker 16.0 repository](https://github.com/odoo/docker/tree/master/16.0).
+For reference, the scripts from Odoo 17.0 can be found in the [Odoo Docker 17.0 repository](https://github.com/odoo/docker/tree/master/17.0).
 
 ## Dockerfile (Noble)
 

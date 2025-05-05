@@ -82,9 +82,6 @@ RUN apt-get update && \
         xz-utils \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Verify Python 3.12 installation and pip version
-RUN python --version | grep "3.12" && pip --version
-
 # Install rtlcss (for right-to-left language support)
 # RUN npm install -g rtlcss
 
