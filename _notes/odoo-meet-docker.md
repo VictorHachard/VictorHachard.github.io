@@ -12,7 +12,7 @@ categories: ['Docker', 'Odoo', 'CI/CD', 'System Administration']
 
 ## Overview  
 
-Deploy Odoo 16 with Docker on Ubuntu 24.04.1 LTS (early 2025). Covers private registry, reverse proxy, logging, custom image creation, container execution, PostgreSQL, and Seq integration.
+This guide covers private registry, reverse proxy, logging, custom image creation, container execution, PostgreSQL, and Seq integration.
 
 <pre class="mermaid">
 flowchart LR
@@ -44,6 +44,16 @@ flowchart LR
   end
 </pre>
 
+### Typical workflow
+
+Developers build the project and push the resulting image to the private registry.
+
+Operators deploy or update the Docker Compose stack via Portainer.
+
+Alternatively, tagging a commit can automatically trigger a new build and push.
+
+Advanced Nginx rules are managed through Nginx Proxy Manager, with Cloudflare handling the public DNS and proxy layer.
+
 ### Required Skills  
 
 - Containerization & Orchestration:
@@ -68,6 +78,12 @@ flowchart LR
   - GitHub Actions & DevOps (CI/CD pipelines, webhooks)  
 - Networking:
   - DNS & Internal Routing (Docker service communication)  
+
+### Points for Enhancement
+
+- Auto-prune old builds in the private registry
+- Cleanup unused images in Portainer
+- Versioned Nginx configuration stored in source control and mounted into the Nginx container as part of the stack
 
 ## Server Setup
 
