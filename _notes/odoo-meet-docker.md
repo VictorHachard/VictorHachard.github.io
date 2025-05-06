@@ -262,6 +262,24 @@ Add Nginx Proxy Manager as a proxy host in itself. Create a new proxy host with 
   }
   ```
 
+#### Add server block for Odoo
+
+To expose your Odoo instance via Nginx Proxy Manager, create a dedicated server block. Below are guides for different Odoo versions:
+
+- **Odoo 11 and 15**: [Server Block for Odoo 11 and 15](https://victorhachard.github.io/notes/nginx-server-block-odoo-11-15)
+- **Odoo 16 and 17**: [Server Block for Odoo 16 and 17](https://victorhachard.github.io/notes/nginx-server-block-odoo-16-17)
+
+#### TLS Certificates
+
+With Cloudflare Proxy:
+
+- In your Cloudflare dashboard, download the Origin Certificate.
+- Upload and install this certificate (along with its private key) in Nginx Proxy Manager.
+
+Cloudflare DNS-Only or Other DNS Providers:
+
+Use the built-in Let’s Encrypt integration in Nginx Proxy Manager to automatically issue and renew your certificate.
+
 ### Install Seq
 
 Refer to the official [Seq documentation](https://hub.docker.com/r/datalust/seq) for the latest installation instructions.
