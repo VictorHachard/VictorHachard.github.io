@@ -78,7 +78,7 @@ RUN apt-get update && \
         gnupg \
         libssl-dev libpq-dev \
         libldap2-dev libsasl2-dev \
-        python3 python3-dev python3-pip python3-venv python3-wheel python3-setuptools \
+        python3 python3-dev python3-pip python3-venv python3-wheel python3-renderpm python3-setuptools \
         xz-utils \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
