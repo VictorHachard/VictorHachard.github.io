@@ -6,7 +6,11 @@ author: Victor Hachard
 categories: ['Docker', 'Linux']
 ---
 
+## Overview
+
 This Bash script lists Docker images sorted by creation date (most recent first), grouped by repository. It excludes specific repositories like debian and ubuntu and removes old images from the same repository, keeping only the most recent one. It also prunes unused Docker objects after the cleanup.
+
+## Script
 
 ```sh
 #!/bin/bash
@@ -47,3 +51,17 @@ sudo docker system prune -f
 # Indicate completion of Docker object cleanup
 echo "Docker object cleanup completed."
 ```
+
+## Usage
+
+1. Save the script to `/usr/local/bin/cleanup_docker_images.sh`.
+2. Make it executable:
+   ```sh
+   sudo chmod 700 /usr/local/bin/cleanup_docker_images.sh
+   sudo chown root:root /usr/local/bin/cleanup_docker_images.sh
+   ```
+3. Create a symbolic link in `/etc/cron.daily` to run the script daily:
+   ```sh
+    sudo ln -s /usr/local/bin/cleanup_docker_images.sh /etc/cron.daily/cleanup_docker_images
+    ```
+    

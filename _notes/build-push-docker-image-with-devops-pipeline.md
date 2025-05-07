@@ -26,7 +26,7 @@ Ensure that:
 
 The DevOps agent must run on a Linux machine with Docker installed.  
 
-💡 **Note:** Implement a cleanup script on the machine, as the build process generates a significant amount of cached data. You can refer to this guide for automated Docker image cleanup: [Automated Cleanup of Docker Images](https://victorhachard.github.io/notes/automated-cleanup-docker-images).
+💡 **Note:** Implement a cleanup script on the machine, as the build process generates a significant amount of cached data. For a detailed walkthrough, see [Automated Cleanup of Docker Images](https://victorhachard.github.io/notes/automated-cleanup-docker-images).
 
 ## DevOps Build Pipeline
 

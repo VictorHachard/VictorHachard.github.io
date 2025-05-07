@@ -147,6 +147,8 @@ sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -
 
 After running the command, access the UI at `http://<your_server_ip>:9443`.
 
+💡 Note: Implement a cleanup script on your host to reclaim the disk space occupied by unused Docker images. For a detailed walkthrough, see [Automated Cleanup Unused Docker Images.](https://victorhachard.github.io/notes/automated-cleanup-unused-docker-images)
+
 ### Install Docker Registry
 
 Install a private Docker registry to store and manage custom images.
