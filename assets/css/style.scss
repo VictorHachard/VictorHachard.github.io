@@ -65,3 +65,9 @@ pre.highlight {
 div.highlight:hover .copy {
   opacity: 1; /* Show the copy button on hover */
 }
+
+@media print {
+  .site-footer {
+      display: none !important;
+  }
+}
