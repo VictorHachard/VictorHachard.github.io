@@ -82,7 +82,7 @@ Advanced Nginx rules are managed through Nginx Proxy Manager, with Cloudflare ha
 ### Points for Enhancement
 
 - Auto-prune old builds in the private registry
-- Cleanup unused images in Portainer
+- Automatically restart any container that becomes unhealthy (NOT TESTED)
 - Versioned Nginx configuration stored in source control and mounted into the Nginx container as part of the stack
 
 ## Server Setup
@@ -393,6 +393,24 @@ Log in with the default credentials (`admin` / `admin`), then configure the Prom
 - [Docker monitoring](https://grafana.com/grafana/dashboards/193): 193
 - [Node Exporter Full](https://grafana.com/grafana/dashboards/1860): 1860
 
+### Install docker-autoheal (NOT TESTED)
+
+Install `docker-autoheal` to automatically restart unhealthy containers. The service will monitor the health of all containers and restart them if they become unhealthy.
+
+```yaml
+services:
+  autoheal:
+    image: willfarrell/autoheal:latest
+    container_name: autoheal
+    restart: always
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - project-internal-network
+```
+
 ## Odoo in a Docker Container
 
 ### Dockerfile: Creating the Odoo Image
@@ -470,6 +488,7 @@ The main services defined are:
 services:
   web:
     image: <IMAGE>:<IMAGE_TAG>
+    restart: unless-stopped
     depends_on:
       - db
     healthcheck:
@@ -499,6 +518,7 @@ services:
 
   db:
     image: postgres:17
+    restart: unless-stopped
     shm_size: 256mb  # Increase shared memory size for PostgreSQL (optional if there are issues like "could not resize shared memory segment")
     environment:
       POSTGRES_DB: postgres
@@ -508,7 +528,6 @@ services:
       - db-data:/var/lib/postgresql/data
     networks:
       - project-internal-network
-      - shared-pgadmin4-network
 
 volumes:
   web-data:
