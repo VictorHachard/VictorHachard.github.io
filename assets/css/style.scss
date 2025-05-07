@@ -67,7 +67,7 @@ div.highlight:hover .copy {
 }
 
 @media print {
-  .site-footer {
+  .site-footer, .site-nav {
       display: none !important;
   }
 }
