@@ -84,7 +84,7 @@ Advanced Nginx rules are managed through Nginx Proxy Manager, with Cloudflare ha
 - Auto-prune old builds in the private registry
 - Automatically restart any container that becomes unhealthy (NOT TESTED)
 - Versioned Nginx configuration stored in source control and mounted into the Nginx container as part of the stack
-- Add an Nginx configuration to retrieve the client’s IP address variable instead of Cloudflare’s when proxying
+- Add an Nginx configuration to retrieve the client’s IP address variable instead of Cloudflare’s when proxying (TODO a guide for this linked to *Real IP with Cloudflare*)
 
 ## Server Setup
 
@@ -271,6 +271,19 @@ To expose your Odoo instance via Nginx Proxy Manager, create a dedicated server 
 
 - **Odoo 11 and 15**: [Server Block for Odoo 11 and 15](https://victorhachard.github.io/notes/nginx-server-block-odoo-11-15)
 - **Odoo 16 and 17**: [Server Block for Odoo 16 and 17](https://victorhachard.github.io/notes/nginx-server-block-odoo-16-17)
+
+#### Real IP with Cloudflare
+
+To ensure that Nginx Proxy Manager correctly identifies the real IP address of clients when using Cloudflare, add the following configuration to your Nginx Proxy Manager server block:
+
+```nginx
+set_real_ip_from 173.245.48.0/20;
+
+real_ip_header CF-Connecting-IP;
+real_ip_recursive on;
+```
+
+Refer to [Cloudflare's current list of IP addresses](https://www.cloudflare.com/ips-v4) for the latest IP ranges to include in the `set_real_ip_from` directive.
 
 #### TLS Certificates
 
