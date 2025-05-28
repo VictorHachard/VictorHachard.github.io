@@ -84,6 +84,7 @@ Advanced Nginx rules are managed through Nginx Proxy Manager, with Cloudflare ha
 - Auto-prune old builds in the private registry
 - Automatically restart any container that becomes unhealthy (NOT TESTED)
 - Versioned Nginx configuration stored in source control and mounted into the Nginx container as part of the stack
+- Add an Nginx configuration to retrieve the client’s IP address variable instead of Cloudflare’s when proxying
 
 ## Server Setup
 
