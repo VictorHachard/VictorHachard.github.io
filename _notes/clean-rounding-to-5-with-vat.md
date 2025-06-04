@@ -17,7 +17,11 @@ This approach considers VAT multiplication **upfront**, ensuring that the final 
 
 The trade-off is accepting a **slight modification of the original HT price** to achieve that clean result.
 
-## SQL Function Used
+## Next HT Multiple of €0.05
+
+This function finds the next HT price that, when multiplied by the VAT rate, results in a TTC price that rounds to a multiple of €0.05.
+
+### SQL Function
 
 ```sql
 CREATE OR REPLACE FUNCTION get_next_ht_multiple_05(ht numeric, taxes numeric)
@@ -45,21 +49,21 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 ```
 
-## Example with 21% VAT
+### Example with 21% VAT
 
 The `get_next_ht_multiple_05` function is applied across a price range from €0.00 to €100.00, in steps of €0.01. For each HT price, we check if within the next 100 cents, there is a value that results in a TTC rounded to a multiple of €0.05.
 
 **VAT used:** 1.21 (i.e., 21%)
 **Criteria:** round(HT × 1.21, 2) mod 0.05 = 0
 
-### Result
+#### Result
 
 * Total tested: 10,001
 * Unchanged (no adjustment needed): 2,001 
 * Adjusted HT prices: 8,000
 * Maximum HT deviation: -€0.12
 
-### Deviation Analysis
+#### Deviation Analysis
 
 ![Distribution Of HT Adjustments To Reach TTC Multiple Of 0.05€]({{site.baseurl}}/res/clean-rounding/next_deviation.png)
 
@@ -79,11 +83,13 @@ The `get_next_ht_multiple_05` function is applied across a price range from €0
 | -0.01     | 2,000 |
 | 0.00      | 2,001 |
 
-## Possible Extension: Symmetric Version
+## Nearest HT Multiple of €0.05
 
 A more advanced version could search in both directions (up and down) to find the closest TTC-rounded price to the original HT.
 
 This would minimize deviation from the original HT while still achieving the goal of clean TTC rounding.
+
+### SQL Function
 
 ```sql
 CREATE OR REPLACE FUNCTION get_nearest_ht_multiple_05(ht numeric, taxes numeric)
@@ -124,21 +130,21 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 ```
 
-## Example with 21% VAT
+### Example with 21% VAT
 
 The `get_nearest_ht_multiple_05` function is applied across a price range from €0.00 to €100.00, in steps of €0.01. For each HT price, we check if within the next 100 cents, there is a value that results in a TTC rounded to a multiple of €0.05.
 
 **VAT used:** 1.21 (i.e., 21%)
 **Criteria:** round(HT × 1.21, 2) mod 0.05 = 0
 
-### Result
+#### Result
 
 * Total tested: 10,001
 * Unchanged (no adjustment needed): 2,001 
 * Adjusted HT prices: 8,000
 * Maximum HT deviation: -€0.06 or +€0.06
 
-### Deviation Analysis
+#### Deviation Analysis
 
 ![Distribution Of HT Adjustments To Reach TTC Multiple Of 0.05€]({{site.baseurl}}/res/clean-rounding/nearest_deviation.png)
 
