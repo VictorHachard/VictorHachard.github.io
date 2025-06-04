@@ -50,16 +50,34 @@ $$ LANGUAGE plpgsql IMMUTABLE;
 The `get_next_ht_multiple_05` function is applied across a price range from €0.00 to €100.00, in steps of €0.01. For each HT price, we check if within the next 100 cents, there is a value that results in a TTC rounded to a multiple of €0.05.
 
 **VAT used:** 1.21 (i.e., 21%)
-
 **Criteria:** round(HT × 1.21, 2) mod 0.05 = 0
 
 ### Result
 
-* Total number of tests: 10,001
-* Number of cases where a clean TTC price was found: **2,001 cases**
-* **Success rate: 20.01%**
+* Total tested: 10,001
+* Unchanged (no adjustment needed): 2,001 
+* Adjusted HT prices: 8,000
+* Maximum HT deviation: -€0.12
 
-This means that in approximately **1 out of 5 cases**, a minimal change (up to €1.00) in the HT price results in a perfectly rounded TTC at a €0.05 multiple.
+### Deviation Analysis
+
+![Distribution Of HT Adjustments To Reach TTC Multiple Of 0.05€]({{site.baseurl}}/res/clean-rounding/next_deviation.png)
+
+| Deviation | Count |
+| --------- | ----- |
+| -0.12     | 100   |
+| -0.11     | 100   |
+| -0.10     | 100   |
+| -0.09     | 100   |
+| -0.08     | 320   |
+| -0.07     | 320   |
+| -0.06     | 320   |
+| -0.05     | 320   |
+| -0.04     | 320   |
+| -0.03     | 2,000 |
+| -0.02     | 2,000 |
+| -0.01     | 2,000 |
+| 0.00      | 2,001 |
 
 ## Possible Extension: Symmetric Version
 
@@ -105,3 +123,37 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 ```
+
+## Example with 21% VAT
+
+The `get_nearest_ht_multiple_05` function is applied across a price range from €0.00 to €100.00, in steps of €0.01. For each HT price, we check if within the next 100 cents, there is a value that results in a TTC rounded to a multiple of €0.05.
+
+**VAT used:** 1.21 (i.e., 21%)
+**Criteria:** round(HT × 1.21, 2) mod 0.05 = 0
+
+### Result
+
+* Total tested: 10,001
+* Unchanged (no adjustment needed): 2,001 
+* Adjusted HT prices: 8,000
+* Maximum HT deviation: -€0.06 or +€0.06
+
+### Deviation Analysis
+
+![Distribution Of HT Adjustments To Reach TTC Multiple Of 0.05€]({{site.baseurl}}/res/clean-rounding/nearest_deviation.png)
+
+| Deviation | Count |
+| --------- | ----- |
+| -0.06     | 100   |
+| -0.05     | 100   |
+| -0.04     | 320   |
+| -0.03     | 321   |
+| -0.02     | 2,000 |
+| -0.01     | 2,000 |
+| 0.00      | 2,001 |
+| 0.01      | 1,999 |
+| 0.02      | 320   |
+| 0.03      | 320   |
+| 0.04      | 320   |
+| 0.05      | 100   |
+| 0.06      | 100   |
