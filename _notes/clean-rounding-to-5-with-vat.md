@@ -4,7 +4,7 @@ title: Clean Rounding to €0.05 with VAT
 draft: false
 date: 2024-06-12 21:42:00 +0200
 author: Victor Hachard
-categories: ['']
+categories: []
 ---
 
 ## Purpose
