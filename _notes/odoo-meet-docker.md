@@ -528,6 +528,12 @@ services:
   db:
     image: postgres:17
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "odoo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     shm_size: 256mb  # Increase shared memory size for PostgreSQL (optional if there are issues like "could not resize shared memory segment")
     environment:
       POSTGRES_DB: postgres
@@ -548,6 +554,17 @@ networks:
   shared-seq-network:
     external: true
 ```
+
+#### Maximum Downtime
+
+With the health-check and `auto-heal` settings, the worst-case downtime before the web container is restarted is:
+
+1. Grace period (start_period): 60 s
+2. Health‐check failures: 3 × 60 s = 180 s (after the grace period, Docker runs a check every 60 s and allows up to 3 failures)
+3. Auto-heal detection: up to 5 s (default polling interval)
+4. Shutdown timeout: up to 10 s (before SIGKILL)
+
+Total worst-case downtime = `180 s + 5 s + 10 s = 195 s` (≈ 3 minutes and 15 seconds).
 
 ## CI/CD 
 
