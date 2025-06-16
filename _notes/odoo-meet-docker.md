@@ -404,7 +404,7 @@ Log in with the default credentials (`admin` / `admin`), then configure the Prom
 - [Docker monitoring](https://grafana.com/grafana/dashboards/193): 193
 - [Node Exporter Full](https://grafana.com/grafana/dashboards/1860): 1860
 
-### Install docker-autoheal (NOT TESTED)
+### Install docker-autoheal
 
 Install `docker-autoheal` to automatically restart unhealthy containers. The service will monitor the health of all containers and restart them if they become unhealthy.
 
@@ -413,13 +413,12 @@ services:
   autoheal:
     image: willfarrell/autoheal:latest
     container_name: autoheal
-    restart: always
+    restart: unless-stopped
     environment:
       - AUTOHEAL_CONTAINER_LABEL=all
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - project-internal-network
 ```
 
 ## Odoo in a Docker Container
