@@ -14,6 +14,8 @@ categories: ['Docker', 'Odoo', 'CI/CD', 'System Administration']
 
 This guide covers private registry, reverse proxy, logging, custom image creation, container execution, PostgreSQL, and Seq integration.
 
+### Architecture Diagram
+
 <pre class="mermaid">
 flowchart LR
   A[Define Dockerfile] -->|Pipeline Execution| DP -->|Push| C[Docker Registry]
@@ -34,15 +36,7 @@ flowchart LR
   DCD -->|Serve| F[Odoo Application]
 </pre>
 
-### Typical workflow
-
-Developers build the project and push the resulting image to the private registry.
-
-Operators deploy or update the Docker Compose stack via Portainer.
-
-Alternatively, tagging a commit can automatically trigger a new build and push.
-
-Advanced Nginx rules are managed through Nginx Proxy Manager, with Cloudflare handling the public DNS and proxy layer.
+### Access Diagram
 
 <pre class="mermaid">
 flowchart LR
@@ -53,6 +47,13 @@ flowchart LR
     N -->|Frontend| Odoo[Odoo Application]
   end
 </pre>
+
+### Typical workflow
+
+- Developers build the project and push the resulting image to the private registry.
+- Operators deploy or update the Docker Compose stack via Portainer.
+- Alternatively, tagging a commit can automatically trigger a new build and push.
+- Advanced Nginx rules are managed through Nginx Proxy Manager, with Cloudflare handling the public DNS and proxy layer.
 
 ### Points for Enhancement
 
