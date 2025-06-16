@@ -34,16 +34,6 @@ flowchart LR
   DCD -->|Serve| F[Odoo Application]
 </pre>
 
-<pre class="mermaid">
-flowchart LR
-  O[Operators with Browser]
-  O -->|Access| CF[Cloudflare]
-  CF -->|Proxy| N[Nginx Reverse Proxy]
-  subgraph Docker
-    N -->|Frontend| Odoo[Odoo Application]
-  end
-</pre>
-
 ### Typical workflow
 
 Developers build the project and push the resulting image to the private registry.
@@ -54,30 +44,15 @@ Alternatively, tagging a commit can automatically trigger a new build and push.
 
 Advanced Nginx rules are managed through Nginx Proxy Manager, with Cloudflare handling the public DNS and proxy layer.
 
-### Required Skills  
-
-- Containerization & Orchestration:
-  - Docker (images, containers, volumes, networks)  
-  - Docker Compose (`docker-compose.yml`)  
-- Image Management:
-  - Private Docker Registry  
-- Infrastructure & Administration:
-  - Portainer (Docker management)  
-  - Linux (filesystem, permissions, users, process control)  
-- Reverse Proxy & Security:
-  - Nginx Proxy Manager (GUI)  
-  - Nginx (reverse proxy)  
-- Database:
-  - PostgreSQL (SQL, users, backups, restores)  
-- Development & Logging:
-  - Odoo (architecture, container execution)  
-  - Seq (centralized logging)  
-  - Bash (automation, log management)  
-- CI/CD & Automation:
-  - Git (version control)  
-  - GitHub Actions & DevOps (CI/CD pipelines, webhooks)  
-- Networking:
-  - DNS & Internal Routing (Docker service communication)  
+<pre class="mermaid">
+flowchart LR
+  O[Operators with Browser]
+  O -->|Access| CF[Cloudflare]
+  CF -->|Proxy| N[Nginx Reverse Proxy]
+  subgraph Docker
+    N -->|Frontend| Odoo[Odoo Application]
+  end
+</pre>
 
 ### Points for Enhancement
 
@@ -91,9 +66,10 @@ Advanced Nginx rules are managed through Nginx Proxy Manager, with Cloudflare ha
 ### Prerequisites
 
 - Updating and upgrading the system
-- Setting the timezone (Brussel)
+- Setting the timezone (Europe/Brussel)
 - Installing and configuring ufw (allow SSH, HTTP, HTTPS)
 - Installing and activate unattended upgrades (activate: Distro-Update, Remove-Unused-Kernel-Packages, Remove-New-Unused-Dependencies, Remove-Unused-Dependencies, Automatic-Reboot, Automatic-Reboot-Time)
+- Updating the SSH port (from 22 to 2233)
 
 📌 **TL;DR:**
 
@@ -110,7 +86,27 @@ sudo apt install ufw -y && sudo ufw allow OpenSSH && sudo ufw allow http && sudo
 # Install and activate unattended upgrades
 sudo apt install unattended-upgrades -y
 sudo dpkg-reconfigure -f noninteractive unattended-upgrades
+
+# Update the SSH port
+sudo sed -i "s/#Port 22/Port 2233/g" /etc/ssh/sshd_config
 ```
+
+⚠️ **Warning:** For improved security, switch from password-based logins to SSH key authentication. After you’ve set up SSH keys for every user, disable all password-based login methods.
+  ```bash
+  sudo sed -i \
+    -e 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' \
+    -e 's/^#*ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' \
+    -e 's/^#*UsePAM.*/UsePAM no/' \
+    /etc/ssh/sshd_config
+  ```
+
+💡 **Note:** To allow a user to run sudo commands without entering a password, add a NOPASSWD rule to their sudoers file. For example:
+  ```bash
+  sudo nano /etc/sudoers.d/<username>
+
+  # Add this line:
+  <username> ALL=(ALL) NOPASSWD:ALL
+  ```
 
 ### Install Docker
 
@@ -277,7 +273,7 @@ To expose your Odoo instance via Nginx Proxy Manager, create a dedicated server 
 To ensure that Nginx Proxy Manager correctly identifies the real IP address of clients when using Cloudflare, add the following configuration to your Nginx Proxy Manager server block:
 
 ```nginx
-set_real_ip_from 173.245.48.0/20;
+set_real_ip_from x.x.x.x/xx; # Replace with Cloudflare's IP ranges
 
 real_ip_header CF-Connecting-IP;
 real_ip_recursive on;
