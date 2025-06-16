@@ -58,7 +58,6 @@ flowchart LR
 ### Points for Enhancement
 
 - Auto-prune old builds in the private registry
-- Automatically restart any container that becomes unhealthy (NOT TESTED)
 - Versioned Nginx configuration stored in source control and mounted into the Nginx container as part of the stack
 - Add an Nginx configuration to retrieve the client’s IP address variable instead of Cloudflare’s when proxying (TODO a guide for this linked to *Real IP with Cloudflare*)
 
