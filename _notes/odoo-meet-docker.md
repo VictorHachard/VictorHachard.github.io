@@ -560,11 +560,11 @@ networks:
 With the health-check and `auto-heal` settings, the worst-case downtime before the web container is restarted is:
 
 1. Grace period (start_period): 60 s
-2. Health‐check failures: 3 × 60 s = 180 s (after the grace period, Docker runs a check every 60 s and allows up to 3 failures)
+2. Health‐check failures: 3 × (60 s + 10 s) = 210 s (after the grace period, Docker runs a check every 60 s and allows up to 3 failures with a 10 s timeout each)
 3. Auto-heal detection: up to 5 s (default polling interval)
 4. Shutdown timeout: up to 10 s (before SIGKILL)
 
-Total worst-case downtime = `180 s + 5 s + 10 s = 195 s` (≈ 3 minutes and 15 seconds).
+Total worst-case downtime = `210 s + 5 s + 10 s = 225 s` (≈ 3 minutes and 45 seconds).
 
 ## CI/CD 
 
