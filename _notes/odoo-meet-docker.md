@@ -142,7 +142,7 @@ sudo docker volume create portainer_data
 sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.4
 ```
 
-After running the command, access the UI at `http://<your_server_ip>:9443`.
+After running the command, access the UI at `https://<your_server_ip>:9443`.
 
 💡 Note: Implement a cleanup script on your host to reclaim the disk space occupied by unused Docker images. For a detailed walkthrough, see [Automated Cleanup Unused Docker Images.](https://victorhachard.github.io/notes/automated-cleanup-unused-docker-images)
 
@@ -174,6 +174,28 @@ volumes:
   registry_auth:
 ```
 
+#### Create a User for the Registry
+
+To secure the registry, create a new user by generating a bcrypt-encrypted password and storing it in the `htpasswd` file:
+
+```bash
+docker run --entrypoint htpasswd httpd:2 -Bbn USERNAME PASSWORD > PATH_TOVOLUME/htpasswd
+```
+
+Alternatively, manually add a new user to the `htpasswd` file using the following command:
+
+```bash
+docker run --entrypoint htpasswd httpd:2 -Bbn USERNAME PASSWORD
+```
+
+Then append the output to the `htpasswd` file in the registry's auth volume:
+
+```bash
+echo 'USERNAME:BCRYPT_PASSWORD' >> /auth/htpasswd
+```
+
+Be sure that there is two lines in the file: one for the new user and one for the existing user (if any).
+
 #### Link the Registry to Portainer
 
 Refer to the official [Portainer documentation](https://docs.portainer.io/admin/registries/add/custom#:~:text=From%20the%20menu%20select%20Registries,enter%20the%20username%20and%20password.) for detailed instructions.
@@ -185,20 +207,6 @@ Refer to the official [Portainer documentation](https://docs.portainer.io/admin/
 - Authentication: `Yes`
 - Username: `USERNAME`
 - Password: `PASSWORD`
-
-#### Create a User for the Registry
-
-To secure the registry, create a new user by generating a bcrypt-encrypted password and storing it in the `htpasswd` file:
-
-```bash
-docker run --entrypoint htpasswd httpd:2 -Bbn USERNAME PASSWORD > PATH_TOVOLUME/htpasswd
-```
-
-Alternatively, manually add a new user to the `htpasswd` file:
-
-```bash
-echo 'USERNAME:BCRYPT_PASSWORD' >> /auth/htpasswd
-```
 
 #### List Registry Images & Tags
 
