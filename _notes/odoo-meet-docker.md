@@ -381,7 +381,7 @@ services:
       - /etc/opt/prometheus:/etc/prometheus:ro
       - prometheus-data:/prometheus
     ports:
-      - "9090:9090"
+      - "9090:9090"  # Optional don't needed if you use internal network
     command:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.path=/prometheus
