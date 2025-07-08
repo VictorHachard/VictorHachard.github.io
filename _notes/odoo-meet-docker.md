@@ -349,7 +349,7 @@ After changing the password, remove the `SEQ_PASSWORD` environment variable.
 
 - Add the `GELF Input` app to Seq to allow Odoo to send logs to Seq (Settings → Apps → Add App → GELP Input). Then add an instance of the GELF Input app with the following settings:
   - Name: `Odoo`
-- Add a retention policy to manage the amount of log data stored in Seq. For example, you can set a policy to delete logs older than 30 days.
+- Add a retention policy to manage the amount of log data stored in Seq (Data → Storage -> Add Retention Policies). For example, you can set a policy to delete logs older than 30 days.
 
 ### Install Grafana & Prometheus
 
