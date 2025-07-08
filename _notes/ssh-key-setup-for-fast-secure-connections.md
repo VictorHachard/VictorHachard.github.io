@@ -69,3 +69,18 @@ If you prefer `ssh` over PuTTY:
    ```powershell
    ssh myserver
    ```
+
+## 4. Disable password-based SSH on the server
+
+💡 Note: Double-check that key login works before proceeding.
+
+```bash
+sudo sed -i.bak \
+  -e "s/^#\?PasswordAuthentication .*/PasswordAuthentication no/" \
+  -e "s/^#\?ChallengeResponseAuthentication .*/ChallengeResponseAuthentication no/" \
+  /etc/ssh/sshd_config
+
+sudo systemctl restart sshd
+```
+
+After this, only key-based logins will be allowed.
