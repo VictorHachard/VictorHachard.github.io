@@ -308,6 +308,14 @@ Refer to the official [Seq documentation](https://hub.docker.com/r/datalust/seq)
 
 📌 **TL;DR:**
 
+Create a docker network for Seq to allow Odoo to send logs to it:
+
+```bash
+docker network create shared-seq-network
+```
+
+Or in portainer, go to `Networks` → `Add Network` and create a new network named `shared-seq-network`.
+
 ```yaml
 services:
   seq:
