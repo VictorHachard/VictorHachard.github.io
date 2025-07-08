@@ -58,20 +58,23 @@ Add Custom Logging Filters and Formatter include the following classes:
 ```py
 class uidFilterSeq(logging.Filter):
     def filter(self, record):
+        # Add the current db name to the log record
+        ct = threading.current_thread()
+        ct_db = getattr(ct, 'dbname', None)
+        dbname = tools.config['log_db'] if tools.config['log_db'] and tools.config['log_db'] != '%d' else ct_db
+        if dbname:
+            record.dbname = dbname
         if odoo and odoo.http and odoo.http.request:
-            if odoo.http.request.uid or odoo.http.request.session.uid:
+            user_id = False
+            try:
                 if odoo.http.request.uid:
                     user_id = odoo.http.request.uid
                 elif odoo.http.request.session.uid:
                     user_id = odoo.http.request.session.uid
-                if odoo.http.request.uid or odoo.http.request.session.uid:
-                    record.user_id = user_id
-                    # res = get_partner_user(user_id)
-                    # if res:
-                    #     record.user_partner = {'user_id': res['user_id'],
-                    #                            'user_login': res['user_login'],
-                    #                            'partner_id': res['partner_id'],
-                    #                            'partner_name': res['partner_name']}
+            except Exception:
+                pass
+            if user_id:
+                record.user_id = user_id
             if odoo.http.request.httprequest.cookies and 'visitor_uuid' in odoo.http.request.httprequest.cookies:
                 record.visitor_id = odoo.http.request.httprequest.cookies['visitor_uuid']
             if odoo.http.request.httprequest.remote_addr:
