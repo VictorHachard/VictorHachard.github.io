@@ -46,7 +46,14 @@ The default port for data ingress with GELF is **12201**.
 
 ## Modify the Odoo Logger
 
- Add Custom Logging Filters and Formatter. In the file `odoo/netsvc.py` , include the following classes:
+Add in the import section of the `odoo/netsvc.py` file:
+
+```py
+from pygelf import GelfUdpHandler, gelp
+gelf.LEVELS.update({25: 6})  # Add custom level for Odoo RUNBOT
+```
+
+Add Custom Logging Filters and Formatter include the following classes:
 
 ```py
 class uidFilterSeq(logging.Filter):
@@ -95,15 +102,6 @@ Integrate the Seq Logging Handler. After the blocks handling `tools.config['sysl
 ```py
 elif tools.cronfig['log_seq']:
     loghost = tools.config['log_seq']
-
-    def record_factory_seq(*args, **kwargs):
-        record = old_factory(*args, **kwargs)
-        # We need to change the runbot to info level because seq don't have a runbot level
-        if record.levelno == logging.RUNBOT:
-            record.levelno = logging.INFO
-        return record
-
-    logging.setLogRecordFactory(record_factory_seq)
     handler = GelfUdpHandler(
         host=str(loghost.split(':')[0]), port=int(loghost.split(':')[1]),
         include_extra_fields=True, debug=True
