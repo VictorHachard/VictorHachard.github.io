@@ -91,6 +91,8 @@ sudo dpkg-reconfigure -f noninteractive unattended-upgrades
 sudo sed -i "s/#Port 22/Port 2233/g" /etc/ssh/sshd_config
 ```
 
+💡 **Note:** To streamline secure access to your Odoo hosts, see [SSH Key Setup for Fast, Secure Connections on Windows with PuTTY](https://victorhachard.github.io/notes/ssh-key-setup-for-fast-secure-connections).
+
 ⚠️ **Warning:** For improved security, switch from password-based logins to SSH key authentication. After you’ve set up SSH keys for every user, disable all password-based login methods.
   ```bash
   sudo sed -i \
