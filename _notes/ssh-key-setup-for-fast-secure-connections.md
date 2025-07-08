@@ -72,7 +72,7 @@ If you prefer `ssh` over PuTTY:
 
 ## 4. Disable password-based SSH on the server
 
-> Double-check that key login works before proceeding.
+💡 Note: Double-check that key login works before proceeding.
 
 ```bash
 sudo sed -i.bak \
