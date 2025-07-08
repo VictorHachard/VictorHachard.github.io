@@ -42,6 +42,8 @@ When starting the Odoo server, you can specify the Seq server in one of two ways
   log_seq = seq-server:port
   ```
 
+The default port for data ingress with GELF is **12201**.
+
 ## Modify the Odoo Logger
 
  Add Custom Logging Filters and Formatter. In the file `odoo/netsvc.py` , include the following classes:
