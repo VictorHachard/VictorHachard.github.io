@@ -418,7 +418,8 @@ volumes:
 ```
 
 After running the command, access the UI at `http://<your_server_ip>:3000`.
-Log in with the default credentials (`admin` / `admin`), then configure the Prometheus data source and import a dashboard as needed.
+Log in with the default credentials (`admin` / `admin`).
+Configure the Prometheus data source in Grafana with the URL `http://<your_server_ip>:9090` or `http://prometheus:9090`
 
 #### Import Dashboards
 
