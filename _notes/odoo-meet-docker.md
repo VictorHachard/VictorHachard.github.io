@@ -17,7 +17,7 @@ This guide covers private registry, reverse proxy, logging, custom image creatio
 ### Architecture Diagram
 
 <div style="overflow-x: scroll;">
-<pre class="mermaid" style="width: 150%;">
+<pre class="mermaid" style="width: 200%;">
 sequenceDiagram
   participant Dev as Developer
   participant CI as CI/CD Pipeline
