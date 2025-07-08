@@ -17,6 +17,43 @@ This guide covers private registry, reverse proxy, logging, custom image creatio
 ### Architecture Diagram
 
 <pre class="mermaid">
+sequenceDiagram
+  participant Dev as Developer
+  participant CI as CI/CD Pipeline
+  participant Dockerfile
+  participant Entrypoint
+  participant Registry as Docker Registry
+  participant Portainer
+  participant Compose as Docker Compose
+  participant Odoo
+  participant PG as PostgreSQL
+  participant Seq
+  participant Grafana
+  participant NPM as Nginx Proxy Manager
+  participant CF as Cloudflare
+  participant User
+
+  Dev->>CI: Tag Commit / Push
+  CI->>Dockerfile: Build Odoo Image
+  Dockerfile->>Entrypoint: Inject Runtime Config (SEQ, THEME, ENV)
+  Entrypoint-->>Dockerfile: Ready for Image Build
+  CI->>Registry: Push Built Image
+  Portainer->>Registry: Pull Image
+  Portainer->>Compose: Deploy Stack
+  Compose->>Odoo: Launch Container
+  Compose->>PG: Start DB
+  Odoo->>Seq: Send Logs (via GELF)
+  Compose->>Grafana: Expose Metrics (via Prometheus Exporters)
+  Odoo->>NPM: Expose Web Interface
+  NPM->>CF: Public Reverse Proxy
+  User->>CF: Access https://odoo.example.com
+  CF->>NPM: Forward Request
+  NPM->>Odoo: Serve Response
+</pre>
+
+### Old Architecture Diagram
+
+<pre class="mermaid">
 flowchart LR
   A[Define Dockerfile] -->|Pipeline Execution| DP -->|Push| C[Docker Registry]
   
