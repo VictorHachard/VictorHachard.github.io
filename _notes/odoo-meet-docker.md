@@ -16,7 +16,8 @@ This guide covers private registry, reverse proxy, logging, custom image creatio
 
 ### Architecture Diagram
 
-<pre class="mermaid">
+<div style="overflow-x: scroll;">
+<pre class="mermaid" style="width: 150%;">
 sequenceDiagram
   participant Dev as Developer
   participant CI as CI/CD Pipeline
@@ -50,6 +51,7 @@ sequenceDiagram
   CF->>NPM: Forward Request
   NPM->>Odoo: Serve Response
 </pre>
+</div>
 
 ### Old Architecture Diagram
 
