@@ -355,6 +355,23 @@ After changing the password, remove the `SEQ_PASSWORD` environment variable.
 
 Install Grafana to visualize monitoring data collected by Prometheus.
 
+Create a file named `prometheus.yml` in `/etc/opt/prometheus` with the following content:
+
+```yaml
+global:
+  scrape_interval: 15s
+ 
+scrape_configs:
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+```
+
+This configuration sets up Prometheus to scrape metrics from cAdvisor and Node Exporter every 15 seconds.
+
 ```yaml
 services:
   prometheus:
