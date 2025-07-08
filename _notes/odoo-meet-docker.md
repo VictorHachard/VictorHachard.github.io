@@ -63,6 +63,41 @@ flowchart LR
 
 ## Server Setup
 
+### Network Prerequisites
+
+#### Required Open Ports
+
+Ensure these ports are reachable on your server so that each service can communicate and be accessed:
+
+| Service / Container           | Port              |
+| ----------------------------- | ----------------- |
+| **SSH**                       | 2233 and 22       |
+| **HTTP (global web)**         | 80                |
+| **HTTPS (global web)**        | 443               |
+| **Portainer CE**              | 9443              |
+| **Nginx Proxy Manager UI**    | 81                |
+| **Docker Registry**           | 5000              |
+| **Seq (logs UI)**             | 8081              |
+| **cAdvisor (metrics)**        | 8080              |
+| **Node Exporter (metrics)**   | 9100              |
+| **Prometheus (metrics + UI)** | 9090              |
+| **Grafana (dashboard UI)**    | 3000              |
+
+#### DNS Records
+
+Point the following hostnames to your server’s public IP so users and tools can reach each interface through the reverse proxy:
+
+| Service / Container           | DNS Record Type | DNS Record Name                   |
+| ----------------------------- | --------------- | --------------------------------- |
+| **Portainer CE**              | A               | `portainer.example.com`           |
+| **Nginx Proxy Manager**       | A               | `nginx-proxy-manager.example.com` |
+| **Docker Registry**           | A               | `registry.example.com`            |
+| **Seq (logs)**                | A               | `seq.example.com`                 |
+| **Grafana (dashboard)**       | A               | `grafana.example.com`             |
+| **Prometheus (metrics)**      | A               | `prometheus.example.com`          |
+
+Once DNS is in place, you can safely close these service ports at the firewall and expose them only via your reverse-proxy layer.
+
 ### Prerequisites
 
 - Updating and upgrading the system
