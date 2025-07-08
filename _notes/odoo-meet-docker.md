@@ -327,6 +327,7 @@ services:
       - "8081:80" # Web interface
     environment:
       - ACCEPT_EULA=Y
+      - SEQ_PASSWORD=your_password_here # Set a strong password
     volumes:
       - seq-data:/data
     networks:
@@ -341,6 +342,8 @@ networks:
 ```
 
 After running the command, access the UI at `http://<your_server_ip>:8081`.
+Log in with the default credentials (`admin` / `your_password_here`), then configure Seq as needed.
+After changing the password, remove the `SEQ_PASSWORD` environment variable.
 
 #### Configure Seq
 
