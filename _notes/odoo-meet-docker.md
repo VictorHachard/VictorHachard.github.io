@@ -87,14 +87,14 @@ Ensure these ports are reachable on your server so that each service can communi
 
 Point the following hostnames to your server’s public IP so users and tools can reach each interface through the reverse proxy:
 
-| Service / Container           | DNS Record Type | DNS Record Name                   |
-| ----------------------------- | --------------- | --------------------------------- |
-| **Portainer CE**              | A               | `portainer.example.com`           |
-| **Nginx Proxy Manager**       | A               | `nginx-proxy-manager.example.com` |
-| **Docker Registry**           | A               | `registry.example.com`            |
-| **Seq (logs)**                | A               | `seq.example.com`                 |
-| **Grafana (dashboard)**       | A               | `grafana.example.com`             |
-| **Prometheus (metrics)**      | A               | `prometheus.example.com`          |
+| Service / Container           | DNS Record Name                   |
+| ----------------------------- | --------------------------------- |
+| **Portainer CE**              | `portainer.example.com`           |
+| **Nginx Proxy Manager**       | `nginx-proxy-manager.example.com` |
+| **Docker Registry**           | `registry.example.com`            |
+| **Seq (logs)**                | `seq.example.com`                 |
+| **Grafana (dashboard)**       | `grafana.example.com`             |
+| **Prometheus (metrics)**      | `prometheus.example.com`          |
 
 Once DNS is in place, you can safely close these service ports at the firewall and expose them only via your reverse-proxy layer.
 
