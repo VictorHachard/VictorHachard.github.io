@@ -92,7 +92,6 @@ if [ -n "${OVERRIDE_CONF_FILE}" ]; then
     "PROXY_MODE"
     "ADMIN_PASSWD"
     "SERVER_WIDE_MODULES"
-    "SEQ_ADDRESS"
   )
 
   for var in "${disallowed_vars[@]}"; do

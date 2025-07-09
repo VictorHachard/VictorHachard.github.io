@@ -553,23 +553,25 @@ The `entrypoint.sh` script is essential for configuring the Odoo container at ru
 
 To add Seq logging to Odoo refer to [Configuring Odoo Logging to Seq with pygelf](https://victorhachard.github.io/notes/odoo-add-seq-logger).
 
-Update the `entrypoint.sh` script to add Seq logging :
+Update the `entrypoint.sh` script :
 
-```bash
-if [ -z "${OVERRIDE_CONF_FILE}" ]; then
-  if [ -n "${SEQ_ADDRESS}" ]; then
-    # If SEQ_ADDRESS is set, update or add log_seq in odoo.conf
-    if grep -q -E "^\s*log_seq\s*=" "$ODOO_RC" ; then
-      sed -i "s/^\s*log_seq\s*=.*/log_seq = ${SEQ_ADDRESS}/" "$ODOO_RC"
+- Add in the `disallowed_vars` list `'SEQ_ADDRESS'`.
+- Then add the following code snippet to the `entrypoint.sh`:
+  ```bash
+  if [ -z "${OVERRIDE_CONF_FILE}" ]; then
+    if [ -n "${SEQ_ADDRESS}" ]; then
+      # If SEQ_ADDRESS is set, update or add log_seq in odoo.conf
+      if grep -q -E "^\s*log_seq\s*=" "$ODOO_RC" ; then
+        sed -i "s/^\s*log_seq\s*=.*/log_seq = ${SEQ_ADDRESS}/" "$ODOO_RC"
+      else
+        echo "log_seq = ${SEQ_ADDRESS}" >> "$ODOO_RC"
+      fi
     else
-      echo "log_seq = ${SEQ_ADDRESS}" >> "$ODOO_RC"
+      # If SEQ_ADDRESS is not set, remove the log_seq line from odoo.conf
+      sed -i "/^\s*log_seq\s*=/d" "$ODOO_RC"
     fi
-  else
-    # If SEQ_ADDRESS is not set, remove the log_seq line from odoo.conf
-    sed -i "/^\s*log_seq\s*=/d" "$ODOO_RC"
   fi
-fi
-```
+  ```
 
 Define `SEQ_ADDRESS` in the Docker environment:
   
