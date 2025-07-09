@@ -90,6 +90,7 @@ if [ -n "${OVERRIDE_CONF_FILE}" ]; then
     "LIMIT_REQUEST"
     "LIST_DB"
     "PROXY_MODE"
+    "UNACCENT"
     "ADMIN_PASSWD"
     "SERVER_WIDE_MODULES"
   )
@@ -122,8 +123,9 @@ fi
 : ${LIMIT_TIME_CPU:=60}
 : ${LIMIT_TIME_REAL:=120}
 : ${LIMIT_REQUEST:=65536}
-: ${LIST_DB:='True'}
-: ${PROXY_MODE:='False'}
+: ${LIST_DB:=True}
+: ${PROXY_MODE:=False}
+: ${UNACCENT:=False}
 
 # Apply custom Odoo configuration if provided
 if [ -n "${OVERRIDE_CONF_FILE}" ]; then
@@ -187,11 +189,14 @@ if [ -z "${OVERRIDE_CONF_FILE}" ]; then
     ODOO_ARGS+=("--limit-time-cpu=${LIMIT_TIME_CPU}")
     ODOO_ARGS+=("--limit-time-real=${LIMIT_TIME_REAL}")
     ODOO_ARGS+=("--limit-request=${LIMIT_REQUEST}")
-    if [ -n "${LIST_DB}" ] && [ "${LIST_DB}" = "False" ]; then
+    if [ -n "${LIST_DB}" ] && { [ "${LIST_DB}" = "False" ] || [ "${LIST_DB}" = "false" ] || [ "${LIST_DB}" = false ]; }; then
         ODOO_ARGS+=("--no-database-list")
     fi
-    if [ -n "${PROXY_MODE}" ] && [ "${PROXY_MODE}" = "True" ]; then
+    if [ -n "${PROXY_MODE}" ] && { [ "${PROXY_MODE}" = "True" ] || [ "${PROXY_MODE}" = "true" ] || [ "${PROXY_MODE}" = true ]; }; then
         ODOO_ARGS+=("--proxy-mode")
+    fi
+    if [ -n "${UNACCENT}" ] && { [ "${UNACCENT}" = "True" ] || [ "${UNACCENT}" = "true" ] || [ "${UNACCENT}" = true ]; }; then
+        ODOO_ARGS+=("--unaccent")
     fi
 fi
 
