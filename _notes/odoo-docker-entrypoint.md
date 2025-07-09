@@ -123,9 +123,9 @@ fi
 : ${LIMIT_TIME_CPU:=60}
 : ${LIMIT_TIME_REAL:=120}
 : ${LIMIT_REQUEST:=65536}
-: ${LIST_DB:=True}
-: ${PROXY_MODE:=False}
-: ${UNACCENT:=False}
+: ${LIST_DB:=true}
+: ${PROXY_MODE:=false}
+: ${UNACCENT:=false}
 
 # Apply custom Odoo configuration if provided
 if [ -n "${OVERRIDE_CONF_FILE}" ]; then
