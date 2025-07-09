@@ -129,7 +129,7 @@ server {
 
 #### Websocket Support
 
-- **Location**: `/longpolling`
+- **Location**: `/websocket`
 - **Scheme**: `http`
 - **Forward Hostname / IP**: `internal-odoo-server` (or the internal IP address of your Odoo server)
 - **Forward Port**: `8072` (or the port your Odoo server is running on)
