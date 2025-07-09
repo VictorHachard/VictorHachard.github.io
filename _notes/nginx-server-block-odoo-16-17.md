@@ -11,7 +11,7 @@ categories: ['Odoo', 'System Administration']
 ⚠️ **Warning:** The only differences between the Odoo 16/17 configuration and the Odoo 11/15 setup are:
 
 - Renaming the `/longpolling` location to `/websocket`
-- Enabling static-asset caching in the proxy manager.
+- Enabling static-asset caching in the proxy manager for Odoo 16.0
 
 ## Purpose
 
@@ -122,7 +122,7 @@ server {
 - **Forward Hostname / IP**: `internal-odoo-server` (or the internal IP address of your Odoo server)
 - **Forward Port**: `8069` (or the port your Odoo server is running on)
 - **Block Common Exploits**: `ON`
-- **Cache Assets**: `ON`
+- **Cache Assets**: `ON` (for Odoo 16.0) `OFF` (for Odoo 17.0)
 - **Websockets Support**: `OFF`
 
 ### Custom Location
