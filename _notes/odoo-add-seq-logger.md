@@ -103,7 +103,7 @@ class DBFormatterSeq(logging.Formatter):
 Integrate the Seq Logging Handler. After the blocks handling `tools.config['syslog']:` and `elif tools.config['logfile']:`, add this snippet to configure Seq logging:
 
 ```py
-elif tools.cronfig['log_seq']:
+elif tools.config['log_seq']:
     loghost = tools.config['log_seq']
     handler = GelfUdpHandler(
         host=str(loghost.split(':')[0]), port=int(loghost.split(':')[1]),
