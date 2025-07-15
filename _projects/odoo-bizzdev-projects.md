@@ -33,3 +33,10 @@ Over the past four years at BizzDev, I have delivered multiple projects using Od
 
 - **Non-Profit Animal Care Management (Odoo 18)**  
   I developed a module for a non-profit organization supporting disabled individuals. This solution streamlines workflows for managing multiple dogs, handles service requests, stores comprehensive reports, and integrates a calendar for scheduling and planning activities.
+
+- **Equipment Rental and Delivery Management (Odoo 11)**  
+  Built a rental module with delivery management: geolocated customer sites to calculate delivery fees by distance, and optimized routing for efficient dispatch.
+
+- **Industrial Maintenance Management with Visualization (Odoo 11)**  
+  Developed a factory maintenance solution featuring an interactive 2D “stacker” floor plan for precise job placement, coupled with a synchronized Gantt timeline to visualize maintenance tasks both spatially and temporally.
+  
