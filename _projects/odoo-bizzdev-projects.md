@@ -14,7 +14,7 @@ languages:
 Over the past four years at BizzDev, I have delivered multiple projects using Odoo Community Edition (CE) across versions 11, 13, 15, 16, 17, and 18, tailoring solutions to meet a wide range of business needs. Below are some key projects:
 
 - **Comprehensive ERP Solution (Odoo 15)**  
-  I implemented an integrated system covering Inventory, POS, eCommerce, Sales, Purchases, Invoicing, and HR. The project included extensive customizations such as specialized stock management, bulk product imports with complex supplier integrations, and dynamic price lists computed from multiple data sources and rules. I also developed a mobile app for inventory management, empowering warehouse staff with real-time data and seamless operational control.
+  I implemented an integrated system covering Inventory, POS, eCommerce, Sales, Purchases, Invoicing, and HR. The project included extensive customizations such as specialized stock management, bulk product imports with complex supplier integrations, and dynamic price lists computed from multiple data sources and rules. I also developed a mobile app for inventory management, helping warehouse staff with real-time data and seamless operational control.
 
 - **B2B Auction Platform (Odoo 16)**  
   I developed and integrated an auction website within Odoo specifically for B2B clients. The platform facilitates efficient and secure online bidding by connecting to an API that retrieves customer and product data, while also providing real-time sales information for accurate tracking and robust post-auction analysis.
