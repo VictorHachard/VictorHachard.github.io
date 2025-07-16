@@ -47,7 +47,7 @@ Explore how to extend Odoo 16.0 to support online auctions with manual bids, aut
 
 <div style="overflow-x: scroll;">
 <pre class="mermaid" style="width: 150%;">
-with sequenceDiagram
+sequenceDiagram
     participant Admin
     participant User
     participant OtherClient
