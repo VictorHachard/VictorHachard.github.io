@@ -2,6 +2,7 @@
 layout: project
 title: Implementing an Auction System in Odoo 16.0
 draft: true
+active: false
 date: 2025-07-16 00:00:00 +0200
 author: Victor Hachard
 languages:
@@ -20,7 +21,7 @@ Explore how to extend Odoo 16.0 to support online auctions with manual bids, aut
 * **JavaScript client**: WebSocket-based real-time updates via the `bus.bus` service
 * **Workflow**: From auction creation to order generation
 
-## 5. Workflow Summary (Réécrit)
+## 2. Workflow Summary
 
 1. **Setup**:
     
