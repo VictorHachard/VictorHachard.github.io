@@ -45,8 +45,7 @@ Explore how to extend Odoo 16.0 to support online auctions with manual bids, aut
 
    À la **date de fin** (ou après prolongation), `set_auction_state()` passe l’enchère à l’état **complete** ou **closed**. Si le prix de réserve est atteint, l’**Admin** déclenche `action_finish_auction()`, générant automatiquement une **commande de vente (sale.order)** pour le gagnant.
 
-<div style="overflow-x: scroll;">
-<pre class="mermaid" style="width: 150%;">
+<pre class="mermaid">
 sequenceDiagram
     participant Admin
     participant User
@@ -75,7 +74,6 @@ sequenceDiagram
     Backend-->>JS_Client: Return updated HTML
     JS_Client-->>User: Replace updated HTML
 </pre>
-</div>
 
 ## 3. Extending the Backend Model
 
