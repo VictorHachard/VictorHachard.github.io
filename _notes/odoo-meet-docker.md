@@ -10,6 +10,8 @@ categories: ['Docker', 'Odoo', 'CI/CD', 'System Administration']
 
 ⚠️ **Warning:** tested on Odoo 11.0, 15.0, 16.0, 17.0, and 18.0 with Ubuntu 24.04.1 LTS in early 2025.
 
+⚠️ **Warning:** Never use the `latest` tag for software on a production server. Always specify a version tag. When upgrading, read the changelog of **every intermediate version** up to the target version.
+
 ## Overview  
 
 This guide covers private registry, reverse proxy, logging, custom image creation, container execution, PostgreSQL, and Seq integration.
