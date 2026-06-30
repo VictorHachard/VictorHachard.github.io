@@ -7,9 +7,9 @@ author: Victor Hachard
 categories: ['Odoo']
 ---
 
-## Get torrent that have an outdated revision
+## Get torrents that have an outdated revision
 
-Retrieves the IDs of pirate torrents that don't have a revision or one of the revision is outdated (not the latest). 
+Retrieves the IDs of pirate torrents that don't have a revision or one of the revisions is outdated (not the latest). 
 
 <!-- ![sql-diagram]({{site.baseurl}}/res/sql-102/1.png) -->
 

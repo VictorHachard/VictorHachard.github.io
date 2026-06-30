@@ -7,7 +7,7 @@ author: Victor Hachard
 categories: ['Odoo']
 ---
 
-To have one2many line tracking value in the parent model, you need to inherit the `mail.thread` model in parent model and the child model and override the `_mail_track` method in the child model.
+To have one2many line tracking value in the parent model, you need to inherit the `mail.thread` model in the parent model and the child model and override the `_mail_track` method in the child model.
 
 ```py
 class Sale(models.Model):

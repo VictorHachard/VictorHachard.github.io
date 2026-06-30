@@ -13,9 +13,9 @@ sudo adduser user_name
 sudo passwd 'user_name' password
 ```
 
-Once a new user created, it’s entry automatically added to the `/etc/passwd` file.
+Once a new user is created, its entry is automatically added to the `/etc/passwd` file.
 
-### Delete an user
+### Delete a user
 
 ```sh
 sudo userdel user_name
@@ -35,11 +35,11 @@ useradd -d folder_name user_name
 tecmint:x:504:504:tecmint:/home/tecmint:/bin/bash
 ```
 
--   Username: User login name used to login into system. It should be between 1 to 32 charcters long.
+-   Username: User login name used to login into system. It should be between 1 and 32 characters long.
 -   Password: User password (or x character) stored in /etc/shadow file in encrypted format.
 -   User ID (UID): Every user must have a User ID (UID) User Identification Number. By default UID 0 is reserved for root user and UID’s ranging from 1-99 are reserved for other predefined accounts. Further UID’s ranging from 100-999 are reserved for system accounts and groups.
 -   Group ID (GID): The primary Group ID (GID) Group Identification Number stored in /etc/group file.
--   User Info: This field is optional and allow you to define extra information about the user. For example, user full name. This field is filled by ‘finger’ command.
+-   User Info: This field is optional and allows you to define extra information about the user. For example, user full name. This field is filled by ‘finger’ command.
 -   Home Directory: The absolute location of user’s home directory.
 -   Shell: The absolute location of a user’s shell i.e. /bin/bash.
 
@@ -58,7 +58,7 @@ sudo groupadd group_name
 sudo groupdel group_name
 ```
 
-#### Add an user to a primary group
+#### Add a user to a primary group
 
 ```sh
 sudo usermod -a -g group_name user_name
@@ -66,7 +66,7 @@ sudo usermod -a -g group_name user_name
 
 Always use the -a (append) switch when adding a user to a new group. If you omit the -a switch the user will be removed from any groups not listed after the -G switch.
 
-#### Add/remove an user to a group
+#### Add/remove a user to a group
 
 ```sh
 sudo usermod -a -G group_name users_name

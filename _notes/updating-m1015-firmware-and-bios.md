@@ -2,7 +2,7 @@
 layout: note
 title: Updating SuperMicro M1015 Firmware and BIOS
 draft: false
-date: 2020-10-11 47:40:00 +0200
+date: 2020-10-11 17:40:00 +0200
 author: Victor Hachard
 categories: ['System Administration']
 ---

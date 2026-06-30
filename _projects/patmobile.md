@@ -13,7 +13,7 @@ githubs:
     - github.com/VictorHachard/BasicWebSite/tree/patmobile
 ---
 
-[Pat'mobile](https://www.patmobile.be/) is a static website that I build for a client.
+[Pat'mobile](https://www.patmobile.be/) is a static website that I built for a client.
 
 ![Logo Pat'mobile]({{site.baseurl}}/res/patmobile/logo.png)
 

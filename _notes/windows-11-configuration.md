@@ -8,7 +8,7 @@ categories: ['System Administration', 'Windows']
 
 ## 1 Restore old Right-click Context menu in Windows 11
 
-- Press `Win + X`, selecting `Windows Terminal (Admin)`, and clicking `Yes` in the User Account Control dialog.
+- Press `Win + X`, select `Windows Terminal (Admin)`, and click `Yes` in the User Account Control dialog.
 - Run the following command to restore the old right-click context menu:
 ```sh
 reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve

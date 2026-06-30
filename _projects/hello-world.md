@@ -19,4 +19,4 @@ print("Hello World!")
 But in general it should represent the minimal effort to show the workings of a
 system's dependencies.
 
-This post is my "Hello World" for all the future project I may do.
+This post is my "Hello World" for all the future projects I may do.

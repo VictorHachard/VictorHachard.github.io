@@ -7,7 +7,7 @@ author: Victor Hachard
 categories: ['Odoo']
 ---
 
-To customizing and configuring the database setup. Add a new key-value pair to the dictionary with the key `post_init_hook` and the value as the name of the function you want to use as the post-init hook.
+To customize and configure the database setup. Add a new key-value pair to the dictionary with the key `post_init_hook` and the value as the name of the function you want to use as the post-init hook.
 
 ```py
 {
@@ -26,10 +26,10 @@ To customizing and configuring the database setup. Add a new key-value pair to t
 }
 ```
 
-Update the `__init__.py` file to include the `_post_init` function, In this example the `_post_init(cr, registry)` function do the following:
+Update the `__init__.py` file to include the `_post_init` function. In this example the `_post_init(cr, registry)` function does the following:
 
 - Activates the French language ('fr_FR') in the 'res.lang' model.
-- Calls the `_auto_activate(env)` function to automatically activates a specific configuration setting.
+- Calls the `_auto_activate(env)` function to automatically activate a specific configuration setting.
 - Updates various fields of the 'base.main_company' record, such as name, website, email, address, VAT number, invoice terms, logo, colors, etc.
 - Updates translations for the 'invoice_terms' field in French.
 - Calls the `_remove_onboarding(env)` and `_remove_digest(env)` functions to clean up onboarding and digest related data.

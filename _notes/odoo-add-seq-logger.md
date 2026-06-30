@@ -23,7 +23,7 @@ pip install pygelf
 
 ## Update the Odoo configuration
 
-In the `__init__(self, fname=None)` method from the `configmanager` class, add this line to introduce a new logging option for Seq::
+In the `__init__(self, fname=None)` method from the `configmanager` class, add this line to introduce a new logging option for Seq:
 
 ```py
 group.add_option('--log-seq', dest='log_seq', help="Logging to seq")
@@ -53,7 +53,7 @@ from pygelf import GelfUdpHandler, gelp
 gelf.LEVELS.update({25: 6})  # Add custom level for Odoo RUNBOT
 ```
 
-Add Custom Logging Filters and Formatter include the following classes:
+Add the following custom logging filter and formatter classes:
 
 ```py
 class uidFilterSeq(logging.Filter):

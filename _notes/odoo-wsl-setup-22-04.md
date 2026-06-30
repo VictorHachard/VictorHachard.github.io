@@ -77,7 +77,7 @@ Installs the `git`:
 sudo apt-get install git
 ```
 
-configure Git settings. The first command disables automatic line ending conversion in Git, which can be useful when working with cross-platform projects. The second and third commands set the global Git username and email address to be used for commits.
+Configure Git settings. The first command disables automatic line ending conversion in Git, which can be useful when working with cross-platform projects. The second and third commands set the global Git username and email address to be used for commits.
 
 ```sh
 git config --global core.autocrlf false
@@ -227,7 +227,7 @@ Start the PostgreSQL command-line tool (psql):
 psql
 ```
 
-Execute SQL command to create a database users: odoo_project_x with the password 'odoo' and the ability to create databases.
+Execute SQL command to create a database user: odoo_project_x with the password 'odoo' and the ability to create databases.
 
 ```sh
 CREATE USER odoo_project_x WITH PASSWORD 'odoo' CREATEDB;

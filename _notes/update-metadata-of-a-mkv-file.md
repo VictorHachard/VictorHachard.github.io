@@ -20,7 +20,7 @@ for %%a in ("*.mkv") do mkvpropedit "%%a" ^
 --edit track:s2 --set flag-default=1 --set flag-forced=0
 ```
 
-This script use the `mkvpropedit` utility installed and available in your system's PATH.
+This script uses the `mkvpropedit` utility installed and available in your system's PATH.
 
 ### Update Track
 
@@ -34,7 +34,7 @@ for %%a in ("*.mkv") do mkvmerge.exe -o "output\%%~na.mkv" ^
 "%%a"
 ```
 
-This script use the `mkvmerge` utility installed and available in your system's PATH.
+This script uses the `mkvmerge` utility installed and available in your system's PATH.
 
 ## Removing Title Tags from MKV Files Using PowerShell
 
@@ -44,4 +44,4 @@ To remove the title tags from multiple MKV files using PowerShell:
 foreach ($f in Get-ChildItem "*.mkv") { mkvpropedit "$f" --edit info -d title --tags all: -d title }
 ```
 
-This script use the `mkvpropedit` utility installed and available in your system's PATH.
+This script uses the `mkvpropedit` utility installed and available in your system's PATH.

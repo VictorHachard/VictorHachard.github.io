@@ -15,9 +15,9 @@ mail-it is a Spring API that allows web applications to easily send email to you
 
 mail-it offers features such as domain whitelisting and an alias system.
 
-The domain whitelisting feature allows which domains are allowed to send emails through the mail-it API, providing an additional level of security and control.
+The domain whitelisting feature controls which domains are allowed to send emails through the mail-it API, providing an additional level of security and control.
 
-The alias system allows sending emails using aliases instead of actual email address to protect privacy.
+The alias system allows sending emails using aliases instead of actual email addresses to protect privacy.
 
 ## Code Example
 

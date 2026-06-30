@@ -19,7 +19,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 - [Odoo `<odoo_version>` - odoo_20240122](https://nightly.odoo.com/`<odoo_version>`.0/nightly/src/)
 - [Python 3.10](https://www.python.org/downloads/release/python-310/)
-- [PostgresSQL 14](https://www.postgresql.org/download/)
+- [PostgreSQL 14](https://www.postgresql.org/download/)
 - [wkhtmltopdf 0.12.6.1 (with patched qt) / Windows](https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1/wkhtmltox-0.12.6-1.msvc2015-win64.exe)
 - [wkhtmltopdf 0.12.6.1-2 (with patched qt) / Ubuntu](https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb)
 - [build-tools from Microsoft (C++) / Windows](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)
@@ -39,7 +39,7 @@ Create a new Login Role with these parameters:
 
 -   Name: ``<project_name>`_odoo_`<odoo_version>``
 -   Password: `odoo`
--   Privileges: Can login, Create databases, Inherit right from the parent roles.
+-   Privileges: Can login, Create databases, Inherit rights from the parent roles.
 
 ```sql
 CREATE USER `<project_name>`_odoo_`<odoo_version>` WITH PASSWORD 'odoo' CREATEDB;
@@ -47,7 +47,7 @@ CREATE USER `<project_name>`_odoo_`<odoo_version>` WITH PASSWORD 'odoo' CREATEDB
 
 #### Odoo configuration
 
-Create a configuration file name 'odoo.conf' in a configuration folder and then copy and paste this following configuration.
+Create a configuration file named 'odoo.conf' in a configuration folder and then copy and paste this following configuration.
 
 ```
 [options]
@@ -89,7 +89,7 @@ pip install -r src\requirements.txt
 
 #### pydevd-odoo
 
-PyDev.Debugger is the Python debugger used in PyDev, PyCharm, VSCode. This plugin aims to make the debugger works better for Odoo.
+PyDev.Debugger is the Python debugger used in PyDev, PyCharm, VSCode. This plugin aims to make the debugger work better for Odoo.
 
 ```bash
 pip install pydevd-odoo

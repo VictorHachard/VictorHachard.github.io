@@ -11,4 +11,4 @@ study: Computer Systems Networking and Telecommunications
 logo: heh.png
 ---
 
-Relevant assets learn: routing and switching, development web-android, object oriented design, algorithms, relational database, data structures, software development.
+Relevant assets learned: routing and switching, development web-android, object-oriented design, algorithms, relational database, data structures, software development.

@@ -10,7 +10,7 @@ githubs:
     - github.com/VictorHachard/pygame-roguelike
 ---
 
-This is a small roguelike game using pygame for learning purpose. I discover GitHub Action for the first time on this project.
+This is a small roguelike game using pygame for learning purposes. I discovered GitHub Actions for the first time on this project.
 
 ![Gif PyGame Roguelike]({{site.baseurl}}/res/pygame-roguelike/sample.gif)
 

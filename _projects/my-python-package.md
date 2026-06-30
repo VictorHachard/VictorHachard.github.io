@@ -9,8 +9,8 @@ githubs:
     - github.com/VictorHachard/vha-toolbox
 ---
 
-This is a Python package that contains some useful functions for my projects. It is available on [PyPi](https://pypi.org/project/vha-toolbox/).
+This is a Python package that contains some useful functions for my projects. It is available on [PyPI](https://pypi.org/project/vha-toolbox/).
 
 ## What I Learned
 
-- Pypi
+- PyPI

@@ -67,7 +67,7 @@ product.write({'list_price': new_price})
 
 ### Update
 
-`self.update(vals)`: This method is used to update a record. It takes a dictionary vals as an argument, similar to self.write(), but it not savec in database. The update method returns mothing.
+`self.update(vals)`: This method is used to update a record. It takes a dictionary vals as an argument, similar to self.write(), but it is not saved in the database. The update method returns nothing.
 
 ```py
 product = self.env['product.product'].browse(product_id)
@@ -81,7 +81,7 @@ products.update({'list_price': new_price})
 | Usage | Used to update existing record(s) in the database. | Used to update a pseudo-record/record in a `@api.onchange` or a `@api.depends`. |
 | Arguments | <td colspan="2"> Takes a dictionary vals where keys are the fields to be updated, and values are the new values for those fields. |
 | Target | Can be called on a specific record or a set of records. | Called on the model itself (a record). |
-| Triggers | Executes related computations methods (`@api.depends`, ...). | Bypasses related computations methods. |
+| Triggers | Executes related computation methods (`@api.depends`, ...). | Bypasses related computations methods. |
 | Returns | Returns `True` if the update is successful. | Returns `None`. |
 
 ## Method Decorators
@@ -163,7 +163,7 @@ class MyModel(models.Model):
         self.nice_done = 'Done' if self.done else 'TODO'
 ```
 
-Since `@onchange` returns a pseudo-records, calling any one of the CRUD methods (`create`, `read`, `write`, `unlink`) on the aforementioned recordset is undefined behaviour, as they potentially do not exist in the database yet.
+Since `@onchange` returns pseudo-records, calling any one of the CRUD methods (`create`, `read`, `write`, `unlink`) on the aforementioned recordset is undefined behaviour, as they potentially do not exist in the database yet.
 
 Instead, simply set the record’s field like shown in the example above or call the `update` method.
 
@@ -177,7 +177,7 @@ Instead, simply set the record’s field like shown in the example above or call
 
 ### @api.constrains
 
-The `@api.constrains` decorator is used to define constrains on a model. It allows you to specify rules that the model's records must follow to maintain data integrity. The decorated method is called whenever the constrain is evaluated.
+The `@api.constrains` decorator is used to define constraints on a model. It allows you to specify rules that the model's records must follow to maintain data integrity. The decorated method is called whenever the constraint is evaluated.
 
 Example:
 
@@ -194,7 +194,7 @@ class MyModel(models.Model):
                 raise ValidationError("Field value must be positive.")
 ```
 
-`@constrains` will be triggered only if the declared fields in the decorated method are included in the `create` or `write` call. It implies that fields not present in a view will not trigger a call during a record creation. A override of `create` is necessary to make sure a constrain will always be triggered (e.g. to test the absence of value).
+`@constrains` will be triggered only if the declared fields in the decorated method are included in the `create` or `write` call. It implies that fields not present in a view will not trigger a call during a record creation. An override of `create` is necessary to make sure a constraint will always be triggered (e.g. to test the absence of value).
 
 ### @api.model_create_multi
 

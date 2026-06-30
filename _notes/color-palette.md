@@ -59,7 +59,7 @@ author: Victor Hachard
         <circle cx="10" cy="10" r="8" fill="#88a1ca" />
     </svg>
 
-- Fushia: `#e77fc2`
+- Fuchsia: `#e77fc2`
 
     <svg width="20" height="20">
         <circle cx="10" cy="10" r="8" fill="#e77fc2" />

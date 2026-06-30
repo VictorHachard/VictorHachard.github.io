@@ -36,7 +36,7 @@ Router#
 Router(config)#?
 ```
 
-This will display all available commands. If there is a -More-, you can either do it to display the next line or make a space to display the next page. To quit the display, press the Q key or CTRL + C combination
+This will display all available commands. If there is a -More-, you can press Enter to display the next line or press the space bar to display the next page. To quit the display, press the Q key or CTRL + C combination
 
 ### Save
 
@@ -177,10 +177,10 @@ Switch#show ipv6 interface brief or sh ipv6 int br
 
 ### IPv4
 
-#### Add an ip address
+#### Add an IP address
 
 -   Interface: Fa0/0
--   IP adress: 192.168.100.1
+-   IP address: 192.168.100.1
 -   Subnet Mask: 255.255.255.0
 
 ```
@@ -195,7 +195,7 @@ Router(config)#int fa0/0
 Router(config-if)#no shutdown or no sh
 ```
 
-####  Remove an ip address
+#### Remove an IP address
 
 ```
 Router(config)#interface fastEthernet 0/0
@@ -209,7 +209,7 @@ Router(config-if)#shutdown or sh
 
 ### IPv6
 
-ipv6 routing is disabled on your routers which prevents ipv6 communication between different pc. You must activate it with this command:
+IPv6 routing is disabled on your routers, which prevents IPv6 communication between different PCs. You must activate it with this command:
 
 ```
 Router(config)#ipv6 unicast-routing

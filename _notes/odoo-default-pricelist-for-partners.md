@@ -36,7 +36,7 @@ class ResConfigSettings(models.TransientModel):
 2. Inherit the `res.partner` model:
 
 
-    The `compute` method `_compute_partner_pricelist_id` calculates the value of the `partner_pricelist_id` field based on the `property_product_pricelist` field. If `sproperty_product_pricelist` is set, it assigns its value to `partner_pricelist_id`. Otherwise, it retrieves the default pricelist for partners from the configuration settings.
+    The `compute` method `_compute_partner_pricelist_id` calculates the value of the `partner_pricelist_id` field based on the `property_product_pricelist` field. If `property_product_pricelist` is set, it assigns its value to `partner_pricelist_id`. Otherwise, it retrieves the default pricelist for partners from the configuration settings.
 
     The `inverse` method `_set_partner_pricelist_id` ensures that when `partner_pricelist_id` is modified, it updates the `property_product_pricelist `field accordingly, ensuring synchronization between the two fields.
 

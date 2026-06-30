@@ -10,4 +10,4 @@ post: Bachelor’s Internship
 logo: none.png
 ---
 
-13-week internship at Technord where I created an installer with NSIS to simplify and accelerate the installation of software and a experimental web application with Angular in order to verify the viability of a new product.
+13-week internship at Technord where I created an installer with NSIS to simplify and accelerate the installation of software and an experimental web application with Angular in order to verify the viability of a new product.

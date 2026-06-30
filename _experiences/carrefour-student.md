@@ -10,4 +10,4 @@ post: Student Job - meat counter
 logo: none.png
 ---
 
-During this experience I was able to improve my communication with customer contacts as well as familiarize myself working in large companies.
+During this experience I was able to improve my communication with customer contacts as well as familiarize myself with working in large companies.

@@ -10,7 +10,7 @@ githubs:
     - github.com/VictorHachard/game-engine
 ---
 
-Game engine is a tools available for game designers to code out a game quickly and easily without building one from the ground up. This game engine is a 2D based using JavaFX.
+A game engine is a tool available for game designers to code out a game quickly and easily without building one from the ground up. This game engine is 2D-based using JavaFX.
 
 ## What I Learned
 

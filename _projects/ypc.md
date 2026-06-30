@@ -14,7 +14,7 @@ githubs:
     - github.com/VictorHachard/YPC_2.0
 ---
 
-YouTube Playlist Checker 2.0 is a web service monitoring your YouTube playlists, so you never again lost a video that has been switched to private or has been deleted.
+YouTube Playlist Checker 2.0 is a web service monitoring your YouTube playlists, so you never again lose a video that has been switched to private or has been deleted.
 
 ![Gif YouTube Playlist Checker]({{site.baseurl}}/res/ypc/sample.gif)
 

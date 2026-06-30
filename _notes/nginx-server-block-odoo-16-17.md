@@ -17,7 +17,7 @@ categories: ['Odoo', 'System Administration']
 
 ## Purpose
 
-This guide provides a complete Nginx configuration for Odoo 11 and 15, including SSL setup, HTTP to HTTPS redirection, and long-polling support. It is designed to be used with Nginx Proxy Manager or directly in an Nginx configuration file.
+This guide provides a complete Nginx configuration for Odoo 16 and 17, including SSL setup, HTTP to HTTPS redirection, and websocket support. It is designed to be used with Nginx Proxy Manager or directly in an Nginx configuration file.
 
 ## References
 
