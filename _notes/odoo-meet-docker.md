@@ -2,7 +2,7 @@
 layout: note
 title: Odoo Deployment with Docker
 draft: false
-active: false
+active: true
 date: 2024-11-14 14:44:00 +0200
 author: Victor Hachard
 categories: ['Docker', 'Odoo', 'CI/CD', 'System Administration']

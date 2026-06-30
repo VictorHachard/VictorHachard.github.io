@@ -1,6 +1,6 @@
 ---
 layout: note
-title: Docker Setup for Long-Term Odoo 15 Deployment
+title: Docker Setup for Long-Term Odoo 19 Deployment
 draft: false
 active: true
 date: 2025-02-06 14:00:00 +0200
@@ -8,27 +8,29 @@ author: Victor Hachard
 categories: ['Docker', 'Odoo', 'System Administration']
 ---
 
+🎯 **TODO:** Update this guide when Odoo becomes compatible with Python 3.13.
+
 ⚠️ **Warning:** This setup has been tested as of early 2025. Future Ubuntu updates may require modifications to maintain compatibility.
 
-## Purpose  
+## Purpose
 
-Odoo 15, originally released in 2021 and with support ending in October 2024. It is compatible with Python versions 3.8 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.  
+Odoo 17, originally released in 2023 and with support ending in October 2026. It is compatible with Python versions 3.10 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
 
 ⚠️ **Warning:** Python 3.12 will receive official security updates and maintenance until October 2028.
 
-⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.  
+⚠️ **Disclaimer:** PPAs are community-maintained and may not always receive timely updates, including security patches. Using deprecated libraries can introduce vulnerabilities and compatibility issues. Deploying this setup in production or security-sensitive environments is at your own risk.
 
-This setup includes a customized **Dockerfile** optimized for running Odoo 15 on modern systems. Key modifications include:  
+This setup includes a customized **Dockerfile** optimized for running Odoo 16 on modern systems. Key modifications include:
 
-- **Ubuntu 24.04 (Noble)** as the base image.  
-- Installation of **Python 3.12** via the **deadsnakes PPA**.  
-- Use of **virtual environments** to prevent conflicts with system packages.  
+- **Ubuntu 24.04 (Noble)** as the base image.
+- Installation of **Python 3.12** via the **deadsnakes PPA**.
+- Use of **virtual environments** to prevent conflicts with system packages.
 
 ## Prerequisites
 
 ### Odoo version
 
-Odoo 15.0 needs to be updated with the latest nightly build because Python 3.12 was not supported when Odoo 15.0 was initially released. You can find the Odoo version in the `release.py` file within the Odoo source code.
+Odoo 17.0 needs to be updated with the latest nightly build because Python 3.12 was not supported when Odoo 17.0 was initially released. You can find the Odoo version in the `release.py` file within the Odoo source code.
 
 ### Directory Structure
 
@@ -46,17 +48,17 @@ src/
 └── wait-for-psql.py 🐳
 ```  
 
-`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). For best compatibility, use the Odoo 18.0 version of both scripts:
-  - `wait-for-psql.py` **has not changed** between Odoo 15.0 and 18.0, so it remains fully compatible.  
-  - `entrypoint.sh` **has not changed** between Odoo 15.0 and 18.0, so it remains fully compatible.
+`wait-for-psql.py` and `entrypoint.sh` are available from the [Odoo Docker repository](https://github.com/odoo/docker/blob/master/). Use the **19.0 version** of both scripts:
+  - `wait-for-psql.py` **has not changed** between Odoo 18.0 and 19.0, so it remains fully compatible.  
+  - `entrypoint.sh` **has not changed** between Odoo 18.0 and 19.0, so it remains fully compatible.
 
-For reference, the older version of the scripts from Odoo 15.0 can be found in the [Odoo Docker 15.0 repository](https://github.com/odoo/docker/tree/5fb6a842747c296099d9384587cd89640eb7a615/15.0).
+For reference, the scripts from Odoo 17.0 can be found in the [Odoo Docker 17.0 repository](https://github.com/odoo/docker/tree/master/17.0).
 
 ## Dockerfile (Noble)
 
-⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until April 2029.
+*This section of this guide is compatible with both Odoo 16.0 and Odoo 17.0.*
 
-💡 **Note:** Ubuntu 24.04 Noble comes with Python 3.12 by default, so no additional PPA is required.
+⚠️ **Warning:** Ubuntu 24.04 Noble will receive official security updates and maintenance until April 2029.
 
 ```dockerfile
 FROM ubuntu:noble
@@ -78,12 +80,9 @@ RUN apt-get update && \
         gnupg \
         libssl-dev libpq-dev \
         libldap2-dev libsasl2-dev \
-        python3 python3-dev python3-pip python3-venv python3-wheel python3-renderpm python3-setuptools \
+        python3 python3-dev python3-pip python3-venv python3-renderpm python3-wheel \
         xz-utils \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install rtlcss (for right-to-left language support)
-# RUN npm install -g rtlcss
 
 # Install wkhtmltopdf
 RUN apt-get update && \
@@ -117,6 +116,10 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ noble-pgdg main' > /etc/a
     && rm -f /etc/apt/sources.list.d/pgdg.list \
     && rm -rf /var/lib/apt/lists/*
 
+# Install rtlcss (for right-to-left language support)
+# Add if needed for RTL language support
+# RUN npm install -g rtlcss
+
 # Create Odoo system user and group
 RUN groupadd -r odoo && useradd -r -g odoo -m -d /home/odoo -s /bin/bash odoo
 
@@ -130,7 +133,7 @@ ENV PYTHONPATH="$ODOO_HOME:$PYTHONPATH"
 RUN mkdir -p /etc/odoo && \
     chown odoo:odoo /etc/odoo && \
     echo "[options]" > /etc/odoo/odoo.conf && \
-    echo "addons_path = /opt/odoo/odoo/addons,/opt/odoo/custom_addons" >> /etc/odoo/odoo.conf && \
+    echo "addons_path = /opt/odoo/odoo/addons,/opt/odoo/app_addons,/opt/odoo/custom_addons" >> /etc/odoo/odoo.conf && \
     echo "data_dir = /var/lib/odoo" >> /etc/odoo/odoo.conf && \
     chown odoo:odoo /etc/odoo/odoo.conf
 
@@ -154,8 +157,9 @@ RUN mkdir -p /etc/systemd/system && \
 # Create Odoo binary
 RUN mkdir -p /usr/bin && \
     echo "#!/usr/bin/env python3" > /usr/bin/odoo && \
-    echo "__import__('os').environ['TZ'] = 'UTC'" >> /usr/bin/odoo && \
-    echo "import odoo" >> /usr/bin/odoo && \
+    echo "" >> /usr/bin/odoo && \
+    echo "import odoo.cli" >> /usr/bin/odoo && \
+    echo "" >> /usr/bin/odoo && \
     echo "if __name__ == \"__main__\":" >> /usr/bin/odoo && \
     echo "    odoo.cli.main()" >> /usr/bin/odoo && \
     chmod +x /usr/bin/odoo
@@ -183,6 +187,7 @@ RUN $VENV_PATH/bin/pip install --no-cache-dir --upgrade pip && \
 
 # Copy Odoo source files and custom addons
 COPY --chown=odoo:odoo odoo $ODOO_HOME/odoo
+COPY --chown=odoo:odoo app_addons $ODOO_HOME/app_addons
 COPY --chown=odoo:odoo custom_addons $ODOO_HOME/custom_addons
 
 # Expose volumes and ports (8069: Odoo, 8071: XML-RPC, 8072: longpolling)
@@ -192,7 +197,7 @@ EXPOSE 8069 8071 8072
 # Set default environment variables
 ENV ODOO_RC=/etc/odoo/odoo.conf
 
-# Set the user to run Odoo
+# Set default user when running the container
 USER odoo
 
 # Entrypoint
