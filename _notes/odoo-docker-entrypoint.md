@@ -141,7 +141,7 @@ EOL
     chown odoo:odoo /etc/odoo/odoo.conf
 fi
 
-# Set the databse configuration parameters
+# Set the database configuration parameters
 DB_ARGS=()
 function check_config() {
     param="$1"

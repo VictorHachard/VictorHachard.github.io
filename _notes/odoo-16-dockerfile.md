@@ -14,7 +14,7 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ## Purpose
 
-Odoo 16, originally released in 2022 and with support ending in October 2025. It is compatible with Python versions 3.7 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
+Odoo 16 was originally released in 2022, with support ending in October 2025. It is compatible with Python versions 3.7 to 3.12 but **does not support Python 3.13 or later**. To ensure compatibility, we must use **Python 3.12**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
 
 ⚠️ **Warning:** Python 3.12 will receive official security updates and maintenance until October 2028.
 

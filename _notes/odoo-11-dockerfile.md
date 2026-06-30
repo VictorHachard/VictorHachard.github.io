@@ -12,7 +12,7 @@ categories: ['Docker', 'Odoo', 'System Administration']
 
 ## Purpose  
 
-Odoo 11, originally released in 2017 and with support ending in 2020. It is compatible with Python versions 3.5 to 3.7 but **does not support Python 3.8 or later**. To ensure compatibility, we must use **Python 3.7**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
+Odoo 11 was originally released in 2017, with support ending in 2020. It is compatible with Python versions 3.5 to 3.7 but **does not support Python 3.8 or later**. To ensure compatibility, we must use **Python 3.7**, which can be installed via the **[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)**.
 
 ⚠️ **Warning:** Official security updates and maintenance for Python 3.7 ended in June 2023.
 

@@ -272,7 +272,7 @@ Then append the output to the `htpasswd` file in the registry's auth volume:
 echo 'USERNAME:BCRYPT_PASSWORD' >> /auth/htpasswd
 ```
 
-Be sure that there is two lines in the file: one for the new user and one for the existing user (if any).
+Be sure that there are two lines in the file: one for the new user and one for the existing user (if any).
 
 #### Link the Registry to Portainer
 
@@ -423,7 +423,7 @@ After changing the password, remove the `SEQ_PASSWORD` environment variable.
 
 #### Configure Seq
 
-- Add the `GELF Input` app to Seq to allow Odoo to send logs to Seq (Settings → Apps → Add App → GELP Input). Then add an instance of the GELF Input app with the following settings:
+- Add the `GELF Input` app to Seq to allow Odoo to send logs to Seq (Settings → Apps → Add App → GELF Input). Then add an instance of the GELF Input app with the following settings:
   - Name: `Odoo`
 - Add a retention policy to manage the amount of log data stored in Seq (Data → Storage → Add Retention Policies). For example, you can set a policy to delete logs older than 30 days.
 
@@ -457,7 +457,7 @@ services:
       - /etc/opt/prometheus:/etc/prometheus:ro
       - prometheus-data:/prometheus
     ports:
-      - "9090:9090"  # Optional don't needed if you use internal network
+      - "9090:9090"  # Optional, not needed if you use internal network
     command:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.path=/prometheus
