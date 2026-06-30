@@ -11,7 +11,7 @@ references:
     - https://solaryx.be
 ---
 
-[Solaryx](https://solaryx.be) is an all-in-one tanning-salon and wellness management platform I design and maintain at [HVG Solutions]({{site.baseurl}}/projects/hvg-solutions/). It is built for Belgian tanning centers and multi-site networks, bringing POS, online booking, equipment control, Belgian compliance, loyalty and reporting together in a single connected system.
+[Solaryx](https://solaryx.be) is an all-in-one tanning-salon and wellness management platform I design and maintain at [HVG Solutions]({{site.baseurl}}/projects/hvg-solutions). It is built for Belgian tanning centers and multi-site networks, bringing POS, online booking, equipment control, Belgian compliance, loyalty and reporting together in a single connected system.
 
 It is a 5-in-1 platform:
 
